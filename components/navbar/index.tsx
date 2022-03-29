@@ -16,31 +16,33 @@ const NavBar = () => {
       {name:"MetaFI",icon:METAFI},
   ]
   return (
-    <nav className="text-white font-light text-sm">
-        <Image src={logo} height={30} width={125} className='object-cover' alt='FIDIS Logo'/>
-        <button className="bg-orange-FIDIS rounded my-4 pl-1.5 pr-4 py-1.5 flex items-center gap-3 font-medium">
-            <Image src={buy_and_sell_icon} height={20} width={23} alt="buy and sell icon"/>
-            Buy/Sell
-        </button>
-        <nav>
-            <Link href="/">
-                <a className="flex items-center gap-2 my-6">
-                    <Image src={overview_icon} height={35} width={35} alt="overview icon"/>
-                    Overview
-                </a>
-            </Link>
-            <div className="flex flex-col gap-4">
-                {data.map((nav,index)=>(
-                    <Link key={index} href="/">
-                        <a className="flex items-center gap-2">
-                            <Image src={nav.icon} height={30} width={30} alt={`${nav.name} icon`} />
-                            {nav.name}
-                        </a>
-                    </Link>
-                ))}
-            </div>
-        </nav>
-        <button className="bg-orange-FIDIS rounded-full my-4 px-2 py-1.5 flex items-center gap-3 font-medium">
+    <nav className="text-white font-light text-sm grid grid-cols-1 gap-6 place-content-between">
+        <div>
+            <Image src={logo} height={30} width={125} className='object-cover' alt='FIDIS Logo'/>
+            <button className="bg-orange-FIDIS rounded my-4 pl-1.5 pr-4 py-1.5 flex items-center gap-3 font-medium">
+                <Image src={buy_and_sell_icon} height={20} width={23} alt="buy and sell icon"/>
+                Buy/Sell
+            </button>
+            <nav>
+                <Link href="/">
+                    <a className="flex items-center gap-2 mt-8 mb-6">
+                        <Image src={overview_icon} height={30} width={30} alt="overview icon"/>
+                        Overview
+                    </a>
+                </Link>
+                <div className="flex flex-col gap-4">
+                    {data.map((nav,index)=>(
+                        <Link key={index} href="/">
+                            <a className="flex items-center gap-2">
+                                <Image src={nav.icon} height={30} width={30} alt={`${nav.name} icon`} />
+                                {nav.name}
+                            </a>
+                        </Link>
+                    ))}
+                </div>
+            </nav>
+        </div>
+        <button className="bg-orange-FIDIS rounded-full px-2 py-1.5 flex items-center gap-3 font-medium">
             <Image src={connect_wallet_icon} height={20} width={20} alt="connect wallet icon"/>
             Connect wallet
         </button>

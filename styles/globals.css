@@ -23,3 +23,7 @@ html {
    background-position-x: left;
    background-repeat: no-repeat;
 }
+
+.market-cap-table > thead > tr > th{
+  font-weight: 200;
+}
