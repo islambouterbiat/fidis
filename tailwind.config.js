@@ -1,5 +1,8 @@
 module.exports = {
-  content: [],
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+  ],
   theme: {
     extend: {
       fontWeight: {
@@ -24,6 +27,7 @@ module.exports = {
         'blue-sky': '#01B7F0',
         'green-success': '#216716',
         'red-rejected': '#FF4E4E',
+        'overlay-background': 'rgba(50, 39, 115, 0.66)',
       },
     },
   },
