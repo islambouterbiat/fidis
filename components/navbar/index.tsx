@@ -24,7 +24,7 @@ const NavBar = (props:{isConnected: boolean,setIsConnected: Dispatch<SetStateAct
   }
   console.log(props.isConnected)
   return (
-    <nav className="text-white font-light text-sm grid grid-cols-1 gap-6 place-content-between w-40">
+    <nav className="text-white py-12 font-light text-sm grid grid-cols-1 gap-6 place-content-between w-40">
         <div>
             <Image src={logo} height={30} width={125} className='object-cover' alt='FIDIS Logo'/>
             <button className="bg-orange-FIDIS rounded my-4 pl-1.5 pr-4 py-1.5 flex items-center gap-3 font-medium">
@@ -57,17 +57,19 @@ const NavBar = (props:{isConnected: boolean,setIsConnected: Dispatch<SetStateAct
             </button>
             :
             <div>  
-                <Link href="/">
+                <Link href="/users/1">
                     <button className="bg-transparent px-2 py-1.5 flex items-center gap-3 font-light">
                         <Image src={account_profile_picture} height={30} width={30} className='rounded-full' alt="connect wallet icon"/>
                         Account
                     </button>
                 </Link>
                 <span className="block h-[0.05rem] w-full my-2 bg-white/50"></span>
-                <button onClick={handleConnectWallet} className="bg-transparent text-[#D29E9E] rounded-full px-2 py-1.5 flex items-center gap-3 font-medium">
-                    <Image src={disconnect_wallet_icon} height={20} width={20} alt="connect wallet icon"/>
-                    Disconnect
-                </button>
+                <Link href="/">
+                    <button onClick={handleConnectWallet} className="bg-transparent text-[#D29E9E] rounded-full px-2 py-1.5 flex items-center gap-3 font-medium">
+                        <Image src={disconnect_wallet_icon} height={20} width={20} alt="connect wallet icon"/>
+                        Disconnect
+                    </button>
+                </Link>
             </div>
         }
     </nav>

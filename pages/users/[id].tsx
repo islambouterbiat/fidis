@@ -1,61 +1,51 @@
-import { GetStaticProps, GetStaticPaths } from 'next'
+import Image from 'next/image'
+import React from 'react'
 
-import { User } from '../../interfaces'
-import { sampleUserData } from '../../utils/sample-data'
-import Layout from '../../components/Layout'
-import ListDetail from '../../components/ListDetail'
+import account_profile_picture from "../../assets/images/account_profile_picture_big.png"
 
-type Props = {
-  item?: User
-  errors?: string
+const styles ={
+  gray_input:"rounded bg-input-background py-1 px-3 placeholder:text-xs placeholder:text-gray-500",
+  gray_input_label:"text-orange-FIDIS font-semibold block mb-2"
 }
-
-const StaticPropsDetail = ({ item, errors }: Props) => {
-  if (errors) {
-    return (
-      <Layout title="Error | Next.js + TypeScript Example">
-        <p>
-          <span style={{ color: 'red' }}>Error:</span> {errors}
-        </p>
-      </Layout>
-    )
-  }
-
+const User = () => {
+  const personal_infos =[
+    {id:"first_name",text:"First Name",placeholder:"john"},
+    {id:"last_name",text:"Last Name",placeholder:"john"},
+    {id:"personal_email",text:"Personal Email",placeholder:"John.smith@email.com"},
+  ]
   return (
-    <Layout
-      title={`${
-        item ? item.name : 'User Detail'
-      } | Next.js + TypeScript Example`}
-    >
-      {item && <ListDetail item={item} />}
-    </Layout>
+    <main className="container mx-auto text-white py-4">
+      <nav className='flex items-start justify-between'>
+        <div className='flex items-center mt-10 gap-10'>
+          <h1 className='text-xl'>Account Details</h1>
+          <div>
+            <button className='px-4 py-1 bg-orange-FIDIS border border-orange-FIDIS font-medium text-sm'>Personal</button>
+            <button className='px-4 py-1 bg-transparent border border-orange-FIDIS font-medium text-sm'>Business</button>
+          </div>
+        </div>
+        <div className='flex flex-col items-center jutify-center text-center gap-2'>
+          <Image src={account_profile_picture} height={120} width={120} className="rounded-full" alt='profile picture' />
+          <button className='rounded-lg bg-input-background text-gray-500 px-3 py-1 text-sm'>update</button>
+        </div>
+      </nav>
+      <section className='flex flex-col gap-8'>
+        <div className='flex'>
+          <div id='wallet_address'>
+            <label htmlFor="wallet_address" className={styles.gray_input_label} >Wallet Address</label>
+            <input type="text" name="wallet_address" id="wallet_address" className={styles.gray_input} placeholder="0x3Bf4CA8e5CA8e5CA8e5CA8e5CA8e5"/>
+          </div>
+        </div>
+        <div className='flex gap-8'>
+          {personal_infos.map((data,index)=>(
+            <div key={index}>
+              <label htmlFor={data.id} className={styles.gray_input_label} >{data.text}</label>
+              <input type="text" name={data.id} id={data.id} className={styles.gray_input} placeholder={data.placeholder}/>
+          </div>
+          ))}
+        </div>
+      </section>
+    </main>
   )
 }
 
-export default StaticPropsDetail
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  // Get the paths we want to pre-render based on users
-  const paths = sampleUserData.map((user) => ({
-    params: { id: user.id.toString() },
-  }))
-
-  // We'll pre-render only these paths at build time.
-  // { fallback: false } means other routes should 404.
-  return { paths, fallback: false }
-}
-
-// This function gets called at build time on server-side.
-// It won't be called on client-side, so you can even do
-// direct database queries.
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  try {
-    const id = params?.id
-    const item = sampleUserData.find((data) => data.id === Number(id))
-    // By returning { props: item }, the StaticPropsDetail component
-    // will receive `item` as a prop at build time
-    return { props: { item } }
-  } catch (err: any) {
-    return { props: { errors: err.message } }
-  }
-}
+export default User
