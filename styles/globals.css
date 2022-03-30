@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: default;
+  font-family: "Montserrat";
+}
+
+button,
+a {
+  cursor: pointer;
+}
+
+html {
+   background-image: url(../assets/images/website_background.png);
+   background-size:cover;
+   background-position-x: left;
+   background-repeat: no-repeat;
+}
+
+.market-cap-table > thead > tr > th{
+  font-weight: 200;
+}
