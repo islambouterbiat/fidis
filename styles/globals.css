@@ -27,3 +27,14 @@ html {
 .market-cap-table > thead > tr > th{
   font-weight: 200;
 }
+
+.scrolltype::-webkit-scrollbar {
+  background:rgba(0, 0, 0, 0.27);
+  width: 4px;
+}
+
+.scrolltype::-webkit-scrollbar-thumb {
+  background: rgba(240, 157, 1, 1);
+  /* outline: 1px solid slategrey; */
+  width: 8px;
+}
