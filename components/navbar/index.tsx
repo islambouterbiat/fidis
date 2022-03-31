@@ -46,7 +46,7 @@ const NavBar = () => {
           onClick={async () =>
             isAuthenticated ? buySellTokens() : await authenticate()
           }
-          className="hoverEffectContained my-4 flex h-12 w-full items-center gap-3 whitespace-nowrap rounded bg-orange-FIDIS px-2 py-1 text-[1.2rem]"
+          className="hoverEffectContained my-4 flex h-12 w-full items-center gap-3 whitespace-nowrap rounded bg-orange-FIDIS px-2 py-1 text-[1.2rem] font-semibold"
         >
           <Image src={wallet_icon} height={24} width={30} alt="" />
           {isAuthenticated
