@@ -72,3 +72,16 @@ html {
   /* outline: 1px solid slategrey; */
   width: 8px;
 }
+
+.notification_disappear {
+  opacity: 0;
+  animation: notification_disappear 5s ease-in-out;
+  @keyframes notification_disappear {
+    70% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}

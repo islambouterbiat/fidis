@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from 'react'
 import Image from 'next/image'
 // import NavLink from 'next/link'
 import Link from 'next/link'
+import Notification from '../constants/notification'
 
 import logo from '../../assets/images/fidis_icons/fidis_logo_text_gold_transparent.png'
 import Chart_pie_icon from '../../assets/images/general_icons/Chart_pie.png'
@@ -54,6 +55,10 @@ const NavBar = () => {
             ? 'Connecting...'
             : 'Connect wallet'}
         </button>
+        {authError && authError.message !== undefined && (
+          <Notification text={authError.message} color="red" />
+        )}
+
         <nav className="text-[1.1rem]">
           <Link href="/">
             <a className={`${styles.btnNav} flex items-center gap-2`}>
