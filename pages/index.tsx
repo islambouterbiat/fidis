@@ -1,12 +1,12 @@
 import Link from 'next/link'
-import MarketCap from '../components/main/dashboard/MarketCap'
+import Layout from '../components/Layout'
 
 const IndexPage = () => (
   <main
-    title="Home | Next.js + TypeScript Example"
+    title="FIDIS Crypto Index Assets - Home"
     className="container mx-auto py-12 text-white"
   >
-    <MarketCap />
+    <Layout />
   </main>
 )
 
