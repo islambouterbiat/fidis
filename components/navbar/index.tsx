@@ -26,16 +26,10 @@ const NavBar = () => {
   ]
 
   //// using useMoralis Hook
+  const { authenticate, authError, logout, isAuthenticated, isAuthenticating } =
+    useMoralis()
 
-  const { authenticate, authError, logout, isAuthenticated } = useMoralis()
-
-  const handleConnectWallet = async () => {
-    await authenticate()
-  }
-
-  const handleDisconnectWallet = async () => {
-    await logout()
-  }
+  const buySellTokens = () => {}
   return (
     <nav className="grid w-64 max-w-[200px] grid-cols-1 place-content-between gap-6 py-12 text-sm font-light text-white">
       <div>
@@ -47,11 +41,18 @@ const NavBar = () => {
           alt="FIDIS"
         />
         <button
-          onClick={handleConnectWallet}
+          disabled={isAuthenticating}
+          onClick={async () =>
+            isAuthenticated ? buySellTokens() : await authenticate()
+          }
           className="hoverEffectContained my-4 flex h-12 w-full items-center gap-3 whitespace-nowrap rounded bg-orange-FIDIS px-2 py-1 text-[1.2rem]"
         >
           <Image src={wallet_icon} height={24} width={30} alt="" />
-          {isAuthenticated ? 'Buy/Sell' : 'Connect wallet'}
+          {isAuthenticated
+            ? 'Buy/Sell'
+            : isAuthenticating
+            ? 'Connecting...'
+            : 'Connect wallet'}
         </button>
         <nav className="text-[1.1rem]">
           <Link href="/">
@@ -121,7 +122,7 @@ const NavBar = () => {
           <span className="my-2 block h-[0.05rem] w-full bg-white/50"></span>
           <Link href="/">
             <button
-              onClick={handleDisconnectWallet}
+              onClick={logout}
               className={`${styles.btnBottomNav} flex items-center gap-3 rounded-full bg-transparent px-2 py-1.5 text-[#D29E9E]`}
             >
               <div className="grid h-[30px] w-[30px] place-items-center overflow-hidden ">
