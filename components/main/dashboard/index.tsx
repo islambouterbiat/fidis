@@ -1,7 +1,8 @@
 import MarketCap from './MarketCap'
 
 const Index = () => {
-  return <MarketCap />
-}
+  return (
+  <MarketCap />
+)}
 
 export default Index

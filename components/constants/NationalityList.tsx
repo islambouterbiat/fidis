@@ -1,6 +1,6 @@
 import React from 'react'
 
-const NationalityList = ({ className }: { className: string }) => {
+const NationalityList = ({ className }: any) => {
   return (
     <select name="nationality" className={className + ' w-44'}>
       <option value="">-- select one --</option>

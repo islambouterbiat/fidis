@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import NationalityList from './../../components/constants/NationalityList'
+import NationalityList from '../../components/constants/NationalityList'
 
 import profile_picture from '../../assets/images/user_icons/profile_picture.png'
 import save_updates_icon from '../../assets/images/general_icons/Save.png'

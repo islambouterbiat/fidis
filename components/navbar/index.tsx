@@ -34,7 +34,7 @@ const NavBar = (props: {
   }
   console.log(props.isConnected)
   return (
-    <nav className="grid w-[200px] grid-cols-1 place-content-between gap-6 py-12 text-sm font-light text-white">
+    <nav className="grid w-64 grid-cols-1 place-content-between gap-6 py-12 text-sm font-light text-white">
       <div>
         <Image
           src={logo}
@@ -45,7 +45,7 @@ const NavBar = (props: {
         />
         <button
           onClick={handleConnectWallet}
-          className="hoverEffectContained my-4 flex h-[50px] w-full items-center gap-3 whitespace-nowrap rounded bg-orange-FIDIS p-[1rem] text-[1.2rem]"
+          className="hoverEffectContained my-4 flex h-12 w-full items-center gap-3 whitespace-nowrap rounded bg-orange-FIDIS px-2 py-1 text-[1.2rem]"
         >
           <Image src={wallet_icon} height={24} width={30} alt="" />
           {props.isConnected ? 'Buy/Sell' : 'Connect wallet'}
@@ -95,7 +95,7 @@ const NavBar = (props: {
       </div>
       {props.isConnected && (
         <div className="text-[1.1rem]">
-          <Link href="/users/1">
+          <Link href="/account/1">
             <button
               className={`${styles.btnBottomNav} flex items-center gap-3 bg-transparent px-2 py-1.5`}
             >
