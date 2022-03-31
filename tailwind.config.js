@@ -15,8 +15,9 @@ module.exports = {
       },
       colors: {
         'black-transparent': 'rgba(0,0,0,0.3)',
-        'orange-FIDIS': 'rgb(240, 157, 1)',
+        'orange-FIDIS': '#f09d01', /// #F09D01
         'orange-FIDIS_opacity_50': 'rgba(240, 157, 1, 0.5)',
+        'orange-FIDIS_hover': 'rgb(253, 189, 83)',
         'green-increased-value': '#00FF38',
         'red-decreased-value': '#FF4E4E',
         'normal-white-text': '#DADADA',
@@ -27,7 +28,7 @@ module.exports = {
         'blue-sky': '#01B7F0',
         'green-success': '#216716',
         'red-rejected': '#FF4E4E',
-        'overlay-background': 'rgba(50, 39, 115, 0.66)',
+        'overlay-background': 'rgba(46, 28, 148, 0.54)',
       },
     },
   },

@@ -2,39 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&display=swap');
+
+:root {
+  --orange-FIDIS: #f09d01;
+  --normal-wite-text: #dadada;
+}
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   cursor: default;
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
+  font-weight: 400;
+  transition: all 0.2s ease-in-out;
+  color: var(--normal-wite-text);
 }
 
 button,
-a {
+button *,
+a,
+a * {
   cursor: pointer;
+  color: white;
 }
 
+button.hoverEffectContained:hover {
+  background-color: var(--orange-FIDIS);
+  color: white;
+}
+
+/* this is for the icon 'Chart-pie' that is next to the word 'Overview' or 'Dashboard' in the general Navbar */
+
+button.hoverEffectOutlined:hover {
+  color: var(--orange-FIDIS);
+  border: 2px solid var(--orange-FIDIS);
+  background: none;
+}
+
+button:hover,
+a:hover {
+  transform: scale(1.02);
+}
+
+a:hover svg path {
+  fill: var(--orange-FIDIS);
+}
 html {
-   background-image: url(../assets/images/website_background.png);
-   background-size:cover;
-   background-position-x: left;
-   background-repeat: no-repeat;
+  /* background-image: url(../assets/images/website_background.png); */
+  background-color: #281f5b;
+  background-size: cover;
+  background-position-x: left;
+  background-repeat: no-repeat;
 }
 
-.market-cap-table > thead > tr > th{
+.market-cap-table > thead > tr > th {
   font-weight: 200;
 }
 
 .scrolltype::-webkit-scrollbar {
-  background:rgba(0, 0, 0, 0.27);
+  background: rgba(0, 0, 0, 0.27);
   width: 4px;
 }
 
 .scrolltype::-webkit-scrollbar-thumb {
-  background: rgba(240, 157, 1, 1);
+  background: var(--orange-FIDIS);
   /* outline: 1px solid slategrey; */
   width: 8px;
 }
