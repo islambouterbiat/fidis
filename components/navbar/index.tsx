@@ -30,13 +30,8 @@ const NavBar = () => {
   const { authenticate, authError, logout, isAuthenticated, isAuthenticating } =
     useMoralis()
 
-<<<<<<< HEAD
-  const handleDisconnectWallet = () => {
-    props.setIsConnected(false)
-  }
-=======
   const buySellTokens = () => {}
->>>>>>> 64156d1469367094a72f87c0af24cc119a9a12d0
+
   return (
     <nav className="grid w-64 max-w-[200px] grid-cols-1 place-content-between gap-6 py-12 text-sm font-light text-white">
       <div>
