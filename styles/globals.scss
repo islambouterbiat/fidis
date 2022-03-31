@@ -71,3 +71,8 @@ html {
   /* outline: 1px solid slategrey; */
   width: 8px;
 }
+
+.line_chart >div> canvas {
+  background-color: rgba(0,0,0);
+  padding: 20px;
+}
