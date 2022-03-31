@@ -48,7 +48,7 @@ const LineChart = () => {
     'July',
   ]
 
-  const data = {
+  const line_chart_data = {
     labels,
     datasets: [
       {
@@ -68,7 +68,9 @@ const LineChart = () => {
       },
     ],
   }
-  return <Line options={options} data={data} />
+  return (
+    <Line options={options} data={line_chart_data} height={800} width={1200} />
+  )
 }
 
 export default LineChart

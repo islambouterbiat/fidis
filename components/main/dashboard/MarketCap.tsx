@@ -71,3 +71,8 @@ const MarketCap = () => {
 }
 
 export default MarketCap
+
+// Daily Scrum:
+// 1) Created Pie Chart + Line Chart + lot of customization + start working on popups
+// 2) Have finished Dashboard and popups by the end of today
+// 3) No problem.

@@ -42,6 +42,7 @@ button.hoverEffectOutlined:hover {
 }
 
 button:hover,
+button[disabled],
 a:hover {
   transform: scale(1.02);
 }
@@ -72,7 +73,20 @@ html {
   width: 8px;
 }
 
-.line_chart >div> canvas {
-  background-color: rgba(0,0,0);
+.notification_disappear {
+  opacity: 0;
+  animation: notification_disappear 5s ease-in-out;
+  @keyframes notification_disappear {
+    70% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}
+
+.line_chart>div>canvas {
+  background-color: rgba(0, 0, 0);
   padding: 20px;
 }

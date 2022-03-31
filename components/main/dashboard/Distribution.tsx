@@ -14,7 +14,7 @@ const Distribution = () => {
     },
   }
 
-  const data = {
+  const pie_chart_data = {
     labels: ['FI25', 'FI10', 'MetaFi'],
     datasets: [
       {
@@ -31,7 +31,6 @@ const Distribution = () => {
           'rgba(255, 206, 86, 1)',
         ],
         borderWidth: 1,
-        hoverOffset: 4,
       },
     ],
   }
@@ -43,7 +42,7 @@ const Distribution = () => {
       </nav>
       <h2 className="py-3 text-sm">FI25 Crypto Index Token</h2>
       <div className="relative -top-12 h-20">
-        <Pie data={data} options={options} />
+        <Pie data={pie_chart_data} options={options} />
       </div>
     </div>
   )

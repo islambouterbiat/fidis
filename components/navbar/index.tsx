@@ -1,6 +1,8 @@
 import { Dispatch, SetStateAction } from 'react'
 import Image from 'next/image'
+// import NavLink from 'next/link'
 import Link from 'next/link'
+import Notification from '../constants/notification'
 
 import logo from '../../assets/images/fidis_icons/fidis_logo_text_gold_transparent.png'
 import Chart_pie_icon from '../../assets/images/general_icons/Chart_pie.png'
@@ -11,29 +13,32 @@ import wallet_icon from '../../assets/images/general_icons/wallet.png'
 import logout_icon from '../../assets/images/general_icons/logout.png'
 import profile_picture from '../../assets/images/user_icons/profile_picture.png'
 
+import { useMoralis } from 'react-moralis'
+
 const styles = {
   btnNav: 'py-[1rem] hover:text-orange-FIDIS',
   btnBottomNav: 'hover:text-orange-FIDIS',
 }
-const NavBar = (props: {
-  isConnected: boolean
-  setIsConnected: Dispatch<SetStateAction<boolean>>
-}) => {
+const NavBar = () => {
   const data = [
     { name: 'FI25', icon: FI25_icon },
     { name: 'FI10', icon: FI10_icon },
     { name: 'MetaFI', icon: METAFI_icon },
   ]
 
-  const handleConnectWallet = () => {
-    props.setIsConnected(true)
-  }
+  //// using useMoralis Hook
+  const { authenticate, authError, logout, isAuthenticated, isAuthenticating } =
+    useMoralis()
 
+<<<<<<< HEAD
   const handleDisconnectWallet = () => {
     props.setIsConnected(false)
   }
+=======
+  const buySellTokens = () => {}
+>>>>>>> 64156d1469367094a72f87c0af24cc119a9a12d0
   return (
-    <nav className="grid w-64 grid-cols-1 place-content-between gap-6 py-12 text-sm font-light text-white">
+    <nav className="grid w-64 max-w-[200px] grid-cols-1 place-content-between gap-6 py-12 text-sm font-light text-white">
       <div>
         <Image
           src={logo}
@@ -43,12 +48,23 @@ const NavBar = (props: {
           alt="FIDIS"
         />
         <button
-          onClick={handleConnectWallet}
-          className="hoverEffectContained my-4 flex h-12 w-full items-center gap-3 whitespace-nowrap rounded bg-orange-FIDIS px-2 py-1 text-[1.2rem]"
+          disabled={isAuthenticating}
+          onClick={async () =>
+            isAuthenticated ? buySellTokens() : await authenticate()
+          }
+          className="hoverEffectContained my-4 flex h-12 w-full items-center gap-3 whitespace-nowrap rounded bg-orange-FIDIS px-2 py-1 text-[1.2rem] font-semibold"
         >
           <Image src={wallet_icon} height={24} width={30} alt="" />
-          {props.isConnected ? 'Buy/Sell' : 'Connect wallet'}
+          {isAuthenticated
+            ? 'Buy/Sell'
+            : isAuthenticating
+            ? 'Connecting...'
+            : 'Connect wallet'}
         </button>
+        {authError && authError.message !== undefined && (
+          <Notification text={authError.message} color="red" />
+        )}
+
         <nav className="text-[1.1rem]">
           <Link href="/">
             <a className={`${styles.btnNav} flex items-center gap-2`}>
@@ -75,9 +91,10 @@ const NavBar = (props: {
               Overview
             </a>
           </Link>
+          {/* add passHref if the url contains anything other than a string */}
           <div className="flex flex-col">
             {data.map((nav, index) => (
-              <Link key={index} href="/">
+              <Link key={index} href={`/${nav.name}`}>
                 <a className={`${styles.btnNav} flex items-center gap-2`}>
                   <Image
                     src={nav.icon}
@@ -92,7 +109,7 @@ const NavBar = (props: {
           </div>
         </nav>
       </div>
-      {props.isConnected && (
+      {isAuthenticated && (
         <div className="text-[1.1rem]">
           <Link href="/account/1">
             <button
@@ -116,7 +133,7 @@ const NavBar = (props: {
           <span className="my-2 block h-[0.05rem] w-full bg-white/50"></span>
           <Link href="/">
             <button
-              onClick={handleDisconnectWallet}
+              onClick={logout}
               className={`${styles.btnBottomNav} flex items-center gap-3 rounded-full bg-transparent px-2 py-1.5 text-[#D29E9E]`}
             >
               <div className="grid h-[30px] w-[30px] place-items-center overflow-hidden ">
