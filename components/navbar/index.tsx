@@ -16,7 +16,7 @@ import profile_picture from '../../assets/images/user_icons/profile_picture.png'
 import { useMoralis } from 'react-moralis'
 
 const styles = {
-  btnNav: 'py-[1rem] hover:text-orange-FIDIS',
+  btnNav: 'py-[0.8rem] hover:text-orange-FIDIS',
   btnBottomNav: 'hover:text-orange-FIDIS',
 }
 const NavBar = () => {
@@ -81,9 +81,11 @@ const NavBar = () => {
           <Notification text={authError.message} color="red" />
         )}
 
-        <nav className="text-[1.1rem]">
+        <nav className="mt-8 text-[1.1rem]">
           <Link href="/">
-            <a className={`${styles.btnNav} flex items-center gap-2`}>
+            <a
+              className={`${styles.btnNav} flex items-center gap-2 border-b-2`}
+            >
               <svg
                 width="35"
                 height="35"
@@ -104,7 +106,7 @@ const NavBar = () => {
                   fill="#DADADA"
                 />
               </svg>
-              {!miniNavOpen && 'Overview'}
+              {!miniNavOpen && 'Dashboard'}
             </a>
           </Link>
           {/* add passHref if the url contains anything other than a string */}
@@ -125,62 +127,67 @@ const NavBar = () => {
           </div>
         </nav>
       </div>
-      {/* mini-nav checkbox */}
-      <label
-        htmlFor="mini_nav"
-        className="relative mb-4 flex cursor-pointer items-center"
-      >
-        <input
-          onClick={handleMiniNav}
-          type="checkbox"
-          id="mini_nav"
-          className="sr-only"
-        />
-        <div className="toggle_bg h-5 w-8 rounded-full border-2 border-gray-200 bg-transparent"></div>
-        {!miniNavOpen && (
-          <span className="ml-3 text-sm font-medium">Mini-Nav</span>
-        )}
-      </label>
-      {isAuthenticated && (
-        <div className="text-[1.1rem]">
-          <Link href="/account">
-            <button
-              className={`${styles.btnBottomNav} flex items-center gap-3 bg-transparent py-1.5`}
-            >
-              <div
-                id="profilePicWrapper"
-                className="h-[35px] w-[35px] overflow-hidden rounded-full border-2 border-normal-white-text"
+
+      <div className="text-[1.1rem]">
+        {/* mini-nav checkbox */}
+        <label
+          htmlFor="mini_nav"
+          className="relative mb-4 flex cursor-pointer items-center hover:scale-105"
+        >
+          <input
+            onClick={handleMiniNav}
+            type="checkbox"
+            id="mini_nav"
+            className="sr-only cursor-pointer"
+          />
+          <div className="toggle_bg h-5 w-8 cursor-pointer rounded-full border-2 border-gray-200 bg-transparent"></div>
+          {!miniNavOpen && (
+            <span className="ml-3 cursor-pointer text-sm font-medium">
+              mini-nav
+            </span>
+          )}
+        </label>
+        {isAuthenticated && (
+          <>
+            <Link href="/account">
+              <button
+                className={`${styles.btnBottomNav} flex items-center gap-3 bg-transparent py-1.5`}
               >
-                <Image
-                  src={profile_picture}
-                  height={41}
-                  width={41}
-                  alt="connect wallet icon"
-                  className="overflow-hidden rounded-full"
-                />
-              </div>
-              {!miniNavOpen && 'Account'}
-            </button>
-          </Link>
-          <span className="my-2 block h-[0.05rem] w-full bg-white/50"></span>
-          <Link href="/">
-            <button
-              onClick={logout}
-              className={`${styles.btnBottomNav} flex items-center gap-3 rounded-full bg-transparent py-1.5 text-[#D29E9E]`}
-            >
-              <div className="grid h-[30px] w-[30px] place-items-center overflow-hidden ">
-                <Image
-                  src={logout_icon}
-                  height={40}
-                  width={40}
-                  alt="connect wallet icon"
-                />
-              </div>
-              {!miniNavOpen && 'Disconnect'}
-            </button>
-          </Link>
-        </div>
-      )}
+                <div
+                  id="profilePicWrapper"
+                  className="h-[35px] w-[35px] overflow-hidden rounded-full border-2 border-normal-white-text"
+                >
+                  <Image
+                    src={profile_picture}
+                    height={41}
+                    width={41}
+                    alt="connect wallet icon"
+                    className="overflow-hidden rounded-full"
+                  />
+                </div>
+                {!miniNavOpen && 'Account'}
+              </button>
+            </Link>
+            <span className="my-2 block h-[0.05rem] w-full bg-white/50"></span>
+            <Link href="/">
+              <button
+                onClick={logout}
+                className={`${styles.btnBottomNav} flex items-center gap-3 rounded-full bg-transparent py-1.5 text-[#D29E9E]`}
+              >
+                <div className="grid h-[30px] w-[30px] place-items-center overflow-hidden ">
+                  <Image
+                    src={logout_icon}
+                    height={40}
+                    width={40}
+                    alt="connect wallet icon"
+                  />
+                </div>
+                {!miniNavOpen && 'Disconnect'}
+              </button>
+            </Link>
+          </>
+        )}
+      </div>
     </nav>
   )
 }

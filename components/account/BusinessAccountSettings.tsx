@@ -3,7 +3,7 @@ import NationalityList from '../constants/NationalityList'
 
 const styles = {
   gray_input:
-    'rounded-lg bg-input-background py-2 px-3 text-xs placeholder:text-xs text-gray-400 placeholder:text-gray-400',
+    'rounded-lg bg-input-background py-3 px-3 text-xs placeholder:text-xs text-gray-400 placeholder:text-gray-400',
   gray_input_label: 'text-orange-FIDIS font-semibold block mb-2',
 }
 
@@ -30,6 +30,7 @@ const BusinessAccountSettings = () => {
             id="wallet_address"
             className={styles.gray_input}
             placeholder="0x3Bf4CA8e5CA8e5CA8e5CA8e5CA8e5"
+            disabled
           />
         </div>
       </div>

@@ -54,7 +54,7 @@ const LineChart = () => {
       {
         tension: 0.3,
         label: 'FI25',
-        data: [20, 30, 100, 150, 120, 200, 190],
+        data: [20, 30, 100, 150, 120, 200, 260],
         // borderWidth: 4,
         borderColor: 'rgb(238,130,238)',
         backgroundColor: 'rgba(238,130,238, 0.5)',
@@ -62,14 +62,14 @@ const LineChart = () => {
       {
         tension: 0.3,
         label: 'FI10',
-        data: [50, 150, 230, 220, 120, 150, 90],
+        data: [50, 150, 230, 220, 120, 150, 180],
         borderColor: 'rgb(55, 125, 255)',
         backgroundColor: 'rgba(255, 255, 255, 0.5)',
       },
       {
         tension: 0.3,
         label: 'MetaFI',
-        data: [100, 250, 170, 240, 260, 250, 255],
+        data: [100, 250, 170, 240, 260, 250, 375],
         borderColor: 'rgb(240, 157, 1)',
         backgroundColor: 'rgba(255, 255, 255, 0.5)',
       },

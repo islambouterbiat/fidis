@@ -23,11 +23,34 @@
 button,
 button *,
 a,
-a * {
+a *,
+input[checkbox],
+input[radio],
+select {
   cursor: pointer;
   color: white;
 }
 
+select,
+input {
+  border: none;
+  outline: none;
+  background: none;
+}
+input {
+  cursor: text;
+}
+select:hover,
+input:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+input[disabled]:hover {
+  opacity: 1;
+  transform: scale(1);
+  cursor: not-allowed;
+}
 button.hoverEffectContained:hover {
   background-color: var(--orange-FIDIS);
   color: white;
