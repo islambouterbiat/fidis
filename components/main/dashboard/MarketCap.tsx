@@ -35,17 +35,13 @@ const MarketCap = () => {
     <div className="col-span-5 w-full rounded bg-black/30 py-2 px-3">
       <nav className="flex items-center justify-between py-2">
         <h1 className="text-xl font-medium">Market Cap</h1>
-        <div className="flex gap-3">
-          <button className={styles.outlined_button}>Transfer</button>
-          <button className={styles.outlined_button}>Request</button>
-        </div>
       </nav>
       <table className="market-cap-table w-full text-left">
         <thead className="whitespace-nowrap text-xs text-gray-300/30">
           <tr className="border-y border-gray-300/30 text-center ">
-            <th className="py-2">Token Name</th>
-            <th className="text-[#00FF38]">Balance</th>
-            <th>Change</th>
+            <th className="py-2 text-left">Token Name</th>
+            <th className="text-right text-[#00FF38]">Balance</th>
+            <th className="text-right">Change</th>
           </tr>
         </thead>
         <tbody className="">

@@ -69,7 +69,7 @@ const LineChart = () => {
     ],
   }
   return (
-    <Line options={options} data={line_chart_data} height={800} width={1200} />
+    <Line options={options} data={line_chart_data} height={300} width={800} />
   )
 }
 
