@@ -55,7 +55,7 @@ const NavBar = () => {
         ) : (
           <Image
             src={mini_logo}
-            height={41}
+            height={45}
             width={41}
             className="object-cover"
             alt="FIDIS"
@@ -67,8 +67,8 @@ const NavBar = () => {
             isAuthenticated ? buySellTokens() : await authenticate()
           }
           className={`hoverEffectContained ${
-            !miniNavOpen ? 'w-full' : ''
-          } my-4 flex h-12 items-center gap-3 whitespace-nowrap rounded bg-orange-FIDIS px-2 py-1 text-[1.2rem] font-semibold`}
+            !miniNavOpen ? 'w-full px-2' : 'px-[0.3rem]'
+          } my-4 flex h-12 items-center gap-3 whitespace-nowrap rounded bg-orange-FIDIS  py-1 text-[1.2rem] font-semibold`}
         >
           <Image src={wallet_icon} height={24} width={30} alt="" />
           {isAuthenticated
@@ -145,7 +145,7 @@ const NavBar = () => {
         <div className="text-[1.1rem]">
           <Link href="/account/1">
             <button
-              className={`${styles.btnBottomNav} flex items-center gap-3 bg-transparent px-2 py-1.5`}
+              className={`${styles.btnBottomNav} flex items-center gap-3 bg-transparent py-1.5`}
             >
               <div
                 id="profilePicWrapper"
@@ -166,7 +166,7 @@ const NavBar = () => {
           <Link href="/">
             <button
               onClick={logout}
-              className={`${styles.btnBottomNav} flex items-center gap-3 rounded-full bg-transparent px-2 py-1.5 text-[#D29E9E]`}
+              className={`${styles.btnBottomNav} flex items-center gap-3 rounded-full bg-transparent py-1.5 text-[#D29E9E]`}
             >
               <div className="grid h-[30px] w-[30px] place-items-center overflow-hidden ">
                 <Image
