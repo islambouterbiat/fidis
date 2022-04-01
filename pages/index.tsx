@@ -1,6 +1,7 @@
 import Link from 'next/link'
+import Popup from '../components/constants/popup'
 import Layout from '../components/Layout'
-import Dashboard from "../components/main/dashboard"
+import Dashboard from '../components/main/dashboard'
 
 const IndexPage = () => (
   <main
@@ -8,6 +9,7 @@ const IndexPage = () => (
     className="container mx-auto py-12 text-white"
   >
     <Dashboard />
+    <Popup />
   </main>
 )
 
