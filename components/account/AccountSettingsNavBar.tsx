@@ -3,16 +3,29 @@ import Image from 'next/image'
 
 import profile_picture from '../../assets/images/user_icons/profile_picture.png'
 
-const AccountSettingsNavBar = () => {
+const AccountSettingsNavBar = ({ accountType, setAccountType }) => {
+  const getClickedButton = (e) => {
+    setAccountType(e.target.innerText)
+  }
   return (
     <nav className="flex items-start justify-between">
       <div className="mt-10 flex items-center gap-10">
         <h1 className="text-xl">Account Details</h1>
         <div>
-          <button className="border border-orange-FIDIS bg-orange-FIDIS px-4 py-1 text-sm font-medium">
+          <button
+            onClick={(e) => getClickedButton(e)}
+            className={`border border-orange-FIDIS ${
+              accountType == 'Personal' ? 'bg-orange-FIDIS' : 'bg-transparent'
+            } px-4 py-1 text-sm font-medium`}
+          >
             Personal
           </button>
-          <button className="border border-orange-FIDIS bg-transparent px-4 py-1 text-sm font-medium">
+          <button
+            onClick={(e) => getClickedButton(e)}
+            className={`border border-orange-FIDIS  ${
+              accountType == 'Business' ? 'bg-orange-FIDIS' : 'bg-transparent'
+            } px-4 py-1 text-sm font-medium`}
+          >
             Business
           </button>
         </div>

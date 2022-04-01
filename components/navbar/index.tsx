@@ -36,13 +36,12 @@ const NavBar = () => {
   const handleMiniNav = () => {
     SetMiniNavOpen((p) => !p)
   }
-  console.log(miniNavOpen)
 
   return (
     <nav
       className={`grid ${
         !miniNavOpen ? 'w-64' : 'w-16'
-      } max-w-[200px] grid-cols-1 place-content-between gap-6 py-12 text-sm font-light text-white transition`}
+      } max-w-[200px] grid-cols-1 place-content-between gap-6 py-12 text-sm font-light text-white transition `}
     >
       <div>
         {!miniNavOpen ? (
