@@ -86,19 +86,19 @@ html {
   }
 }
 
-.line_chart>div>canvas {
-  background-color: rgba(0, 0, 0);
+.line_chart > div > canvas {
+  background-color: rgb(0 0 0 / 0.3);
   padding: 20px;
 }
 
 .toggle_bg:after {
-    content: '';
-    @apply absolute top-1 left-1 bg-white border border-gray-300 rounded-full h-3 w-3 transition shadow-sm;
+  content: '';
+  @apply absolute top-1 left-1 h-3 w-3 rounded-full border border-gray-300 bg-white shadow-sm transition;
 }
 input:checked + .toggle_bg:after {
-    transform: translateX(100%);
-    @apply border-white;
+  transform: translateX(100%);
+  @apply border-white;
 }
 input:checked + .toggle_bg {
-    @apply bg-blue-600 border-blue-600;
+  @apply border-blue-600 bg-blue-600;
 }
