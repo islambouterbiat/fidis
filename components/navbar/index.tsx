@@ -72,10 +72,12 @@ const NavBar = () => {
         >
           <Image src={wallet_icon} height={24} width={30} alt="" />
           {isAuthenticated
-            ? !miniNavOpen && 'Buy/Sell'
+            ? 'Buy/Sell'
+            : !isAuthenticated
+            ? 'Connect wallet'
             : isAuthenticating
-            ? !miniNavOpen && 'Connecting...'
-            : !miniNavOpen && 'Connect wallet'}
+            ? 'Loading...'
+            : ''}
         </button>
         {authError && authError.message !== undefined && (
           <Notification text={authError.message} color="red" />
@@ -112,11 +114,8 @@ const NavBar = () => {
           {/* add passHref if the url contains anything other than a string */}
           <div className="flex flex-col">
             {data.map((nav, index) => (
-              <Link href={`/${nav.name}`}>
-                <a
-                  key={index}
-                  className={`${styles.btnNav} flex items-center gap-2`}
-                >
+              <Link key={index} href={`/${nav.name}`}>
+                <a className={`${styles.btnNav} flex items-center gap-2`}>
                   <Image
                     src={nav.icon}
                     height={30}
