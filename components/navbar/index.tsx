@@ -1,10 +1,10 @@
-import { Dispatch, SetStateAction } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
-// import NavLink from 'next/link'
 import Link from 'next/link'
 import Notification from '../constants/notification'
 
 import logo from '../../assets/images/fidis_icons/fidis_logo_text_gold_transparent.png'
+import mini_logo from '../../assets/images/fidis_icons/fidis_logo_gold_transparent.png'
 import Chart_pie_icon from '../../assets/images/general_icons/Chart_pie.png'
 import FI25_icon from '../../assets/images/tokens_icons/fi25.png'
 import FI10_icon from '../../assets/images/tokens_icons/fi10.png'
@@ -20,41 +20,63 @@ const styles = {
   btnBottomNav: 'hover:text-orange-FIDIS',
 }
 const NavBar = () => {
+  const [miniNavOpen, SetMiniNavOpen] = useState(false)
   const data = [
     { name: 'FI25', icon: FI25_icon },
     { name: 'FI10', icon: FI10_icon },
     { name: 'MetaFI', icon: METAFI_icon },
   ]
 
-  //// using useMoralis Hook
+  // using useMoralis Hook
   const { authenticate, authError, logout, isAuthenticated, isAuthenticating } =
     useMoralis()
 
   const buySellTokens = () => {}
 
+  const handleMiniNav = () => {
+    SetMiniNavOpen((p) => !p)
+  }
+  console.log(miniNavOpen)
+
   return (
-    <nav className="grid w-64 max-w-[200px] grid-cols-1 place-content-between gap-6 py-12 text-sm font-light text-white">
+    <nav
+      className={`grid ${
+        !miniNavOpen ? 'w-64' : 'w-16'
+      } max-w-[200px] grid-cols-1 place-content-between gap-6 py-12 text-sm font-light text-white transition`}
+    >
       <div>
-        <Image
-          src={logo}
-          height={82}
-          width={354}
-          className="object-cover"
-          alt="FIDIS"
-        />
+        {!miniNavOpen ? (
+          <Image
+            src={logo}
+            height={82}
+            width={354}
+            className="object-cover"
+            alt="FIDIS"
+          />
+        ) : (
+          <Image
+            src={mini_logo}
+            height={41}
+            width={41}
+            className="object-cover"
+            alt="FIDIS"
+          />
+        )}
         <button
           disabled={isAuthenticating}
           onClick={async () =>
             isAuthenticated ? buySellTokens() : await authenticate()
           }
-          className="hoverEffectContained my-4 flex h-12 w-full items-center gap-3 whitespace-nowrap rounded bg-orange-FIDIS px-2 py-1 text-[1.2rem] font-semibold"
+          className={`hoverEffectContained ${
+            !miniNavOpen ? 'w-full' : ''
+          } my-4 flex h-12 items-center gap-3 whitespace-nowrap rounded bg-orange-FIDIS px-2 py-1 text-[1.2rem] font-semibold`}
         >
           <Image src={wallet_icon} height={24} width={30} alt="" />
           {isAuthenticated
-            ? 'Buy/Sell'
+            ? !miniNavOpen && 'Buy/Sell'
             : isAuthenticating
-            ? 'Connecting...'
-            : 'Connect wallet'}
+            ? !miniNavOpen && 'Connecting...'
+            : !miniNavOpen && 'Connect wallet'}
         </button>
         {authError && authError.message !== undefined && (
           <Notification text={authError.message} color="red" />
@@ -83,7 +105,7 @@ const NavBar = () => {
                   fill="#DADADA"
                 />
               </svg>
-              Overview
+              {!miniNavOpen && 'Overview'}
             </a>
           </Link>
           {/* add passHref if the url contains anything other than a string */}
@@ -97,13 +119,29 @@ const NavBar = () => {
                     width={30}
                     alt={`${nav.name} icon`}
                   />
-                  {nav.name}
+                  {!miniNavOpen && nav.name}
                 </a>
               </Link>
             ))}
           </div>
         </nav>
       </div>
+      {/* mini-nav checkbox */}
+      <label
+        htmlFor="mini_nav"
+        className="relative mb-4 flex cursor-pointer items-center"
+      >
+        <input
+          onClick={handleMiniNav}
+          type="checkbox"
+          id="mini_nav"
+          className="sr-only"
+        />
+        <div className="toggle_bg h-5 w-8 rounded-full border-2 border-gray-200 bg-transparent"></div>
+        {!miniNavOpen && (
+          <span className="ml-3 text-sm font-medium">Mini-Nav</span>
+        )}
+      </label>
       {isAuthenticated && (
         <div className="text-[1.1rem]">
           <Link href="/account/1">
@@ -122,7 +160,7 @@ const NavBar = () => {
                   className="overflow-hidden rounded-full"
                 />
               </div>
-              Account
+              {!miniNavOpen && 'Account'}
             </button>
           </Link>
           <span className="my-2 block h-[0.05rem] w-full bg-white/50"></span>
@@ -139,7 +177,7 @@ const NavBar = () => {
                   alt="connect wallet icon"
                 />
               </div>
-              Disconnect
+              {!miniNavOpen && 'Disconnect'}
             </button>
           </Link>
         </div>

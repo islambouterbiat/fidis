@@ -90,3 +90,15 @@ html {
   background-color: rgba(0, 0, 0);
   padding: 20px;
 }
+
+.toggle_bg:after {
+    content: '';
+    @apply absolute top-1 left-1 bg-white border border-gray-300 rounded-full h-3 w-3 transition shadow-sm;
+}
+input:checked + .toggle_bg:after {
+    transform: translateX(100%);
+    @apply border-white;
+}
+input:checked + .toggle_bg {
+    @apply bg-blue-600 border-blue-600;
+}
