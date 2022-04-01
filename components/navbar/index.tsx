@@ -40,23 +40,23 @@ const NavBar = () => {
   return (
     <nav
       className={`grid ${
-        !miniNavOpen ? 'w-64' : 'w-16'
+        !miniNavOpen ? 'w-64' : 'w-15'
       } max-w-[200px] grid-cols-1 place-content-between gap-6 py-12 text-sm font-light text-white transition `}
     >
       <div>
         {!miniNavOpen ? (
           <Image
             src={logo}
-            height={82}
-            width={354}
+            height={50}
+            width={222}
             className="object-cover"
             alt="FIDIS"
           />
         ) : (
           <Image
             src={mini_logo}
-            height={45}
-            width={41}
+            height={50}
+            width={50}
             className="object-cover"
             alt="FIDIS"
           />
