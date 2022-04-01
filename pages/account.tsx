@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import React from 'react'
-import AccountSettingsNavBar from '../../components/account/AccountSettingsNavBar'
-import PersonalAccountSettings from '../../components/account/PersonalAccountSettings'
-import BusinessAccountSettings from '../../components/account/BusinessAccountSettings'
+import AccountSettingsNavBar from '../components/account/AccountSettingsNavBar'
+import PersonalAccountSettings from '../components/account/PersonalAccountSettings'
+import BusinessAccountSettings from '../components/account/BusinessAccountSettings'
 
-import save_updates_icon from '../../assets/images/general_icons/Save.png'
+import save_updates_icon from '../assets/images/general_icons/Save.png'
 
 const User = () => {
   const [accountType, setAccountType] = useState('Personal')

@@ -143,7 +143,7 @@ const NavBar = () => {
       </label>
       {isAuthenticated && (
         <div className="text-[1.1rem]">
-          <Link href="/account/1">
+          <Link href="/account">
             <button
               className={`${styles.btnBottomNav} flex items-center gap-3 bg-transparent py-1.5`}
             >

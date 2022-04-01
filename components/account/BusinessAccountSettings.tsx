@@ -18,7 +18,7 @@ const BusinessAccountSettings = () => {
     },
   ]
   return (
-    <section className="scrolltype relative -top-5 flex h-1/2 flex-col gap-8 overflow-y-auto pr-8">
+    <section className="scrolltype relative -top-5 flex max-h-[70%] flex-col gap-8 overflow-y-auto pr-8">
       <div className="flex">
         <div id="wallet_address">
           <label htmlFor="wallet_address" className={styles.gray_input_label}>
