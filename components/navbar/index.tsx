@@ -28,8 +28,14 @@ const NavBar = () => {
   ]
 
   // using useMoralis Hook
-  const { authenticate, authError, logout, isAuthenticated, isAuthenticating } =
-    useMoralis()
+  const {
+    authenticate,
+    authError,
+    login,
+    logout,
+    isAuthenticated,
+    isAuthenticating,
+  } = useMoralis()
 
   const buySellTokens = () => {}
 
@@ -71,13 +77,14 @@ const NavBar = () => {
           } my-4 flex h-12 items-center gap-3 whitespace-nowrap rounded bg-orange-FIDIS  py-1 text-[1.2rem] font-semibold`}
         >
           <Image src={wallet_icon} height={24} width={30} alt="" />
-          {isAuthenticated
-            ? 'Buy/Sell'
-            : !isAuthenticated
-            ? 'Connect wallet'
-            : isAuthenticating
-            ? 'Loading...'
-            : ''}
+          {!miniNavOpen &&
+            (isAuthenticated
+              ? 'Buy/Sell'
+              : !isAuthenticated
+              ? 'Connect wallet'
+              : isAuthenticating
+              ? 'Loading...'
+              : '')}
         </button>
         {authError && authError.message !== undefined && (
           <Notification text={authError.message} color="red" />

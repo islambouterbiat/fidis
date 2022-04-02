@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 
-import profile_picture from '../../assets/images/user_icons/profile_picture.png'
+import profile_picture from '../../../assets/images/user_icons/profile_picture.png'
 
 const AccountSettingsNavBar = ({ accountType, setAccountType }) => {
   const getClickedButton = (e) => {
@@ -30,7 +30,7 @@ const AccountSettingsNavBar = ({ accountType, setAccountType }) => {
           </button>
         </div>
       </div>
-      <div className="jutify-center flex flex-col items-center gap-2 text-center">
+      <div className="flex flex-col items-center justify-center gap-2 text-center">
         <Image
           src={profile_picture}
           height={120}
