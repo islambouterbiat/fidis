@@ -7,7 +7,6 @@ const IndexPage = () => (
     className="container mx-auto py-12 text-white"
   >
     <Dashboard />
-    <Popup />
   </main>
 )
 
