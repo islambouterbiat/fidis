@@ -46,7 +46,7 @@ const NavBar = () => {
   return (
     <nav
       className={`grid ${
-        !miniNavOpen ? 'w-64 max-w-[200px]' : 'w-15'
+        !miniNavOpen ? ' w-[200px] min-w-[200px] max-w-[200px]' : 'w-15'
       }  grid-cols-1 place-content-between gap-6 py-12 text-sm font-light text-white transition `}
     >
       <div>

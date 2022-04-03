@@ -102,51 +102,57 @@ const User = () => {
       country !== ''
     ) {
       // if accountType is 'Business' then send the company infos
-      if (
-        accountType === 'Business' &&
-        company_name !== '' &&
-        ein !== '' &&
-        company_email !== '' &&
-        company_houseNo !== '' &&
-        company_street !== '' &&
-        company_city !== '' &&
-        company_state !== '' &&
-        company_zipCode !== '' &&
-        company_country !== ''
-      ) {
-        await setUserData({
-          accountType,
-          company_name,
-          ein,
-          company_email,
-          company_houseNo,
-          company_street,
-          company_city,
-          company_state,
-          company_zipCode,
-          company_country,
-          company_address,
-          firstName,
-          lastName,
-          personalEmail,
-          username: personalEmail,
-          email: personalEmail,
-          birthday,
-          birthday_month,
-          birthday_day,
-          birthday_year,
-          nationality,
-          idType,
-          idNumber,
-          idPhoto,
-          homeAddress,
-          houseNo,
-          street,
-          city,
-          state,
-          zipCode,
-          country,
-        })
+      if (accountType === 'Business') {
+        if (
+          company_name !== '' &&
+          ein !== '' &&
+          company_email !== '' &&
+          company_houseNo !== '' &&
+          company_street !== '' &&
+          company_city !== '' &&
+          company_state !== '' &&
+          company_zipCode !== '' &&
+          company_country !== ''
+        ) {
+          await setUserData({
+            accountType,
+            company_name,
+            ein,
+            company_email,
+            company_houseNo,
+            company_street,
+            company_city,
+            company_state,
+            company_zipCode,
+            company_country,
+            company_address,
+            firstName,
+            lastName,
+            personalEmail,
+            username: personalEmail,
+            email: personalEmail,
+            birthday,
+            birthday_month,
+            birthday_day,
+            birthday_year,
+            nationality,
+            idType,
+            idNumber,
+            idPhoto,
+            homeAddress,
+            houseNo,
+            street,
+            city,
+            state,
+            zipCode,
+            country,
+          })
+          setShowNotificationAfterUpdatingUserInfos(true)
+
+          setTimeout(() => {
+            setShowNotificationAfterUpdatingUserInfos(false)
+          }, 8000)
+        } else alert('empty fields')
       } else {
         await setUserData({
           accountType,
@@ -171,19 +177,21 @@ const User = () => {
           zipCode,
           country,
         })
-      }
-      setShowNotificationAfterUpdatingUserInfos(true)
+        setShowNotificationAfterUpdatingUserInfos(true)
 
-      setTimeout(() => {
-        setShowNotificationAfterUpdatingUserInfos(false)
-      }, 8000)
+        setTimeout(() => {
+          setShowNotificationAfterUpdatingUserInfos(false)
+        }, 8000)
+      }
     } else alert('empty fields')
   }
   console.log(formRef)
 
   /// this should execute only once, that's why it's separated, and not every time the user data changes
   useEffect(() => {
-    setAccountType(user.attributes.accountType || 'Personal')
+    user
+      ? setAccountType(user.attributes.accountType || 'Personal')
+      : 'Personal'
   }, [])
 
   /// fetch all user data from Moralis database when the user logs in

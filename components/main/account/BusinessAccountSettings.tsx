@@ -50,7 +50,9 @@ const BusinessAccountSettings = () => {
         </div>
       </div>
       {/* Company Infos */}
-      <h1 className="text-2xl text-green-increased-value">Company Infos</h1>
+      <h1 className="mt-0 w-fit border-b-2 p-4 pl-0 text-2xl font-bold text-green-increased-value">
+        Company Infos
+      </h1>
       <div className="flex gap-8">
         {company_infos.map((data, index) => (
           <div key={index}>
@@ -124,7 +126,7 @@ const BusinessAccountSettings = () => {
         </div>
       </div>
       {/* Company Signee Infos */}
-      <h1 className=" text-2xl text-green-increased-value">
+      <h1 className="mt-4 w-fit border-b-2 p-4 pl-0 text-2xl font-bold text-green-increased-value">
         Company Signee Infos
       </h1>
       <div className="flex gap-8">
