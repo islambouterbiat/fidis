@@ -8,7 +8,7 @@ const AccountSettingsNavBar = ({ accountType, setAccountType }) => {
     setAccountType(e.target.innerText)
   }
   return (
-    <nav className="flex items-start justify-between">
+    <nav className="mb-2 flex items-start justify-between">
       <div className="mt-10 flex items-center gap-10">
         <h1 className="text-xl">Account Details</h1>
         <div>

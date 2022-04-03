@@ -6,7 +6,7 @@ const Button = ({ isLoading, onClick, svg, text, background }) => {
     <button
       disabled={isLoading}
       onClick={onClick}
-      className={`flex items-center gap-3 rounded-full bg-${background} px-2 py-1.5 font-medium ${
+      className={`flex items-center gap-2 rounded-full bg-${background} px-3 py-1.5 font-medium ${
         isLoading && 'cursor-not-allowed opacity-50'
       }`}
     >
