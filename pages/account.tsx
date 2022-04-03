@@ -5,7 +5,7 @@ import PersonalAccountSettings from '../components/main/account/PersonalAccountS
 import BusinessAccountSettings from '../components/main/account/BusinessAccountSettings'
 import Button from '../components/core/Button'
 import { useMoralis } from 'react-moralis'
-import Notification from '../components/constants/notification'
+import Notification from '../components/constants/Notification'
 import save_updates_icon from '../assets/images/general_icons/Save.png'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
