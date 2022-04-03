@@ -7,6 +7,7 @@ ChartJS.register(ArcElement, Tooltip, Legend)
 const Distribution = () => {
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: 'right' as const,
@@ -41,8 +42,25 @@ const Distribution = () => {
         <h1 className="text-xl font-medium">Distribution</h1>
       </nav>
       <h2 className="py-3 text-sm">FI25 Crypto Index Token</h2>
-      <div className="relative -top-12 h-20">
+      <div className="">
         <Pie data={pie_chart_data} options={options} />
+      </div>
+      <div className="flex justify-end">
+        <label
+          htmlFor="value_balance"
+          className="relative mt-2 flex cursor-pointer items-center hover:scale-105"
+        >
+          <input
+            // onClick={handleBalanceToggle}
+            type="checkbox"
+            id="value_balance"
+            className="sr-only cursor-pointer"
+          />
+          <div className="toggle_bg h-5 w-8 cursor-pointer rounded-full border-2 border-gray-200 bg-transparent"></div>
+          <span className="ml-3 cursor-pointer text-sm font-medium">
+            Balance
+          </span>
+        </label>
       </div>
     </div>
   )
