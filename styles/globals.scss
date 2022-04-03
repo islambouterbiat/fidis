@@ -33,15 +33,14 @@ select {
 
 select,
 input {
-  border: none;
   outline: none;
   background: none;
 }
 input {
   cursor: text;
 }
-select:hover,
-input:hover {
+.account_settings select:hover,
+.account_settings input:hover {
   opacity: 0.8;
   transform: scale(1.05);
 }
@@ -124,4 +123,17 @@ input:checked + .toggle_bg:after {
 }
 input:checked + .toggle_bg {
   @apply border-blue-600 bg-blue-600;
+}
+
+.popup select {
+ outline:none;
+}
+.popup select > option{
+ background: #000;
+ color: var(--orange-FIDIS);
+ padding: 2px;
+} 
+.popup select > option:hover {
+  background: var(--orange-FIDIS);
+  color:white
 }

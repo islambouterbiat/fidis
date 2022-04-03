@@ -9,9 +9,9 @@ import save_updates_icon from '../assets/images/general_icons/Save.png'
 
 const User = () => {
   const [accountType, setAccountType] = useState('Personal')
-  console.log(accountType)
+
   return (
-    <main className="container mx-auto h-full py-4 text-white">
+    <main className="account_settings container mx-auto h-full py-4 text-white">
       <AccountSettingsNavBar
         accountType={accountType}
         setAccountType={setAccountType}

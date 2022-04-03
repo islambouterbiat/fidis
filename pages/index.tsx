@@ -1,6 +1,4 @@
-import Link from 'next/link'
-import Popup from '../components/constants/popup'
-import Layout from '../components/Layout'
+import Popup from '../components/constants/Popup'
 import Dashboard from '../components/main/dashboard'
 
 const IndexPage = () => (

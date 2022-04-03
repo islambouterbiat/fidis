@@ -1,6 +1,15 @@
 import Link from 'next/link'
 import Head from 'next/head'
 
+const styles = {
+  buy_sell_buttons:
+    'border-b w-full border-orange-FIDIS px-12 py-3 text-2xl font-bold ',
+  popup_input:
+    'border w-full border-orange-FIDIS py-3 px-4 text-xl text-white/50 ',
+  popup_token_select:
+    'rounded-r font-bold text-2xl text-center border border-orange-FIDIS w-full border-l-0 text-orange-FIDIS pt-[10px] pb-[11px] px-2 popup_token_select',
+}
+
 const Popup = () => (
   <div
     className="fixed inset-0 z-10 overflow-y-auto"
@@ -20,7 +29,7 @@ const Popup = () => (
         To: "opacity-0"
     --> */}
       <div
-        className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+        className="fixed inset-0 bg-black bg-opacity-60 transition-opacity"
         aria-hidden="true"
       ></div>
 
@@ -42,57 +51,62 @@ const Popup = () => (
         From: "opacity-100 translate-y-0 sm:scale-100"
         To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
     --> */}
-      <div className="relative inline-block transform overflow-hidden rounded-lg bg-white text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:align-middle">
-        <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-          <div className="sm:flex sm:items-start">
-            <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-              {/* <!-- Heroicon name: outline/exclamation --> */}
-              <svg
-                className="h-6 w-6 text-red-600"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                />
-              </svg>
-            </div>
-            <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-              <h3
-                className="text-lg font-medium leading-6 text-gray-900"
-                id="modal-title"
-              >
-                Deactivate account
-              </h3>
-              <div className="mt-2">
-                <p className="text-sm text-gray-500">
-                  Are you sure you want to deactivate your account? All of your
-                  data will be permanently removed. This action cannot be
-                  undone.
-                </p>
-              </div>
-            </div>
+      <div className="popup relative inline-block w-[22rem] transform overflow-hidden rounded-lg bg-black text-left align-bottom shadow-xl transition-all sm:my-8 sm:align-middle">
+        <div className="bg-black pb-4 shadow-lg shadow-black">
+          <div className="flex w-full">
+            <button className={styles.buy_sell_buttons + 'bg-orange-FIDIS'}>
+              Buy
+            </button>
+            <button className={styles.buy_sell_buttons + 'bg-transparent'}>
+              Sell
+            </button>
           </div>
-        </div>
-        <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-          <button
-            type="button"
-            className="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-          >
-            Deactivate
-          </button>
-          <button
-            type="button"
-            className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-          >
-            Cancel
-          </button>
+          <div className="flex flex-col gap-6 px-7 py-4">
+            <div className="mt-3 flex items-center">
+              <input
+                type="select"
+                name="token_amount"
+                id="token_amount"
+                className="w-full rounded-l border border-r-0 border-orange-FIDIS py-3 px-4 text-xl text-white/50"
+              />
+              <select
+                name="token_type"
+                id="token_type"
+                className={styles.popup_token_select}
+              >
+                <option value="FI25">FI25</option>
+                <option value="FI10">FI10</option>
+                <option value="MetaFi">MetaFi</option>
+              </select>
+            </div>
+            <div className="relative flex">
+              <input
+                type="select"
+                name="dollars_amount"
+                id="dollars_amount"
+                className={styles.popup_input + 'dollar_input rounded-l'}
+              />
+              <span className="absolute top-3 left-32 text-lg text-orange-FIDIS">
+                $
+              </span>
+              <input
+                type="select"
+                name="eth_amount"
+                id="eth_amount"
+                className={styles.popup_input + 'rounded-r'}
+              />
+              <span className="absolute top-3 right-2 text-lg text-orange-FIDIS">
+                eth
+              </span>
+            </div>
+            <button
+              className={
+                styles.buy_sell_buttons + 'mt-3 rounded bg-orange-FIDIS'
+              }
+            >
+              Buy Now
+            </button>
+          </div>
         </div>
       </div>
     </div>
