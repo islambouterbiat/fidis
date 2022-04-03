@@ -12,9 +12,9 @@ const styles = {
 }
 
 const Popup = ({ SetPopupOpen, popupOpen }) => {
-  const ref = useRef()
+  const ref: any = useRef()
   useEffect(() => {
-    const checkIfClickedOutside = (e) => {
+    const checkIfClickedOutside = (e: any) => {
       // If the popup is open and the clicked target is not within the popup,
       // then close the popup
       if (popupOpen && ref.current && !ref.current.contains(e.target)) {
