@@ -15,8 +15,8 @@ const Popup = ({ SetPopupOpen, popupOpen }) => {
   const ref = useRef()
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
-      // If the menu is open and the clicked target is not within the menu,
-      // then close the menu
+      // If the popup is open and the clicked target is not within the popup,
+      // then close the popup
       if (popupOpen && ref.current && !ref.current.contains(e.target)) {
         SetPopupOpen(false)
       }
