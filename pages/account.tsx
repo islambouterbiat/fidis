@@ -8,11 +8,20 @@ import { useMoralis } from 'react-moralis'
 import Notification from '../components/constants/notification'
 import save_updates_icon from '../assets/images/general_icons/Save.png'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
+import Input from '../components/core/Input'
+
+const styles = {
+  gray_input:
+    'rounded bg-input-background py-3 px-3 text-xs placeholder:text-xs text-gray-400 placeholder:text-gray-400',
+  gray_input_label: 'text-orange-FIDIS font-semibold block mb-2',
+}
 
 const User = () => {
   //// define the account type Personal/Business
   const [accountType, setAccountType] = useState('Personal')
-
+  const [emptyFields, setEmptyFields] = useState(false)
+  const router = useRouter()
   /* 
   variables:
     - user: the user object, contains all infos about the current user
@@ -152,7 +161,13 @@ const User = () => {
           setTimeout(() => {
             setShowNotificationAfterUpdatingUserInfos(false)
           }, 8000)
-        } else alert('empty fields')
+        } else {
+          setEmptyFields(true)
+
+          setTimeout(() => {
+            setEmptyFields(false)
+          }, 8000)
+        }
       } else {
         await setUserData({
           accountType,
@@ -183,7 +198,13 @@ const User = () => {
           setShowNotificationAfterUpdatingUserInfos(false)
         }, 8000)
       }
-    } else alert('empty fields')
+    } else {
+      setEmptyFields(true)
+
+      setTimeout(() => {
+        setEmptyFields(false)
+      }, 8000)
+    }
   }
   console.log(formRef)
 
@@ -192,6 +213,8 @@ const User = () => {
     user
       ? setAccountType(user.attributes.accountType || 'Personal')
       : 'Personal'
+
+    !user && router.push('/')
   }, [])
 
   /// fetch all user data from Moralis database when the user logs in
@@ -240,18 +263,41 @@ const User = () => {
     user && updateUserInputs()
   }, [user, accountType])
 
-  return (
+  return user ? (
     <main className="container mx-auto h-full py-4 text-white">
       <AccountSettingsNavBar
         accountType={accountType}
         setAccountType={setAccountType}
       />
       <form ref={formRef} className="h-[90%] overflow-y-auto">
-        {accountType == 'Personal' ? (
-          <PersonalAccountSettings />
-        ) : (
-          <BusinessAccountSettings />
-        )}
+        <section className="scrolltype flex max-h-[70%] flex-col gap-8 overflow-y-auto pr-8">
+          {/* I removed ths: relative -top-5 
+      because it was causing the form to appear on the top of the button 'upload photo profile' */}
+          <div className="flex">
+            <div id="walletAddress">
+              <label
+                htmlFor="walletAddress"
+                className={styles.gray_input_label}
+              >
+                Wallet Address
+              </label>
+              <Input
+                type="text"
+                name="walletAddress"
+                id="walletAddress"
+                className={styles.gray_input + ' w-[320px] rounded-md p-4'}
+                placeholder={user.attributes.ethAddress}
+                disabled
+              />
+            </div>
+          </div>
+          {accountType == 'Personal' ? (
+            <PersonalAccountSettings styles={styles} />
+          ) : (
+            <BusinessAccountSettings styles={styles} />
+          )}
+        </section>
+
         <div id="save_changes" className="mt-6 flex w-full justify-end">
           <Button
             isLoading={isUserUpdating}
@@ -260,6 +306,7 @@ const User = () => {
             svg={save_updates_icon}
             text="Save Changes"
           />
+          {emptyFields && <Notification text="Empty fields" color="red" />}
           {userError
             ? showNotificationAfterUpdatingUserInfos && (
                 <Notification text={userError.message} color="red" />
@@ -270,7 +317,8 @@ const User = () => {
         </div>
       </form>
     </main>
+  ) : (
+    <></>
   )
 }
-
 export default User

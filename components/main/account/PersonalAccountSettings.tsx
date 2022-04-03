@@ -8,7 +8,11 @@ const styles = {
   gray_input_label: 'text-orange-FIDIS font-semibold block mb-2',
 }
 
-const PersonalAccountSettings = () => {
+const PersonalAccountSettings = ({
+  styles,
+}: {
+  styles: { gray_input_label: string; gray_input: string }
+}) => {
   const personal_infos = [
     { id: 'firstName', text: 'First Name', placeholder: 'john' },
     { id: 'lastName', text: 'Last Name', placeholder: 'john' },
@@ -23,31 +27,15 @@ const PersonalAccountSettings = () => {
   if (!user) return <div>user logged out</div>
 
   return (
-    <section className="scrolltype flex max-h-[70%] flex-col gap-8 overflow-y-auto pr-8">
-      {/* I removed ths: relative -top-5 
-      because it was causing the form to appear on the top of the button 'upload photo profile' */}
-      <div className="flex">
-        <div id="walletAddress">
-          <label htmlFor="walletAddress" className={styles.gray_input_label}>
-            Wallet Address
-          </label>
-          <Input
-            type="text"
-            name="walletAddress"
-            id="walletAddress"
-            className={styles.gray_input + ' w-[320px]'}
-            placeholder={user.attributes.ethAddress}
-            disabled
-          />
-        </div>
-      </div>
+    <>
       <div className="flex gap-8">
         {personal_infos.map((data, index) => (
           <div key={index}>
             <label htmlFor={data.id} className={styles.gray_input_label}>
               {data.text}
+              <span className=" text-red-decreased-value">{' *'}</span>
             </label>
-            <Input
+            <input
               type="text"
               name={data.id}
               id={data.id}
@@ -62,43 +50,46 @@ const PersonalAccountSettings = () => {
         <div id="date_of_birth">
           <label htmlFor="date_of_birth" className={styles.gray_input_label}>
             Birthday
+            <span className=" text-red-decreased-value">{' *'}</span>
           </label>
           <div className="flex gap-2">
-            <Input
+            <input
               type="text"
               placeholder="MM"
               id="birthday_month"
               name="birthday_month"
               className={styles.gray_input + ' w-12'}
               required
-            ></Input>
-            <Input
+            ></input>
+            <input
               type="text"
               placeholder="DD"
               id="birthday_day"
               name="birthday_day"
               className={styles.gray_input + ' w-12'}
               required
-            ></Input>
-            <Input
+            ></input>
+            <input
               type="text"
               placeholder="YYYY"
               id="birthday_year"
               name="birthday_year"
               className={styles.gray_input + ' w-20'}
               required
-            ></Input>
+            ></input>
           </div>
         </div>
         <div id="nationality">
           <label htmlFor="nationality" className={styles.gray_input_label}>
             Nationality
+            <span className=" text-red-decreased-value">{' *'}</span>
           </label>
           <NationalityList className={styles.gray_input + ' w-28'} />
         </div>
         <div id="id_type">
           <label htmlFor="id_type" className={styles.gray_input_label}>
             ID Type
+            <span className=" text-red-decreased-value">{' *'}</span>
           </label>
           <select
             required
@@ -115,19 +106,21 @@ const PersonalAccountSettings = () => {
         <div id="idNumber">
           <label htmlFor="idNumber" className={styles.gray_input_label}>
             ID Number
+            <span className=" text-red-decreased-value">{' *'}</span>
           </label>
-          <Input
+          <input
             type="text"
             id="idNumber"
             name="idNumber"
             className={styles.gray_input + ' w-28'}
             placeholder="LTS123728673"
             required
-          ></Input>
+          ></input>
         </div>
         <div id="idPhoto">
           <label htmlFor="idPhoto" className={styles.gray_input_label}>
             ID Photo
+            <span className=" text-red-decreased-value">{' *'}</span>
             <br />
             {user.attributes.idPhoto && (
               <a className="text-sm text-green-400 underline" href="">
@@ -135,7 +128,7 @@ const PersonalAccountSettings = () => {
               </a>
             )}
           </label>
-          <Input
+          <input
             type="file"
             accept="image/*"
             id="idPhoto"
@@ -159,60 +152,64 @@ const PersonalAccountSettings = () => {
       <div className="flex items-center gap-8">
         <div id="home_address">
           <label htmlFor="houseNo" className={styles.gray_input_label}>
-            Home Address
+            Home Address{' '}
+            <span className=" text-red-decreased-value">{' * '}</span>
+            <a className="text-sm text-green-400 underline" href="">
+              fill with the company address
+            </a>
           </label>
           <div className="flex gap-2">
-            <Input
+            <input
               type="text"
               placeholder="House Number"
               id="houseNo"
               name="houseNo"
               className={styles.gray_input + ' w-32'}
               required
-            ></Input>
-            <Input
+            ></input>
+            <input
               type="text"
               placeholder="Street"
               id="street"
               name="street"
               className={styles.gray_input + ' w-40'}
               required
-            ></Input>
-            <Input
+            ></input>
+            <input
               type="text"
               placeholder="City"
               id="city"
               name="city"
               className={styles.gray_input + ' w-36'}
               required
-            ></Input>
-            <Input
+            ></input>
+            <input
               type="text"
               placeholder="State"
               id="state"
               name="state"
               className={styles.gray_input + ' w-36'}
               required
-            ></Input>
-            <Input
+            ></input>
+            <input
               type="text"
               placeholder="Zip Code"
               id="zipCode"
               name="zipCode"
               className={styles.gray_input + ' w-20'}
               required
-            ></Input>
-            <Input
+            ></input>
+            <input
               type="text"
               placeholder="Country"
               id="country"
               name="country"
               className={styles.gray_input + ' w-20'}
-            ></Input>
+            ></input>
           </div>
         </div>
       </div>
-    </section>
+    </>
   )
 }
 

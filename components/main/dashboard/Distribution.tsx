@@ -41,8 +41,12 @@ const Distribution = () => {
         <h1 className="text-xl font-medium">Distribution</h1>
       </nav>
       <h2 className="py-3 text-sm">FI25 Crypto Index Token</h2>
-      <div className="relative -top-12 h-20">
-        <Pie data={pie_chart_data} options={options} />
+      <div className="relative -top-12 w-[100%]">
+        <Pie
+          data={pie_chart_data}
+          options={options}
+          // className="max-h-[340px]"
+        />
       </div>
     </div>
   )

@@ -38,7 +38,7 @@ const Input = ({
       } bg- flex items-center gap-3 rounded-full px-2 py-1.5 font-medium ${
         disabled && 'cursor-not-allowed opacity-50'
       } ${className || ''}`}
-      placeholder={placeholder}
+      placeholder={`${placeholder} ${required && ' *'}`}
       disabled={disabled}
       onClick={onClick}
       required={required}
