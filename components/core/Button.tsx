@@ -1,8 +1,18 @@
 import React from 'react'
+import Image from 'next/image'
 
-const Button = () => {
+const Button = ({ isLoading, onClick, svg, text, background }) => {
   return (
-    <div>Button</div>
+    <button
+      disabled={isLoading}
+      onClick={onClick}
+      className={`flex items-center gap-2 rounded-full bg-${background} px-3 py-1.5 font-medium ${
+        isLoading && 'cursor-not-allowed opacity-50'
+      }`}
+    >
+      <Image src={svg} height={20} width={20} alt="save changes icon" />
+      {text}
+    </button>
   )
 }
 

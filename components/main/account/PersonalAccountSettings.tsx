@@ -1,5 +1,6 @@
-import React from 'react'
-import NationalityList from '../constants/NationalityList'
+import NationalityList from '../../constants/NationalityList'
+import { useMoralis } from 'react-moralis'
+import Input from '../../core/Input'
 
 const styles = {
   gray_input:
@@ -9,27 +10,33 @@ const styles = {
 
 const PersonalAccountSettings = () => {
   const personal_infos = [
-    { id: 'first_name', text: 'First Name', placeholder: 'john' },
-    { id: 'last_name', text: 'Last Name', placeholder: 'john' },
+    { id: 'firstName', text: 'First Name', placeholder: 'john' },
+    { id: 'lastName', text: 'Last Name', placeholder: 'john' },
     {
-      id: 'personal_email',
+      id: 'personalEmail',
       text: 'Personal Email',
       placeholder: 'John.smith@email.com',
     },
   ]
+  const { user } = useMoralis()
+
+  if (!user) return <div>user logged out</div>
+
   return (
-    <section className="scrolltype relative -top-5 flex max-h-[70%] flex-col gap-8 overflow-y-auto pr-8">
+    <section className="scrolltype flex max-h-[70%] flex-col gap-8 overflow-y-auto pr-8">
+      {/* I removed ths: relative -top-5 
+      because it was causing the form to appear on the top of the button 'upload photo profile' */}
       <div className="flex">
-        <div id="wallet_address">
-          <label htmlFor="wallet_address" className={styles.gray_input_label}>
+        <div id="walletAddress">
+          <label htmlFor="walletAddress" className={styles.gray_input_label}>
             Wallet Address
           </label>
-          <input
+          <Input
             type="text"
-            name="wallet_address"
-            id="wallet_address"
-            className={styles.gray_input}
-            placeholder="0x3Bf4CA8e5CA8e5CA8e5CA8e5CA8e5"
+            name="walletAddress"
+            id="walletAddress"
+            className={styles.gray_input + ' w-[320px]'}
+            placeholder={user.attributes.ethAddress}
             disabled
           />
         </div>
@@ -40,12 +47,13 @@ const PersonalAccountSettings = () => {
             <label htmlFor={data.id} className={styles.gray_input_label}>
               {data.text}
             </label>
-            <input
+            <Input
               type="text"
               name={data.id}
               id={data.id}
-              className={styles.gray_input}
+              className={styles.gray_input + ' w-[230px]'}
               placeholder={data.placeholder}
+              required
             />
           </div>
         ))}
@@ -53,78 +61,96 @@ const PersonalAccountSettings = () => {
       <div className="flex items-center gap-8">
         <div id="date_of_birth">
           <label htmlFor="date_of_birth" className={styles.gray_input_label}>
-            Birth Day
+            Birthday
           </label>
           <div className="flex gap-2">
-            <input
+            <Input
               type="text"
               placeholder="MM"
-              id="date_of_birth_month"
-              name="date_of_birth_month"
+              id="birthday_month"
+              name="birthday_month"
               className={styles.gray_input + ' w-12'}
-            ></input>
-            <input
+              required
+            ></Input>
+            <Input
               type="text"
               placeholder="DD"
-              id="date_of_birth_day"
-              name="date_of_birth_day"
+              id="birthday_day"
+              name="birthday_day"
               className={styles.gray_input + ' w-12'}
-            ></input>
-            <input
+              required
+            ></Input>
+            <Input
               type="text"
               placeholder="YYYY"
-              id="date_of_birth_year"
-              name="date_of_birth_year"
+              id="birthday_year"
+              name="birthday_year"
               className={styles.gray_input + ' w-20'}
-            ></input>
+              required
+            ></Input>
           </div>
         </div>
-        <div id="citizenship">
-          <label htmlFor="citizenship" className={styles.gray_input_label}>
-            Citizenship
+        <div id="nationality">
+          <label htmlFor="nationality" className={styles.gray_input_label}>
+            Nationality
           </label>
-          <NationalityList className={styles.gray_input + ' w-36'} />
+          <NationalityList className={styles.gray_input + ' w-28'} />
         </div>
         <div id="id_type">
           <label htmlFor="id_type" className={styles.gray_input_label}>
             ID Type
           </label>
-          <select name="nationality" className={styles.gray_input}>
+          <select
+            required
+            id="idType"
+            name="idType"
+            className={styles.gray_input}
+          >
             <option value="">SSN</option>
-            <option value="idk">idk</option>
-            <option value="idk">idk</option>
-            <option value="idk">idk</option>
-            <option value="idk">idk</option>
-            <option value="idk">idk</option>
+            <option value="Passport">Passport</option>
+            <option value="ID Card">ID Card</option>
+            <option value="Driver permit">Driver permit</option>
           </select>
         </div>
-        <div id="id_number">
-          <label htmlFor="id_number" className={styles.gray_input_label}>
+        <div id="idNumber">
+          <label htmlFor="idNumber" className={styles.gray_input_label}>
             ID Number
           </label>
-          <input
+          <Input
             type="text"
-            id="id_number"
-            name="id_number"
+            id="idNumber"
+            name="idNumber"
             className={styles.gray_input + ' w-28'}
             placeholder="LTS123728673"
-          ></input>
+            required
+          ></Input>
         </div>
-        <div id="id_photo">
-          <label htmlFor="id_photo" className={styles.gray_input_label}>
+        <div id="idPhoto">
+          <label htmlFor="idPhoto" className={styles.gray_input_label}>
             ID Photo
+            <br />
+            {user.attributes.idPhoto && (
+              <a className="text-sm text-green-400 underline" href="">
+                view current
+              </a>
+            )}
           </label>
-          <input
+          <Input
             type="file"
             accept="image/*"
-            id="id_photo"
+            id="idPhoto"
             style={{ display: 'none' }}
-            name="id_photo"
+            name="idPhoto"
             className={styles.gray_input + ' w-28 cursor-pointer'}
             // value="upload"
           />
-          <label htmlFor="id_photo">
-            <button className={styles.gray_input + ' w-28 cursor-pointer'}>
+          <label htmlFor="idPhoto">
+            <button
+              onClick={(e) => {
+                e.preventDefault()
+              }}
+              className={styles.gray_input + ' w-28 cursor-pointer'}
+            >
               Upload
             </button>
           </label>
@@ -132,52 +158,57 @@ const PersonalAccountSettings = () => {
       </div>
       <div className="flex items-center gap-8">
         <div id="home_address">
-          <label htmlFor="home_address" className={styles.gray_input_label}>
+          <label htmlFor="houseNo" className={styles.gray_input_label}>
             Home Address
           </label>
           <div className="flex gap-2">
-            <input
+            <Input
               type="text"
               placeholder="House Number"
-              id="house_number"
-              name="house_number"
+              id="houseNo"
+              name="houseNo"
               className={styles.gray_input + ' w-32'}
-            ></input>
-            <input
+              required
+            ></Input>
+            <Input
               type="text"
               placeholder="Street"
               id="street"
               name="street"
               className={styles.gray_input + ' w-40'}
-            ></input>
-            <input
+              required
+            ></Input>
+            <Input
               type="text"
               placeholder="City"
               id="city"
               name="city"
               className={styles.gray_input + ' w-36'}
-            ></input>
-            <input
+              required
+            ></Input>
+            <Input
               type="text"
               placeholder="State"
               id="state"
               name="state"
               className={styles.gray_input + ' w-36'}
-            ></input>
-            <input
+              required
+            ></Input>
+            <Input
               type="text"
               placeholder="Zip Code"
-              id="zip_code"
-              name="zip_code"
+              id="zipCode"
+              name="zipCode"
               className={styles.gray_input + ' w-20'}
-            ></input>
-            <input
+              required
+            ></Input>
+            <Input
               type="text"
               placeholder="Country"
               id="country"
               name="country"
               className={styles.gray_input + ' w-20'}
-            ></input>
+            ></Input>
           </div>
         </div>
       </div>
