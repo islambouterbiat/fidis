@@ -16,19 +16,25 @@ const MarketCap = () => {
       token_name: 'FI25',
       token_icon: FI25_icon,
       balance: 218.3,
+      balance_in_dollars: 13.213,
       change: 130.4,
+      change_percentage: 25.1,
     },
     {
       token_name: 'FI10',
       token_icon: FI10_icon,
       balance: 31.38,
+      balance_in_dollars: 1.213,
       change: 24.51,
+      change_percentage: 4,
     },
     {
       token_name: 'MetaFi',
       token_icon: METAFI_icon,
       balance: 0,
+      balance_in_dollars: 0,
       change: 259.32,
+      change_percentage: -3,
     },
   ]
   return (
@@ -38,16 +44,18 @@ const MarketCap = () => {
       </nav>
       <table className="market-cap-table w-full text-left">
         <thead className="whitespace-nowrap text-xs text-gray-300/30">
-          <tr className="border-y border-gray-300/30 text-center ">
-            <th className="py-2 text-left">Token Name</th>
-            <th className="text-right text-[#00FF38]">Balance</th>
-            <th className="text-right">Change</th>
+          <tr className="border-y border-gray-300/30 text-center">
+            <th className="py-2 text-left text-sm font-light">Token Name</th>
+            <th className="text-right text-sm font-medium text-green-increased-value">
+              Balance
+            </th>
+            <th className="text-right text-sm font-light">Change</th>
           </tr>
         </thead>
-        <tbody className="">
+        <tbody>
           {dummy_data.map((token, index) => (
             <tr key={index} className="text-right">
-              <td className="flex items-center gap-2 py-3">
+              <td className="flex items-center gap-2 py-3 font-bold">
                 <Image
                   src={token.token_icon}
                   height={26}
@@ -56,8 +64,32 @@ const MarketCap = () => {
                 />
                 {token.token_name}
               </td>
-              <td>{token.balance}</td>
-              <td>$ {token.change}</td>
+              <td className="font-bold">
+                {token.balance}
+                <span className="block text-xs font-medium text-green-increased-value">
+                  ≈ ${token.balance_in_dollars}
+                </span>
+                {/* {token.balance > 0 && (
+                  <span className="block text-xs font-medium text-green-increased-value">
+                    ≈ ${token.balance_in_dollars}
+                  </span>
+                )} */}
+              </td>
+              <td className="font-bold">
+                $ {token.change}
+                <span
+                  className={`block text-xs font-medium ${
+                    token.change_percentage >= 0
+                      ? 'text-green-increased-value'
+                      : 'text-red-decreased-value'
+                  }`}
+                >
+                  {token.change_percentage > 0
+                    ? '+' + token.change_percentage
+                    : token.change_percentage}
+                  %
+                </span>
+              </td>
             </tr>
           ))}
         </tbody>

@@ -78,10 +78,6 @@ html {
   background-repeat: no-repeat;
 }
 
-.market-cap-table > thead > tr > th {
-  font-weight: 200;
-}
-
 .scrolltype::-webkit-scrollbar {
   background: rgba(0, 0, 0, 0.27);
   width: 4px;
@@ -116,7 +112,7 @@ html {
   }
 }
 
-.line_chart > div > canvas {
+.line_chart >div> div > canvas {
   background-color: rgb(0 0 0 / 0.3);
   padding: 20px;
 }

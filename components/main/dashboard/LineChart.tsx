@@ -25,6 +25,7 @@ ChartJS.register(
 const LineChart = () => {
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: 'top' as const,
@@ -76,7 +77,9 @@ const LineChart = () => {
     ],
   }
   return (
-    <Line options={options} data={line_chart_data} height={300} width={800} />
+    <div className="h-[15rem]">
+      <Line options={options} data={line_chart_data} />
+    </div>
   )
 }
 

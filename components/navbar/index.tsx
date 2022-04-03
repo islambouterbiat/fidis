@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import Notification from '../constants/Notification'
+import Notification from '../constants/notification'
+import Popup from '../constants/Popup'
 
 import logo from '../../assets/images/fidis_icons/fidis_logo_text_gold_transparent.png'
 import mini_logo from '../../assets/images/fidis_icons/fidis_logo_gold_transparent.png'
@@ -21,6 +22,7 @@ const styles = {
 }
 const NavBar = () => {
   const [miniNavOpen, SetMiniNavOpen] = useState(false)
+  const [popupOpen, SetPopupOpen] = useState(false)
   const data = [
     { name: 'FI25', icon: FI25_icon },
     { name: 'FI10', icon: FI10_icon },
@@ -37,7 +39,9 @@ const NavBar = () => {
     isAuthenticating,
   } = useMoralis()
 
-  const buySellTokens = () => {}
+  const buySellTokens = () => {
+    SetPopupOpen((p) => !p)
+  }
 
   const handleMiniNav = () => {
     SetMiniNavOpen((p) => !p)
@@ -197,6 +201,7 @@ const NavBar = () => {
           </>
         )}
       </div>
+      {popupOpen && <Popup SetPopupOpen={SetPopupOpen} popupOpen={popupOpen} />}
     </nav>
   )
 }

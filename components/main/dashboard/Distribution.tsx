@@ -7,6 +7,7 @@ ChartJS.register(ArcElement, Tooltip, Legend)
 const Distribution = () => {
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: 'right' as const,
@@ -21,14 +22,14 @@ const Distribution = () => {
         label: '# of Votes',
         data: [12, 19, 3],
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
+          'rgba(111, 159, 198, 1)',
+          'rgba(243, 168, 101, 1)',
+          'rgba(127, 185, 115, 1)',
         ],
         borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
+          'rgba(111, 159, 198, 1)',
+          'rgba(243, 168, 101, 1)',
+          'rgba(127, 185, 115, 1)',
         ],
         borderWidth: 1,
       },
@@ -41,12 +42,31 @@ const Distribution = () => {
         <h1 className="text-xl font-medium">Distribution</h1>
       </nav>
       <h2 className="py-3 text-sm">FI25 Crypto Index Token</h2>
-      <div className="relative -top-12 w-[100%]">
-        <Pie
-          data={pie_chart_data}
-          options={options}
-          // className="max-h-[340px]"
-        />
+      <div className="h-32">
+        <Pie data={pie_chart_data} options={options} />
+      </div>
+      <div className="flex justify-end">
+        <label
+          htmlFor="value_balance"
+          className="relative mt-2 flex cursor-pointer items-center hover:scale-105"
+        >
+          <span className="mr-1.5 cursor-pointer text-sm font-medium">
+            Value
+          </span>
+          <div className="relative">
+            <input
+              // onClick={handleBalanceToggle}
+              type="checkbox"
+              id="value_balance"
+              className="sr-only cursor-pointer"
+            />
+            <div className="toggle_bg h-5 w-8 cursor-pointer rounded-full border-2 border-gray-200 bg-transparent"></div>
+          </div>
+
+          <span className="ml-1.5 cursor-pointer text-sm font-medium">
+            Balance
+          </span>
+        </label>
       </div>
     </div>
   )
