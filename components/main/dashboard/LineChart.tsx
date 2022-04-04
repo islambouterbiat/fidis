@@ -149,13 +149,15 @@ const LineChart = () => {
       </div>
       <div className="absolute top-2.5 left-72 flex items-center gap-2">
         <button
-          className="text-white"
+          className={currentChart == 'line_chart' && 'rounded bg-black/50 px-1'}
           onClick={() => setCurrentChart('line_chart')}
         >
           <AiOutlineLineChart size={24} />
         </button>
         <button
-          className="text-white"
+          className={
+            currentChart == 'candlestick' && 'rounded bg-black/50 px-1'
+          }
           onClick={() => setCurrentChart('candlestick')}
         >
           <MdOutlineWaterfallChart size={24} />
