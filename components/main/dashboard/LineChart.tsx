@@ -14,6 +14,8 @@ import {
 import { Line } from 'react-chartjs-2'
 import 'chartjs-adapter-date-fns'
 import CandleStick from './CandleStick'
+import { AiOutlineLineChart } from 'react-icons/ai'
+import { MdOutlineWaterfallChart } from 'react-icons/md'
 
 ChartJS.register(
   ArcElement,
@@ -30,6 +32,9 @@ ChartJS.register(
 const LineChart = () => {
   // state for giving user the ability to set chart timeframe by month or week ...
   const [timeframe, setTimeframe] = useState('month')
+  // state for showing current type of charts
+  const [currentChart, setCurrentChart] = useState('line_chart')
+
   const options = {
     responsive: true,
     maintainAspectRatio: false,
@@ -124,6 +129,7 @@ const LineChart = () => {
     { name: 'month', text: '1M' },
     { name: 'year', text: '1Y' },
   ]
+  console.log(currentChart)
   return (
     <div className="relative h-[15rem]">
       <div className="absolute top-2.5 left-12 flex items-center gap-2">
@@ -141,8 +147,27 @@ const LineChart = () => {
           </button>
         ))}
       </div>
-      <Line options={options} data={line_chart_data} />
-      <CandleStick />
+      <div className="absolute top-2.5 left-72 flex items-center gap-2">
+        <button
+          className="text-white"
+          onClick={() => setCurrentChart('line_chart')}
+        >
+          <AiOutlineLineChart size={24} />
+        </button>
+        <button
+          className="text-white"
+          onClick={() => setCurrentChart('candlestick')}
+        >
+          <MdOutlineWaterfallChart size={24} />
+        </button>
+      </div>
+      {currentChart == 'line_chart' ? (
+        <Line options={options} data={line_chart_data} />
+      ) : currentChart == 'candlestick' ? (
+        <CandleStick />
+      ) : (
+        ''
+      )}
     </div>
   )
 }

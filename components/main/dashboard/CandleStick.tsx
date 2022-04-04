@@ -17,13 +17,29 @@ const CandleStick = () => {
           x: new Date('2016, 08, 01'),
           y: [52.76, 57.35, 52.15, 57.03],
         },
+        {
+          x: new Date('2016, 09, 01'),
+          y: [52.76, 57.35, 52.15, 57.03],
+        },
+        {
+          x: new Date('2016, 10, 01'),
+          y: [52.76, 57.35, 52.15, 57.03],
+        },
+        {
+          x: new Date('2016, 11, 01'),
+          y: [52.76, 57.35, 52.15, 57.03],
+        },
+        {
+          x: new Date('2016, 12, 01'),
+          y: [52.76, 57.35, 52.15, 57.03],
+        },
       ],
     },
   ]
   return (
-    <>
+    <div className="relative top-10">
       <Chart options={options} series={series} type="candlestick" />
-    </>
+    </div>
   )
 }
 
