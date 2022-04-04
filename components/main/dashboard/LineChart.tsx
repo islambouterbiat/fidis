@@ -6,11 +6,13 @@ import {
   Legend,
   CategoryScale,
   LinearScale,
+  TimeScale,
   PointElement,
   LineElement,
   Title,
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
+import 'chartjs-adapter-date-fns'
 
 ChartJS.register(
   CategoryScale,
@@ -19,7 +21,8 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  TimeScale
 )
 
 const LineChart = () => {
@@ -38,6 +41,14 @@ const LineChart = () => {
     interaction: {
       intersect: false,
     },
+    scales: {
+      x: {
+        type: 'time',
+        time: {
+          unit: 'day',
+        },
+      },
+    },
   }
   const labels = [
     'January',
@@ -50,12 +61,19 @@ const LineChart = () => {
   ]
 
   const line_chart_data = {
-    labels,
+    // labels,
     datasets: [
       {
         tension: 0.3,
         label: 'FI25',
-        data: [20, 30, 100, 150, 120, 200, 260],
+        data: [
+          { x: '2022-03-12', y: 50 },
+          { x: '2022-03-23', y: 10 },
+          { x: '2022-04-12', y: 20 },
+          { x: '2022-04-28', y: 100 },
+          { x: '2022-05-12', y: 60 },
+          { x: '2022-06-12', y: 40 },
+        ],
         // borderWidth: 4,
         borderColor: 'rgb(238,130,238)',
         backgroundColor: 'rgba(238,130,238, 0.5)',
@@ -63,16 +81,23 @@ const LineChart = () => {
       {
         tension: 0.3,
         label: 'FI10',
-        data: [50, 150, 230, 220, 120, 150, 180],
+        data: [
+          { x: '2022-03-12', y: 100 },
+          { x: '2022-03-23', y: 80 },
+          { x: '2022-04-12', y: 70 },
+          { x: '2022-04-28', y: 10 },
+          { x: '2022-05-12', y: 20 },
+          { x: '2022-06-12', y: 70 },
+        ],
         borderColor: 'rgb(55, 125, 255)',
-        backgroundColor: 'rgba(255, 255, 255, 0.5)',
+        backgroundColor: 'rgba(55, 125, 255, 0.5)',
       },
       {
         tension: 0.3,
         label: 'MetaFI',
         data: [100, 250, 170, 240, 260, 250, 375],
         borderColor: 'rgb(240, 157, 1)',
-        backgroundColor: 'rgba(255, 255, 255, 0.5)',
+        backgroundColor: 'rgba(240, 157, 1, 0.5)',
       },
     ],
   }

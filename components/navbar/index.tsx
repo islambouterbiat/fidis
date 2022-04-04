@@ -23,7 +23,6 @@ const styles = {
 const NavBar = () => {
   const [miniNavOpen, SetMiniNavOpen] = useState(false)
   const [popupOpen, SetPopupOpen] = useState(false)
-  const router = useRouter()
   const data = [
     { name: 'FI25', icon: FI25_icon },
     { name: 'FI10', icon: FI10_icon },
@@ -47,6 +46,8 @@ const NavBar = () => {
   const handleMiniNav = () => {
     SetMiniNavOpen((p) => !p)
   }
+  // using router for navbar activeCLass (get page pathname and set className)
+  const router = useRouter()
 
   return (
     <nav
