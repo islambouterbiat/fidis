@@ -78,6 +78,14 @@ html {
   background-repeat: no-repeat;
 }
 
+#Navbar {
+  a:hover {
+    transform: scale(1);
+  }
+  a {
+    padding-left: 0.5rem;
+  }
+}
 .scrolltype::-webkit-scrollbar {
   background: rgba(0, 0, 0, 0.27);
   width: 4px;

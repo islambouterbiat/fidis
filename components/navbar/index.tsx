@@ -19,7 +19,7 @@ const styles = {
   btnBottomNav: 'hover:text-orange-FIDIS',
 }
 const NavBar = ({ profilePicture, setProfilePicture }: any) => {
-  const [miniNavOpen, SetMiniNavOpen] = useState(false)
+  const [miniNav, SetMiniNav] = useState(false)
   const [popupOpen, SetPopupOpen] = useState(false)
   const data = [
     { name: 'FI25', icon: FI25_icon },
@@ -43,7 +43,7 @@ const NavBar = ({ profilePicture, setProfilePicture }: any) => {
   }
 
   const handleMiniNav = () => {
-    SetMiniNavOpen((p) => !p)
+    SetMiniNav((p) => !p)
   }
   // using router for navbar activeCLass (get page pathname and set className)
   const router = useRouter()
@@ -61,24 +61,27 @@ const NavBar = ({ profilePicture, setProfilePicture }: any) => {
   }, [user, isAuthenticated])
   return (
     <nav
+      id="Navbar"
       className={`grid ${
-        !miniNavOpen ? ' w-[200px] min-w-[200px] max-w-[200px]' : 'w-15'
+        !miniNav
+          ? ' w-[200px] min-w-[200px] max-w-[200px]'
+          : 'w-[55px] min-w-[55px] max-w-[55px]'
       }  grid-cols-1 place-content-between gap-6 py-12 text-sm font-light text-white transition `}
     >
       <div>
-        {!miniNavOpen ? (
+        {!miniNav ? (
           <Image
             src={logo}
-            height={50}
-            width={222}
+            height={55}
+            width={236}
             className="object-cover"
             alt="FIDIS"
           />
         ) : (
           <Image
             src={mini_logo}
-            height={50}
-            width={50}
+            height={55}
+            width={55}
             className="object-cover"
             alt="FIDIS"
           />
@@ -89,11 +92,13 @@ const NavBar = ({ profilePicture, setProfilePicture }: any) => {
             isAuthenticated ? buySellTokens() : await authenticate()
           }
           className={`hoverEffectContained ${
-            !miniNavOpen ? 'w-full px-2' : 'px-[0.3rem]'
+            !miniNav
+              ? 'w-full px-2'
+              : 'mx-auto flex w-full place-content-center px-[0.3rem]'
           } my-4 flex h-12 items-center gap-3 whitespace-nowrap rounded bg-orange-FIDIS  py-1 text-[1.2rem] font-semibold`}
         >
           <Image src={wallet_icon} height={24} width={30} alt="" />
-          {!miniNavOpen &&
+          {!miniNav &&
             (isAuthenticated
               ? 'Buy/Sell'
               : !isAuthenticated
@@ -109,8 +114,10 @@ const NavBar = ({ profilePicture, setProfilePicture }: any) => {
         <nav className="mt-8 text-[1.1rem]">
           <Link href="/">
             <a
-              className={`${styles.btnNav} flex items-center gap-2 border-b-2 ${
-                router.pathname === '/' ? 'text-orange-FIDIS' : ''
+              className={`${styles.btnNav} flex items-center gap-2 ${
+                router.pathname === '/'
+                  ? 'bg-[#17175e99] text-orange-FIDIS'
+                  : ''
               }`}
             >
               <svg
@@ -133,7 +140,7 @@ const NavBar = ({ profilePicture, setProfilePicture }: any) => {
                   fill={router.pathname === '/' ? '#F09D01' : '#DADADA'}
                 />
               </svg>
-              {!miniNavOpen && 'Dashboard'}
+              {!miniNav && 'Dashboard'}
             </a>
           </Link>
           {/* add passHref if the url contains anything other than a string */}
@@ -143,17 +150,17 @@ const NavBar = ({ profilePicture, setProfilePicture }: any) => {
                 <a
                   className={`${styles.btnNav} flex items-center gap-2 ${
                     router.pathname.includes(`/${nav.name}`)
-                      ? 'text-orange-FIDIS'
+                      ? 'bg-[#17175e99]   text-orange-FIDIS'
                       : ''
                   }`}
                 >
                   <Image
                     src={nav.icon}
-                    height={30}
-                    width={30}
+                    height={37}
+                    width={37}
                     alt={`${nav.name} icon`}
                   />
-                  {!miniNavOpen && nav.name}
+                  {!miniNav && nav.name}
                 </a>
               </Link>
             ))}
@@ -165,16 +172,16 @@ const NavBar = ({ profilePicture, setProfilePicture }: any) => {
         {/* mini-nav checkbox */}
         <label
           htmlFor="mini_nav"
-          className="relative mb-4 flex cursor-pointer items-center hover:scale-105"
+          className="relative mb-4 flex cursor-pointer items-center pl-1"
         >
           <input
             onClick={handleMiniNav}
             type="checkbox"
             id="mini_nav"
-            className="sr-only cursor-pointer"
+            className="sr-only cursor-pointer pl-1"
           />
           <div className="toggle_bg h-5 w-8 cursor-pointer rounded-full border-2 border-gray-200 bg-transparent"></div>
-          {!miniNavOpen && (
+          {!miniNav && (
             <span className="ml-3 cursor-pointer text-sm font-medium">
               mini-nav
             </span>
@@ -183,8 +190,12 @@ const NavBar = ({ profilePicture, setProfilePicture }: any) => {
         {isAuthenticated && (
           <>
             <Link href="/account">
-              <button
-                className={`${styles.btnBottomNav} flex items-center gap-3 bg-transparent py-1.5`}
+              <a
+                className={`${styles.btnNav} flex items-center gap-2 ${
+                  router.pathname === '/account'
+                    ? 'bg-[#17175e99]   text-orange-FIDIS'
+                    : ''
+                }`}
               >
                 <div
                   id="profilePicWrapper"
@@ -198,8 +209,8 @@ const NavBar = ({ profilePicture, setProfilePicture }: any) => {
                     className="overflow-hidden rounded-full"
                   />
                 </div>
-                {!miniNavOpen && 'Account'}
-              </button>
+                {!miniNav && 'Account'}
+              </a>
             </Link>
             <span className="my-2 block h-[0.05rem] w-full bg-white/50"></span>
             <Link href="/">
@@ -209,9 +220,13 @@ const NavBar = ({ profilePicture, setProfilePicture }: any) => {
                   router.push('/')
                   router.reload()
                 }}
-                className={`${styles.btnBottomNav} flex items-center gap-3 rounded-full bg-transparent py-1.5 text-[#D29E9E]`}
+                className={`${styles.btnBottomNav} ${
+                  miniNav ? 'mx-auto ml-1' : ''
+                } flex items-center gap-3 rounded-full bg-transparent py-1.5 text-[#D29E9E]`}
               >
-                <div className="grid h-[30px] w-[30px] place-items-center overflow-hidden ">
+                <div
+                  className={` grid h-[30px] w-[30px] place-items-center overflow-hidden `}
+                >
                   <Image
                     src={logout_icon}
                     height={40}
@@ -219,7 +234,7 @@ const NavBar = ({ profilePicture, setProfilePicture }: any) => {
                     alt="connect wallet icon"
                   />
                 </div>
-                {!miniNavOpen && 'Disconnect'}
+                {!miniNav && 'Disconnect'}
               </button>
             </Link>
           </>
