@@ -1,79 +1,30 @@
-import 'chartjs-adapter-luxon'
-import { DateTime } from 'luxon'
-import {
-  Chart as ChartJS,
-  ArcElement,
-  Tooltip,
-  Legend,
-  CategoryScale,
-  LinearScale,
-  TimeScale,
-  PointElement,
-  LineElement,
-  Title,
-} from 'chart.js'
-
-ChartJS.register(
-  ArcElement,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  TimeScale
-)
+import Chart from 'react-apexcharts'
 
 const CandleStick = () => {
-  //   const ctx = document.getElementById('myChart')
-  const date01 = DateTime.fromRFC2822('04 Apr 2022 00:00 GMT')
-  const date02 = DateTime.fromRFC2822('05 Apr 2022 00:00 GMT')
-  const date03 = DateTime.fromRFC2822('06 Apr 2022 00:00 GMT')
-  const date04 = DateTime.fromRFC2822('07 Apr 2022 00:00 GMT')
-  const data = {
-    datasets: [
-      {
-        data: [
-          {
-            x: date01.valueOf(),
-            o: 1, //opening
-            h: 1.5, //heighest point
-            l: 0.75, //lowest point
-            c: 1.25, //closing
-          },
-          {
-            x: date02.valueOf(),
-            o: 1, //opening
-            h: 1.5, //heighest point
-            l: 0.75, //lowest point
-            c: 1.25, //closing
-          },
-          {
-            x: date03.valueOf(),
-            o: 1, //opening
-            h: 1.5, //heighest point
-            l: 0.75, //lowest point
-            c: 1.25, //closing
-          },
-          {
-            x: date04.valueOf(),
-            o: 1, //opening
-            h: 1.5, //heighest point
-            l: 0.75, //lowest point
-            c: 1.25, //closing
-          },
-        ],
-      },
-    ],
-  }
-  const config = {
-    type: 'candlestick',
-    data: data,
-    options: {},
-  }
-  const myChart = new ChartJS('myChart', config)
-  return <div>{myChart}</div>
+  const options = {}
+  const series = [
+    {
+      data: [
+        {
+          x: new Date('2016, 01, 01'),
+          y: [51.98, 56.29, 51.59, 53.85],
+        },
+        {
+          x: new Date('2016, 02, 01'),
+          y: [53.66, 54.99, 51.35, 52.95],
+        },
+        {
+          x: new Date('2016, 08, 01'),
+          y: [52.76, 57.35, 52.15, 57.03],
+        },
+      ],
+    },
+  ]
+  return (
+    <>
+      <Chart options={options} series={series} type="candlestick" />
+    </>
+  )
 }
 
 export default CandleStick
