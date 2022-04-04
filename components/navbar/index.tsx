@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import Notification from '../constants/Notification'
-import Popup from '../constants/Popup'
+import Notification from './../constants/NationalityList'
+import Popup from './../constants/Popup'
 
 import logo from '../../assets/images/fidis_icons/fidis_logo_text_gold_transparent.png'
 import mini_logo from '../../assets/images/fidis_icons/fidis_logo_gold_transparent.png'
@@ -12,7 +12,7 @@ import FI10_icon from '../../assets/images/tokens_icons/fi10.png'
 import METAFI_icon from '../../assets/images/tokens_icons/metafi.png'
 import wallet_icon from '../../assets/images/general_icons/wallet.png'
 import logout_icon from '../../assets/images/general_icons/logout.png'
-import profile_picture from '../../assets/images/user_icons/profile_picture.png'
+import profilePhotoDefault from '../../assets/images/user_icons/profilePhotoDefault.png'
 
 import { useMoralis } from 'react-moralis'
 
@@ -171,7 +171,7 @@ const NavBar = () => {
                   className="h-[35px] w-[35px] overflow-hidden rounded-full border-2 border-normal-white-text"
                 >
                   <Image
-                    src={profile_picture}
+                    src={profilePhotoDefault}
                     height={41}
                     width={41}
                     alt="connect wallet icon"

@@ -268,6 +268,7 @@ const User = () => {
       <AccountSettingsNavBar
         accountType={accountType}
         setAccountType={setAccountType}
+        styles={styles}
       />
       <form ref={formRef} className="h-[90%] overflow-y-auto">
         <section className="scrolltype flex max-h-[70%] flex-col gap-8 overflow-y-auto pr-8">
@@ -281,7 +282,7 @@ const User = () => {
               >
                 Wallet Address
               </label>
-              <Input
+              <input
                 type="text"
                 name="walletAddress"
                 id="walletAddress"
