@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Head from 'next/head'
-import { useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const styles = {
   buy_sell_buttons:
@@ -12,6 +12,7 @@ const styles = {
 }
 
 const Popup = ({ SetPopupOpen, popupOpen }) => {
+  const [tokenAmountInput, setTokenAmountInput] = useState('1')
   const ref: any = useRef()
   useEffect(() => {
     const checkIfClickedOutside = (e: any) => {
@@ -29,6 +30,8 @@ const Popup = ({ SetPopupOpen, popupOpen }) => {
     }
   }, [popupOpen])
 
+  const dollarsAmount = Number(tokenAmountInput) * 50
+  const ethAmount = Number(tokenAmountInput) * 2
   return (
     <div
       className="fixed inset-0 z-10 overflow-y-auto"
@@ -86,7 +89,9 @@ const Popup = ({ SetPopupOpen, popupOpen }) => {
             <div className="flex flex-col gap-6 px-7 py-4">
               <div className="mt-3 flex items-center">
                 <input
-                  type="select"
+                  value={tokenAmountInput}
+                  onChange={(e) => setTokenAmountInput(e.target.value)}
+                  type="text"
                   name="token_amount"
                   id="token_amount"
                   className="w-full rounded-l border border-r-0 border-orange-FIDIS py-3 px-4 text-xl text-white/50"
@@ -106,6 +111,7 @@ const Popup = ({ SetPopupOpen, popupOpen }) => {
                   type="select"
                   name="dollars_amount"
                   id="dollars_amount"
+                  value={dollarsAmount}
                   className={styles.popup_input + 'dollar_input rounded-l'}
                 />
                 <span className="absolute top-3 left-32 text-lg text-orange-FIDIS">
@@ -115,6 +121,7 @@ const Popup = ({ SetPopupOpen, popupOpen }) => {
                   type="select"
                   name="eth_amount"
                   id="eth_amount"
+                  value={ethAmount}
                   className={styles.popup_input + 'rounded-r'}
                 />
                 <span className="absolute top-3 right-2 text-lg text-orange-FIDIS">
