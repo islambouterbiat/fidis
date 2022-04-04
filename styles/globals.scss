@@ -112,11 +112,11 @@ html {
   }
 }
 
-.line_chart >div> div > canvas {
+.line_chart > div > div > canvas {
   background-color: rgb(0 0 0 / 0.3);
   padding: 20px;
 }
-.apexcharts-canvas{
+.apexcharts-canvas {
   background-color: rgb(0 0 0 / 0.3);
 }
 
@@ -133,14 +133,14 @@ input:checked + .toggle_bg {
 }
 
 .popup select {
- outline:none;
+  outline: none;
 }
-.popup select > option{
- background: #000;
- color: var(--orange-FIDIS);
- padding: 2px;
-} 
+.popup select > option {
+  background: #000;
+  color: var(--orange-FIDIS);
+  padding: 2px;
+}
 .popup select > option:hover {
   background: var(--orange-FIDIS);
-  color:white
+  color: white;
 }

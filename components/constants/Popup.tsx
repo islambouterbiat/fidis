@@ -8,7 +8,8 @@ const styles = {
   popup_input:
     'border w-full border-orange-FIDIS py-3 px-4 text-xl text-white/50 ',
   popup_token_select:
-    'rounded-r font-bold text-2xl text-center border border-orange-FIDIS w-full border-l-0 text-orange-FIDIS pt-[10px] pb-[11px] px-2 popup_token_select',
+    'mr-4 w-[90px] border-none rounded-r font-bold text-2xl text-center w-full text-orange-FIDIS pt-[10px] pb-[11px] px-2 popup_token_select hover:scale-105',
+  select_container: 'border-2 rounded border-orange-FIDIS ',
 }
 
 const Popup = ({ SetPopupOpen, popupOpen }) => {
@@ -101,14 +102,16 @@ const Popup = ({ SetPopupOpen, popupOpen }) => {
               </button> */}
             </div>
             <div className="flex flex-col gap-6 px-7 py-4">
-              <div className="mt-3 flex items-center">
+              <div
+                className={`${styles.select_container} mt-3 flex items-center`}
+              >
                 <input
                   value={tokenAmountInput}
                   onChange={(e) => setTokenAmountInput(e.target.value)}
                   type="text"
                   name="token_amount"
                   id="token_amount"
-                  className="w-full rounded-l border border-r-0 border-orange-FIDIS py-3 px-4 text-xl text-white/50"
+                  className="w-full rounded-l py-3 px-4 text-xl text-white/50"
                 />
                 <select
                   name="token_type"
