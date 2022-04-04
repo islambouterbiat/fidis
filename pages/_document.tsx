@@ -15,6 +15,10 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&display=swap"
             rel="stylesheet"
           />
+          <script
+            src="../../utils/chartjs-chart-financial.js"
+            type="text/javascript"
+          ></script>
         </Head>
         <body>
           <Main />

@@ -9,11 +9,11 @@ import {
   TimeScale,
   PointElement,
   LineElement,
-  BarElement,
   Title,
 } from 'chart.js'
 import { Line, Bar } from 'react-chartjs-2'
 import 'chartjs-adapter-date-fns'
+import CandleStick from './CandleStick'
 
 ChartJS.register(
   ArcElement,
@@ -21,7 +21,6 @@ ChartJS.register(
   LinearScale,
   PointElement,
   LineElement,
-  BarElement,
   Title,
   Tooltip,
   Legend,
@@ -37,6 +36,7 @@ const LineChart = () => {
     plugins: {
       legend: {
         position: 'top' as const,
+        align: 'end',
       },
       //   title: {
       //     display: true,
@@ -142,6 +142,7 @@ const LineChart = () => {
         ))}
       </div>
       <Line options={options} data={line_chart_data} />
+      <CandleStick />
     </div>
   )
 }
