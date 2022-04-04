@@ -3,6 +3,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Notification from './../constants/NationalityList'
 import Popup from './../constants/Popup'
+import { useMoralis } from 'react-moralis'
+import { useRouter } from 'next/router'
 
 import logo from '../../assets/images/fidis_icons/fidis_logo_text_gold_transparent.png'
 import mini_logo from '../../assets/images/fidis_icons/fidis_logo_gold_transparent.png'
@@ -14,8 +16,6 @@ import wallet_icon from '../../assets/images/general_icons/wallet.png'
 import logout_icon from '../../assets/images/general_icons/logout.png'
 import profilePhotoDefault from '../../assets/images/user_icons/profilePhotoDefault.png'
 
-import { useMoralis } from 'react-moralis'
-
 const styles = {
   btnNav: 'py-[0.8rem] hover:text-orange-FIDIS',
   btnBottomNav: 'hover:text-orange-FIDIS',
@@ -23,6 +23,7 @@ const styles = {
 const NavBar = () => {
   const [miniNavOpen, SetMiniNavOpen] = useState(false)
   const [popupOpen, SetPopupOpen] = useState(false)
+  const router = useRouter()
   const data = [
     { name: 'FI25', icon: FI25_icon },
     { name: 'FI10', icon: FI10_icon },
@@ -97,7 +98,9 @@ const NavBar = () => {
         <nav className="mt-8 text-[1.1rem]">
           <Link href="/">
             <a
-              className={`${styles.btnNav} flex items-center gap-2 border-b-2`}
+              className={`${styles.btnNav} flex items-center gap-2 border-b-2 ${
+                router.pathname === '/' ? 'text-orange-FIDIS' : ''
+              }`}
             >
               <svg
                 width="35"
@@ -110,13 +113,13 @@ const NavBar = () => {
                   fillRule="evenodd"
                   clipRule="evenodd"
                   d="M14.9771 5.11746C8.1407 5.82007 2.80821 11.5967 2.80821 18.6187C2.80821 26.1149 8.88507 32.1918 16.3813 32.1918C23.4033 32.1918 29.1799 26.8593 29.8825 20.0229H16.3813C15.6058 20.0229 14.9771 19.3942 14.9771 18.6187V5.11746ZM0 18.6187C0 9.57163 7.33414 2.2375 16.3813 2.2375C17.1567 2.2375 17.7854 2.86614 17.7854 3.64161V17.2146H31.3584C32.1339 17.2146 32.7625 17.8433 32.7625 18.6187C32.7625 27.6659 25.4284 35 16.3813 35C7.33414 35 0 27.6659 0 18.6187Z"
-                  fill="#DADADA"
+                  fill={router.pathname === '/' ? '#F09D01' : '#DADADA'}
                 />
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"
                   d="M22.9338 3.03062V12.0662H31.9694C30.9153 7.6023 27.3977 4.08469 22.9338 3.03062ZM21.994 0.012731C28.7717 0.856184 34.1438 6.22829 34.9873 13.006C35.115 14.0321 34.2645 14.8745 33.2305 14.8745H21.0616C20.5446 14.8745 20.1255 14.4554 20.1255 13.9384V1.76946C20.1255 0.735507 20.9679 -0.114954 21.994 0.012731Z"
-                  fill="#DADADA"
+                  fill={router.pathname === '/' ? '#F09D01' : '#DADADA'}
                 />
               </svg>
               {!miniNavOpen && 'Dashboard'}
@@ -126,7 +129,13 @@ const NavBar = () => {
           <div className="flex flex-col">
             {data.map((nav, index) => (
               <Link key={index} href={`/${nav.name}`}>
-                <a className={`${styles.btnNav} flex items-center gap-2`}>
+                <a
+                  className={`${styles.btnNav} flex items-center gap-2 ${
+                    router.pathname.includes(`/${nav.name}`)
+                      ? 'text-orange-FIDIS'
+                      : ''
+                  }`}
+                >
                   <Image
                     src={nav.icon}
                     height={30}

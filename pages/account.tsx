@@ -18,7 +18,7 @@ const styles = {
 }
 
 const User = () => {
-  //// define the account type Personal/Business
+  // define the account type Personal/Business
   const [accountType, setAccountType] = useState('Personal')
   const [emptyFields, setEmptyFields] = useState(false)
   const router = useRouter()
@@ -31,20 +31,20 @@ const User = () => {
   */
   const { user, setUserData, isUserUpdating, userError } = useMoralis()
 
-  //// define the state + content of the form
+  // define the state + content of the form
   const formRef = useRef<HTMLFormElement>(null)!
 
-  //// show notification when the user clicks 'save unfos'
+  // show notification when the user clicks 'save unfos'
   const [
     showNotificationAfterUpdatingUserInfos,
     setShowNotificationAfterUpdatingUserInfos,
   ] = useState(false)
 
-  ///// the function to update the user infos
+  // the function to update the user infos
   const handleUpdateUserInfos = async (e: any) => {
     e.preventDefault()
 
-    //// get Personal/Signee infos from the form
+    // get Personal/Signee infos from the form
     const company_name =
         accountType === 'Business' ? formRef.current.company_name.value : '',
       ein = accountType === 'Business' ? formRef.current.ein.value : '',
@@ -67,7 +67,7 @@ const User = () => {
           ? `House No: ${formRef.current.company_houseNo.value}, Street: ${formRef.current.company_street.value}, City: ${formRef.current.company_city.value}, , State: ${formRef.current.company_state.value}, Zip code: ${formRef.current.company_zipCode.value}, Country: ${formRef.current.company_country.value}`
           : ''
 
-    //// get Personal/Signee infos from the form
+    // get Personal/Signee infos from the form
     const firstName = formRef.current.firstName.value,
       lastName = formRef.current.lastName.value,
       personalEmail = formRef.current.personalEmail.value,
@@ -259,7 +259,7 @@ const User = () => {
       formRef.current.zipCode.value = user.attributes.zipCode || ''
       formRef.current.country.value = user.attributes.country || ''
     }
-    /// execute the function only in case the user is logged in, this is important because $user is $undefined otherwise
+    // execute the function only in case the user is logged in, this is important because $user is $undefined otherwise
     user && updateUserInputs()
   }, [user, accountType])
 
