@@ -10,6 +10,7 @@ import save_updates_icon from '../assets/images/general_icons/Save.png'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import Input from '../components/core/Input'
+import MiniNav from '../components/main/account/MiniNav'
 
 const styles = {
   gray_input:
@@ -17,11 +18,12 @@ const styles = {
   gray_input_label: 'text-orange-FIDIS font-semibold block mb-2',
 }
 
-const User = ({ profilePicture, setProfilePicture }: any) => {
+const User = ({ profilePicture, setProfilePicture, handleMiniNav }: any) => {
   //// define the account type Personal/Business
   const [accountType, setAccountType] = useState('Personal')
   const [emptyFields, setEmptyFields] = useState(false)
   const router = useRouter()
+
   /* 
   variables:
     - user: the user object, contains all infos about the current user
@@ -302,7 +304,8 @@ const User = ({ profilePicture, setProfilePicture }: any) => {
           )}
         </section>
 
-        <div id="save_changes" className="mt-6 flex w-full justify-end">
+        <div id="save_changes" className="mt-6 flex w-full justify-between">
+          <MiniNav handleMiniNav={handleMiniNav} />
           <Button
             isLoading={isUserUpdating}
             onClick={handleUpdateUserInfos}

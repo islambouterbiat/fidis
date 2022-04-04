@@ -18,8 +18,7 @@ const styles = {
   btnNav: 'py-[0.8rem] hover:text-orange-FIDIS',
   btnBottomNav: 'hover:text-orange-FIDIS',
 }
-const NavBar = ({ profilePicture, setProfilePicture }: any) => {
-  const [miniNav, SetMiniNav] = useState(false)
+const NavBar = ({ profilePicture, setProfilePicture, miniNav }: any) => {
   const [popupOpen, SetPopupOpen] = useState(false)
   const data = [
     { name: 'FI25', icon: FI25_icon },
@@ -42,9 +41,6 @@ const NavBar = ({ profilePicture, setProfilePicture }: any) => {
     SetPopupOpen((p) => !p)
   }
 
-  const handleMiniNav = () => {
-    SetMiniNav((p) => !p)
-  }
   // using router for navbar activeCLass (get page pathname and set className)
   const router = useRouter()
 
@@ -169,24 +165,6 @@ const NavBar = ({ profilePicture, setProfilePicture }: any) => {
       </div>
 
       <div className="text-[1.1rem]">
-        {/* mini-nav checkbox */}
-        <label
-          htmlFor="mini_nav"
-          className="relative mb-4 flex cursor-pointer items-center pl-1"
-        >
-          <input
-            onClick={handleMiniNav}
-            type="checkbox"
-            id="mini_nav"
-            className="sr-only cursor-pointer pl-1"
-          />
-          <div className="toggle_bg h-5 w-8 cursor-pointer rounded-full border-2 border-gray-200 bg-transparent"></div>
-          {!miniNav && (
-            <span className="ml-3 cursor-pointer text-sm font-medium">
-              mini-nav
-            </span>
-          )}
-        </label>
         {isAuthenticated && (
           <>
             <Link href="/account">
