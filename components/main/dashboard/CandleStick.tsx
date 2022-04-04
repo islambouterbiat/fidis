@@ -1,5 +1,6 @@
-import Chart from 'react-apexcharts'
 import moment from 'moment'
+import dynamic from 'next/dynamic'
+const ApexCharts = dynamic(() => import('react-apexcharts'), { ssr: false })
 
 const CandleStick = () => {
   const options = {
@@ -43,7 +44,7 @@ const CandleStick = () => {
   ]
   return (
     <div className="relative top-10">
-      <Chart
+      <ApexCharts
         options={options}
         series={series}
         type="candlestick"
