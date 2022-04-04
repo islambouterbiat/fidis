@@ -130,7 +130,11 @@ const LineChart = () => {
         {timeframeData.map((t, index) => (
           <button
             key={index}
-            className="rounded bg-black/50 px-2 py-1 text-center text-xs text-white"
+            className={`rounded px-2 py-1 text-center text-xs  ${
+              timeframe == t.name
+                ? 'bg-white text-black'
+                : 'bg-black/50 text-white'
+            }`}
             onClick={() => setTimeframe(t.name)}
           >
             {t.text}
