@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import Notification from './../constants/NationalityList'
+import Notification from './../constants/Notification'
 import Popup from './../constants/Popup'
 import { useMoralis } from 'react-moralis'
 import { useRouter } from 'next/router'
@@ -85,16 +85,9 @@ const NavBar = ({ profilePicture, setProfilePicture }: any) => {
         )}
         <button
           disabled={isAuthenticating}
-          onClick={async () => {
-            if (isAuthenticated) {
-              buySellTokens()
-            } else {
-              await authenticate()
-              // thought refreshing after login might be more secure, but it's not the best ux
-              // router.push('/')
-              // router.reload()
-            }
-          }}
+          onClick={async () =>
+            isAuthenticated ? buySellTokens() : await authenticate()
+          }
           className={`hoverEffectContained ${
             !miniNavOpen ? 'w-full px-2' : 'px-[0.3rem]'
           } my-4 flex h-12 items-center gap-3 whitespace-nowrap rounded bg-orange-FIDIS  py-1 text-[1.2rem] font-semibold`}
