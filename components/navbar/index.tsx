@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import Notification from './../constants/NationalityList'
@@ -6,21 +6,20 @@ import Popup from './../constants/Popup'
 
 import logo from '../../assets/images/fidis_icons/fidis_logo_text_gold_transparent.png'
 import mini_logo from '../../assets/images/fidis_icons/fidis_logo_gold_transparent.png'
-import Chart_pie_icon from '../../assets/images/general_icons/Chart_pie.png'
 import FI25_icon from '../../assets/images/tokens_icons/fi25.png'
 import FI10_icon from '../../assets/images/tokens_icons/fi10.png'
 import METAFI_icon from '../../assets/images/tokens_icons/metafi.png'
 import wallet_icon from '../../assets/images/general_icons/wallet.png'
 import logout_icon from '../../assets/images/general_icons/logout.png'
-import profilePhotoDefault from '../../assets/images/user_icons/profilePhotoDefault.png'
 
 import { useMoralis } from 'react-moralis'
+import { useRouter } from 'next/router'
 
 const styles = {
   btnNav: 'py-[0.8rem] hover:text-orange-FIDIS',
   btnBottomNav: 'hover:text-orange-FIDIS',
 }
-const NavBar = () => {
+const NavBar = ({ profilePicture, setProfilePicture }: any) => {
   const [miniNavOpen, SetMiniNavOpen] = useState(false)
   const [popupOpen, SetPopupOpen] = useState(false)
   const data = [
@@ -29,8 +28,11 @@ const NavBar = () => {
     { name: 'MetaFI', icon: METAFI_icon },
   ]
 
+  const router = useRouter()
+
   // using useMoralis Hook
   const {
+    user,
     authenticate,
     authError,
     login,
@@ -47,6 +49,17 @@ const NavBar = () => {
     SetMiniNavOpen((p) => !p)
   }
 
+  useEffect(() => {
+    /// update the profile picture from the default to the one in Moralis database if it exists
+    if (!isAuthenticated) return
+    if (user && user.attributes.profilePicture !== undefined) {
+      try {
+        setProfilePicture(`${user.attributes.profilePicture}`)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }, [user, isAuthenticated])
   return (
     <nav
       className={`grid ${
@@ -73,9 +86,16 @@ const NavBar = () => {
         )}
         <button
           disabled={isAuthenticating}
-          onClick={async () =>
-            isAuthenticated ? buySellTokens() : await authenticate()
-          }
+          onClick={async () => {
+            if (isAuthenticated) {
+              buySellTokens()
+            } else {
+              await authenticate()
+              // thought refreshing after login might be more secure, but it's not the best ux
+              // router.push('/')
+              // router.reload()
+            }
+          }}
           className={`hoverEffectContained ${
             !miniNavOpen ? 'w-full px-2' : 'px-[0.3rem]'
           } my-4 flex h-12 items-center gap-3 whitespace-nowrap rounded bg-orange-FIDIS  py-1 text-[1.2rem] font-semibold`}
@@ -171,7 +191,7 @@ const NavBar = () => {
                   className="h-[35px] w-[35px] overflow-hidden rounded-full border-2 border-normal-white-text"
                 >
                   <Image
-                    src={profilePhotoDefault}
+                    src={profilePicture}
                     height={41}
                     width={41}
                     alt="connect wallet icon"
@@ -184,7 +204,11 @@ const NavBar = () => {
             <span className="my-2 block h-[0.05rem] w-full bg-white/50"></span>
             <Link href="/">
               <button
-                onClick={logout}
+                onClick={() => {
+                  logout()
+                  router.push('/')
+                  router.reload()
+                }}
                 className={`${styles.btnBottomNav} flex items-center gap-3 rounded-full bg-transparent py-1.5 text-[#D29E9E]`}
               >
                 <div className="grid h-[30px] w-[30px] place-items-center overflow-hidden ">

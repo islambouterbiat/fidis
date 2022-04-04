@@ -17,7 +17,7 @@ const styles = {
   gray_input_label: 'text-orange-FIDIS font-semibold block mb-2',
 }
 
-const User = () => {
+const User = ({ profilePicture, setProfilePicture }: any) => {
   //// define the account type Personal/Business
   const [accountType, setAccountType] = useState('Personal')
   const [emptyFields, setEmptyFields] = useState(false)
@@ -29,7 +29,8 @@ const User = () => {
     - isUserUpdating: used to show LADOING state when the user clicks 'save unfos'
     - userError: used to show error message when the user clicks 'save unfos'
   */
-  const { user, setUserData, isUserUpdating, userError } = useMoralis()
+  const { user, isAuthUndefined, setUserData, isUserUpdating, userError } =
+    useMoralis()
 
   //// define the state + content of the form
   const formRef = useRef<HTMLFormElement>(null)!
@@ -206,7 +207,7 @@ const User = () => {
       }, 8000)
     }
   }
-  console.log(formRef)
+  // console.log(formRef)
 
   /// this should execute only once, that's why it's separated, and not every time the user data changes
   useEffect(() => {
@@ -266,6 +267,8 @@ const User = () => {
   return user ? (
     <main className="container mx-auto h-full py-4 text-white">
       <AccountSettingsNavBar
+        profilePicture={profilePicture}
+        setProfilePicture={setProfilePicture}
         accountType={accountType}
         setAccountType={setAccountType}
         styles={styles}
