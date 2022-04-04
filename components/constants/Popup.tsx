@@ -12,6 +12,7 @@ const styles = {
 }
 
 const Popup = ({ SetPopupOpen, popupOpen }) => {
+  const [popupAction, setPopupAction] = useState('Buy')
   const [tokenAmountInput, setTokenAmountInput] = useState('1')
   const ref: any = useRef()
   useEffect(() => {
@@ -79,12 +80,25 @@ const Popup = ({ SetPopupOpen, popupOpen }) => {
         >
           <div className="bg-black pb-4 shadow-lg shadow-black">
             <div className="flex w-full">
-              <button className={styles.buy_sell_buttons + 'bg-orange-FIDIS'}>
+              {['Buy', 'sell'].map((btn, index) => (
+                <button
+                  key={index}
+                  className={`
+                    ${styles.buy_sell_buttons} + ${
+                    popupAction == btn ? 'bg-orange-FIDIS' : 'bg-transparent'
+                  }
+                  `}
+                  onClick={() => setPopupAction(btn)}
+                >
+                  {btn}
+                </button>
+              ))}
+              {/* <button className={styles.buy_sell_buttons + 'bg-orange-FIDIS'} onclick={()=>setPopupAction('Buy')}>
                 Buy
               </button>
-              <button className={styles.buy_sell_buttons + 'bg-transparent'}>
+              <button className={styles.buy_sell_buttons + 'bg-transparent'} onclick={()=>setPopupAction('Sell')>
                 Sell
-              </button>
+              </button> */}
             </div>
             <div className="flex flex-col gap-6 px-7 py-4">
               <div className="mt-3 flex items-center">
@@ -133,7 +147,7 @@ const Popup = ({ SetPopupOpen, popupOpen }) => {
                   styles.buy_sell_buttons + 'mt-3 rounded bg-orange-FIDIS'
                 }
               >
-                Buy Now
+                {popupAction == 'Buy' ? 'Buy' : 'Sell'} Now
               </button>
             </div>
           </div>
