@@ -47,7 +47,7 @@ const Popup = ({ SetPopupOpen, popupOpen }) => {
         role="dialog"
         aria-modal="true"
       >
-        <div className="sm:block sm:p-0 flex min-h-screen items-end justify-center px-4 pt-4 pb-20 text-center">
+        <div className="sm:block sm:p-0 flex min-h-screen items-center justify-center px-4 pt-4 pb-20 text-center">
           {/* <!--
       Background overlay, show/hide based on modal state.
 
