@@ -1,6 +1,8 @@
+import { useRef, useState } from 'react'
 import NationalityList from '../../constants/NationalityList'
 import { useMoralis } from 'react-moralis'
 import Input from '../../core/Input'
+import Moralis from 'moralis'
 
 const styles = {
   gray_input:
@@ -24,6 +26,37 @@ const PersonalAccountSettings = ({
   ]
   const { user } = useMoralis()
 
+  const idPhotoRef = useRef<HTMLInputElement>()
+  const [loadingImage, setLoadingImage] = useState(false)
+  const [idPhotoFileURL, setProfilePictureURL] = useState('')
+  const handleUploadProfileImage = async (e) => {
+    e.preventDefault()
+    // if the user click upload, then canceled, return nothing
+    if (!idPhotoRef.current.files.length) return
+
+    // catch the first file in the file list (image) (only one file allowed)
+    const file = idPhotoRef.current.files[0]
+
+    // create a new Moralis file instance containing the image name and actual image metadata
+    const idPhotoFile = new Moralis.File(file.name, file)
+
+    // set loading image to true
+    setLoadingImage(true)
+    try {
+      // awaiting to moralis server to upload the image to the IPFS
+      await idPhotoFile.saveIPFS()
+      user.set('idPhoto', idPhotoFile._url)
+      await user.save()
+      setProfilePictureURL(`${idPhotoFile._url}`)
+      console.log('done')
+    } catch (error) {
+      console.log(error)
+    }
+
+    // set loading image to false
+    setLoadingImage(false)
+  }
+
   if (!user) return <div>user logged out</div>
 
   return (
@@ -46,7 +79,7 @@ const PersonalAccountSettings = ({
           </div>
         ))}
       </div>
-      <div className="flex items-center gap-8">
+      <div className="flex gap-8">
         <div id="date_of_birth">
           <label htmlFor="date_of_birth" className={styles.gray_input_label}>
             Birthday
@@ -117,36 +150,40 @@ const PersonalAccountSettings = ({
             required
           ></input>
         </div>
-        <div id="idPhoto">
+        <div id="idPhoto_div" className="grid">
           <label htmlFor="idPhoto" className={styles.gray_input_label}>
             ID Photo
             <span className=" text-red-decreased-value">{' *'}</span>
-            <br />
-            {user.attributes.idPhoto && (
-              <a className="text-sm text-green-400 underline" href="">
-                view current
-              </a>
-            )}
           </label>
+          <label
+            htmlFor="idPhoto"
+            className={`${styles.gray_input} relative z-0 w-28 text-center ${
+              loadingImage
+                ? 'cursor-wait bg-input-background-READONLY'
+                : 'cursor-pointer '
+            }`}
+          >
+            Upload
+          </label>
+          {user.attributes.idPhoto && (
+            <a
+              className="text-sm text-green-400 underline"
+              href={idPhotoFileURL}
+              target="_blank"
+            >
+              view current
+            </a>
+          )}
           <input
+            disabled={loadingImage}
+            onChange={handleUploadProfileImage}
             type="file"
             accept="image/*"
             id="idPhoto"
-            style={{ display: 'none' }}
             name="idPhoto"
-            className={styles.gray_input + ' w-28 cursor-pointer'}
-            // value="upload"
+            ref={idPhotoRef}
+            style={{ display: 'none' }}
           />
-          <label htmlFor="idPhoto">
-            <button
-              onClick={(e) => {
-                e.preventDefault()
-              }}
-              className={styles.gray_input + ' w-28 cursor-pointer'}
-            >
-              Upload
-            </button>
-          </label>
         </div>
       </div>
       <div className="flex items-center gap-8">

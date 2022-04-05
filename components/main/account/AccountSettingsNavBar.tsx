@@ -13,10 +13,10 @@ const AccountSettingsNavBar = ({
     setAccountType(e.target.innerText)
   }
 
-  const profilePictureRef = useRef<HTMLInputElement>()
-  const [loadingImage, setLoadingImage] = useState(false)
   const { user, isAuthenticated } = useMoralis()
 
+  const profilePictureRef = useRef<HTMLInputElement>()
+  const [loadingImage, setLoadingImage] = useState(false)
   const handleUploadProfileImage = async (e) => {
     e.preventDefault()
     // if the user click upload, then canceled, return nothing
@@ -106,8 +106,8 @@ const AccountSettingsNavBar = ({
             onChange={handleUploadProfileImage}
             type="file"
             accept="image/*"
-            id="idPhoto"
-            name="idPhoto"
+            id="profilePhoto"
+            name="profilePhoto"
             className={`
               ${styles.gray_input}
               z-999 absolute -top-16 -left-16 h-[300px] w-[300px] cursor-pointer  opacity-0
