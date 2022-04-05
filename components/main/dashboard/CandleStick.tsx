@@ -2,53 +2,27 @@ import moment from 'moment'
 import dynamic from 'next/dynamic'
 const ApexCharts = dynamic(() => import('react-apexcharts'), { ssr: false })
 
+import { candlestickData } from '../../../utils/candlestickChartData'
+
 const CandleStick = () => {
-  const options = {
+  const options: any = {
     chart: {
       foreColor: '#fff',
+      toolbar: { show: false },
     },
   }
   const series = [
     {
-      data: [
-        {
-          x: moment(new Date('2021- 01- 01')).format('MMM Do YY'),
-          y: [51.98, 56.29, 51.59, 53.85],
-        },
-        {
-          x: moment(new Date('2021- 02- 01')).format('MMM Do YY'),
-          y: [53.66, 54.99, 51.35, 52.95],
-        },
-        {
-          x: moment(new Date('2021- 03- 21')).format('MMM Do YY'),
-          y: [52.95, 57.35, 52.15, 57.03],
-        },
-        {
-          x: moment(new Date('2021- 05- 15')).format('MMM Do YY'),
-          y: [57.03, 57.35, 52.15, 52.03],
-        },
-        {
-          x: moment(new Date('2021- 06- 13')).format('MMM Do YY'),
-          y: [52.03, 57.35, 52.15, 53.03],
-        },
-        {
-          x: moment(new Date('2021- 08- 05')).format('MMM Do YY'),
-          y: [53.03, 57.35, 52.15, 52.5],
-        },
-        {
-          x: moment(new Date('2021- 11- 01')).format('MMM Do YY'),
-          y: [52.5, 57.35, 52.15, 52.76],
-        },
-      ],
+      data: candlestickData,
     },
   ]
   return (
-    <div className="relative top-10">
+    <div className="relative top-10 h-[15rem] xxl:h-[25rem]">
       <ApexCharts
         options={options}
         series={series}
         type="candlestick"
-        height="200"
+        height="100%"
       />
     </div>
   )

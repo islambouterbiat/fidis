@@ -17,6 +17,18 @@
   transition: all 0.2s ease-in-out;
   color: var(--normal-wite-text);
 }
+@media (min-width: 2500px) { 
+ div,button,a{
+   font-size: 25px !important;
+ }
+ span,input,select{
+   font-size: 18px !important;
+ }
+ h1{
+ font-size: 28px !important;
+ }
+// *{transform: scale(1.2);}
+ }
 
 button,
 button *,

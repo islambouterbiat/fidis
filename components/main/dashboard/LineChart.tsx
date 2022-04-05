@@ -122,13 +122,13 @@ const LineChart = () => {
   ]
 
   return (
-    <div className="relative h-[15rem]">
+    <div className="relative h-[15rem] xxl:h-[25rem]">
       {/* timeframe options */}
       <div className="absolute top-2.5 left-12 flex items-center gap-2">
         {timeframeData.map((t, index) => (
           <button
             key={index}
-            className={`rounded px-2 py-1 text-center text-xs  ${
+            className={`rounded px-2 py-1 text-center text-xs xxl:px-4 xxl:py-2  ${
               timeframe == t.name
                 ? 'bg-white text-black'
                 : 'bg-black/50 text-white'
@@ -140,14 +140,14 @@ const LineChart = () => {
         ))}
       </div>
       {/* chart type buttons */}
-      <div className="absolute top-2.5 left-72 flex items-center gap-2">
+      <div className="absolute top-2.5 left-72 flex items-center gap-2 xxl:left-[42rem]">
         <button
           className={
             currentChart == 'line_chart' ? 'rounded bg-black/50 px-1' : ''
           }
           onClick={() => setCurrentChart('line_chart')}
         >
-          <AiOutlineLineChart size={24} />
+          <AiOutlineLineChart className="h-5 w-5 xxl:h-10 xxl:w-10" />
         </button>
         <button
           className={
@@ -155,7 +155,7 @@ const LineChart = () => {
           }
           onClick={() => setCurrentChart('candlestick')}
         >
-          <MdOutlineWaterfallChart size={24} />
+          <MdOutlineWaterfallChart className="h-5 w-5 xxl:h-10 xxl:w-10" />
         </button>
       </div>
       {currentChart == 'line_chart' ? (

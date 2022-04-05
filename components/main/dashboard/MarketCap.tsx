@@ -44,11 +44,11 @@ const MarketCap = () => {
       </nav>
       <div className="market-cap-table w-full border-collapse text-left ">
         <div className=" flex items-center justify-between whitespace-nowrap border-y border-gray-300/30 text-center text-xs text-gray-300/30">
-          <div className="py-2 text-left text-sm font-light">Token Name</div>
-          <div className="text-right text-sm font-medium text-green-increased-value">
+          <div className="py-2 text-left font-light xxl:py-6">Token Name</div>
+          <div className="text-right font-medium text-green-increased-value">
             Balance
           </div>
-          <div className="text-right text-sm font-light">Change</div>
+          <div className="text-right font-light">Change</div>
         </div>
         <div>
           {dummy_data.map((token, index) => (

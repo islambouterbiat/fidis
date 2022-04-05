@@ -74,7 +74,7 @@ const AccountSettingsNavBar = ({
             onClick={(e) => getClickedButton(e)}
             className={`border border-orange-FIDIS ${
               accountType == 'Personal' ? 'bg-orange-FIDIS' : 'bg-transparent'
-            } px-4 py-1 text-sm font-medium`}
+            } px-4 py-1 text-sm font-medium xxl:py-4 xxl:px-6`}
           >
             Personal
           </button>
@@ -82,7 +82,7 @@ const AccountSettingsNavBar = ({
             onClick={(e) => getClickedButton(e)}
             className={`border border-orange-FIDIS  ${
               accountType == 'Business' ? 'bg-orange-FIDIS' : 'bg-transparent'
-            } px-4 py-1 text-sm font-medium`}
+            } px-4 py-1 text-sm font-medium xxl:py-4 xxl:px-6`}
           >
             Business
           </button>

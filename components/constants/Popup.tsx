@@ -8,7 +8,7 @@ const styles = {
   popup_input:
     'border w-full border-orange-FIDIS py-3 px-4 text-xl text-white/50 ',
   popup_token_select:
-    'mr-4 w-[90px] border-none rounded-r font-bold text-2xl text-center w-full text-orange-FIDIS pt-[10px] pb-[11px] px-2 popup_token_select hover:scale-105',
+    'mr-4 w-[90px] border-none rounded-r font-bold text-2xl text-center w-full text-orange-FIDIS pt-[10px] pb-[11px] popup_token_select hover:scale-105',
   select_container: 'border-2 rounded border-orange-FIDIS ',
 }
 
@@ -47,7 +47,7 @@ const Popup = ({ SetPopupOpen, popupOpen }) => {
         role="dialog"
         aria-modal="true"
       >
-        <div className="flex min-h-screen items-end justify-center px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+        <div className="sm:block sm:p-0 flex min-h-screen items-end justify-center px-4 pt-4 pb-20 text-center">
           {/* <!--
       Background overlay, show/hide based on modal state.
 
@@ -65,7 +65,7 @@ const Popup = ({ SetPopupOpen, popupOpen }) => {
 
           {/* <!-- This element is to trick the browser into centering the modal contents. --> */}
           <span
-            className="hidden sm:inline-block sm:h-screen sm:align-middle"
+            className="sm:inline-block sm:h-screen sm:align-middle hidden"
             aria-hidden="true"
           >
             &#8203;
@@ -83,7 +83,7 @@ const Popup = ({ SetPopupOpen, popupOpen }) => {
     --> */}
           <div
             ref={ref}
-            className="popup relative inline-block w-[22rem] transform overflow-hidden rounded-lg bg-black text-left align-bottom shadow-xl transition-all sm:my-8 sm:align-middle"
+            className="popup sm:my-8 sm:align-middle relative inline-block w-[22rem] transform overflow-hidden rounded-lg bg-black text-left align-bottom shadow-xl transition-all"
           >
             <div className="bg-black pb-4 shadow-lg shadow-black">
               <div className="flex w-full">
@@ -100,12 +100,6 @@ const Popup = ({ SetPopupOpen, popupOpen }) => {
                     {btn}
                   </button>
                 ))}
-                {/* <button className={styles.buy_sell_buttons + 'bg-orange-FIDIS'} onclick={()=>setPopupAction('Buy')}>
-                Buy
-              </button>
-              <button className={styles.buy_sell_buttons + 'bg-transparent'} onclick={()=>setPopupAction('Sell')>
-                Sell
-              </button> */}
               </div>
               <div className="flex flex-col gap-6 px-7 py-4">
                 <div

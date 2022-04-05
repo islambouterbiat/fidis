@@ -31,6 +31,10 @@ module.exports = {
         'overlay-background': 'rgba(46, 28, 148, 0.54)',
       },
     },
+    screens: {
+      xxl: '2400px',
+      // => @media (min-width: 2400px) { ... }
+    },
   },
   plugins: [],
 }
