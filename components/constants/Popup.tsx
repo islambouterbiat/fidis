@@ -32,6 +32,7 @@ const Popup = ({ SetPopupOpen, popupOpen }) => {
     }
   }, [popupOpen])
 
+  // javascript calculation for token
   const dollarsAmount = Number(tokenAmountInput) * 50
   const ethAmount = Number(tokenAmountInput) * 2
   return (

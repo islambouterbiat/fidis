@@ -35,7 +35,7 @@ const LineChart = () => {
   // state for showing current type of charts
   const [currentChart, setCurrentChart] = useState('line_chart')
 
-  const options = {
+  const options: any = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
@@ -64,15 +64,6 @@ const LineChart = () => {
       },
     },
   }
-  const labels = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-  ]
 
   const line_chart_data = {
     // labels,
@@ -129,9 +120,10 @@ const LineChart = () => {
     { name: 'month', text: '1M' },
     { name: 'year', text: '1Y' },
   ]
-  console.log(currentChart)
+
   return (
     <div className="relative h-[15rem]">
+      {/* timeframe options */}
       <div className="absolute top-2.5 left-12 flex items-center gap-2">
         {timeframeData.map((t, index) => (
           <button
@@ -147,6 +139,7 @@ const LineChart = () => {
           </button>
         ))}
       </div>
+      {/* chart type buttons */}
       <div className="absolute top-2.5 left-72 flex items-center gap-2">
         <button
           className={
