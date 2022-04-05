@@ -8,7 +8,6 @@ import { useMoralis } from 'react-moralis'
 import Notification from '../components/constants/Notification'
 import save_updates_icon from '../assets/images/general_icons/Save.png'
 import { useRouter } from 'next/router'
-import MiniNav from '../components/main/account/MiniNav'
 import Head from 'next/head'
 
 const styles = {
@@ -17,7 +16,7 @@ const styles = {
   gray_input_label: 'text-orange-FIDIS font-semibold block mb-2',
 }
 
-const User = ({ profilePicture, setProfilePicture, handleMiniNav }: any) => {
+const User = ({ profilePicture, setProfilePicture }: any) => {
   //// define the account type Personal/Business
   const [accountType, setAccountType] = useState('Personal')
   const [emptyFields, setEmptyFields] = useState(false)
@@ -310,7 +309,6 @@ const User = ({ profilePicture, setProfilePicture, handleMiniNav }: any) => {
             </section>
 
             <div id="save_changes" className="mt-6 flex w-full justify-between">
-              <MiniNav handleMiniNav={handleMiniNav} />
               <Button
                 isLoading={isUserUpdating}
                 onClick={handleUpdateUserInfos}

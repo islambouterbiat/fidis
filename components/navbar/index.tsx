@@ -5,6 +5,7 @@ import Notification from './../constants/Notification'
 import Popup from './../constants/Popup'
 import { useMoralis } from 'react-moralis'
 import { useRouter } from 'next/router'
+import MiniNav from '../main/account/MiniNav'
 
 import logo from '../../assets/images/fidis_icons/fidis_logo_text_gold_transparent.png'
 import mini_logo from '../../assets/images/fidis_icons/fidis_logo_gold_transparent.png'
@@ -18,8 +19,13 @@ const styles = {
   btnNav: 'py-[0.8rem] hover:text-orange-FIDIS',
   btnBottomNav: 'hover:text-orange-FIDIS',
 }
-const NavBar = ({ profilePicture, setProfilePicture, miniNav }: any) => {
+const NavBar = ({ profilePicture, setProfilePicture }: any) => {
   const [popupOpen, SetPopupOpen] = useState(false)
+  const [miniNav, SetMiniNav] = useState(false)
+  const handleMiniNav = () => {
+    SetMiniNav((p) => !p)
+    console.log('Mini nav toggled')
+  }
   const data = [
     { name: 'FI25', icon: FI25_icon },
     { name: 'FI10', icon: FI10_icon },
@@ -163,8 +169,8 @@ const NavBar = ({ profilePicture, setProfilePicture, miniNav }: any) => {
           </div>
         </nav>
       </div>
-
       <div className="text-[1.1rem]">
+        <MiniNav handleMiniNav={handleMiniNav} miniNav={miniNav} />
         {isAuthenticated && (
           <>
             <Link href="/account">
