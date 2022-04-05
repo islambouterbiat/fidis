@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import NationalityList from '../../constants/NationalityList'
 import { useMoralis } from 'react-moralis'
 import Input from '../../core/Input'
@@ -28,7 +28,7 @@ const PersonalAccountSettings = ({
 
   const idPhotoRef = useRef<HTMLInputElement>()
   const [loadingImage, setLoadingImage] = useState(false)
-  const [idPhotoFileURL, setProfilePictureURL] = useState('')
+  const [idPhotoFileURL, setIdPhotoFileURL] = useState('')
   const handleUploadProfileImage = async (e) => {
     e.preventDefault()
     // if the user click upload, then canceled, return nothing
@@ -47,7 +47,7 @@ const PersonalAccountSettings = ({
       await idPhotoFile.saveIPFS()
       user.set('idPhoto', idPhotoFile._url)
       await user.save()
-      setProfilePictureURL(`${idPhotoFile._url}`)
+      setIdPhotoFileURL(`${idPhotoFile._url}`)
       console.log('done')
     } catch (error) {
       console.log(error)
@@ -56,6 +56,13 @@ const PersonalAccountSettings = ({
     // set loading image to false
     setLoadingImage(false)
   }
+
+  useEffect(() => {
+    user
+      ? user.attributes.idPhoto &&
+        setIdPhotoFileURL(`${user.attributes.idPhoto}`)
+      : setIdPhotoFileURL('')
+  }, [user])
 
   if (!user) return <div>user logged out</div>
 
@@ -188,13 +195,6 @@ const PersonalAccountSettings = ({
       </div>
       <div className="flex items-center gap-8">
         <div id="home_address">
-          <label htmlFor="houseNo" className={styles.gray_input_label}>
-            Home Address{' '}
-            <span className=" text-red-decreased-value">{' * '}</span>
-            <a className="text-sm text-green-400 underline" href="">
-              fill with the company address
-            </a>
-          </label>
           <div className="flex gap-2">
             <input
               type="text"
