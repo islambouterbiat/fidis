@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Chart as ChartJS,
   ArcElement,
@@ -13,9 +13,11 @@ import {
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
 import 'chartjs-adapter-date-fns'
-import CandleStick from './CandleStick'
+import CandleStickChart from './CandlestickChart'
 import { AiOutlineLineChart } from 'react-icons/ai'
 import { MdOutlineWaterfallChart } from 'react-icons/md'
+
+import { getData } from './../../../utils/chartData'
 
 ChartJS.register(
   ArcElement,
@@ -30,6 +32,12 @@ ChartJS.register(
 )
 
 const LineChart = () => {
+  const [chartData, setChartData] = useState([])
+  useEffect(() => {
+    getData().then((data) => {
+      setChartData(data)
+    })
+  }, [])
   // state for giving user the ability to set chart timeframe by month or week ...
   const [timeframe, setTimeframe] = useState('month')
   // state for showing current type of charts
@@ -161,7 +169,7 @@ const LineChart = () => {
       {currentChart == 'line_chart' ? (
         <Line options={options} data={line_chart_data} />
       ) : currentChart == 'candlestick' ? (
-        <CandleStick />
+        <CandleStickChart chartData={chartData} />
       ) : (
         ''
       )}

@@ -1,4 +1,3 @@
-import moment from 'moment'
 import dynamic from 'next/dynamic'
 const ApexCharts = dynamic(() => import('react-apexcharts'), { ssr: false })
 
