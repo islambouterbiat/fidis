@@ -7,10 +7,9 @@ import Button from '../components/core/Button'
 import { useMoralis } from 'react-moralis'
 import Notification from '../components/constants/Notification'
 import save_updates_icon from '../assets/images/general_icons/Save.png'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
-import Input from '../components/core/Input'
 import MiniNav from '../components/main/account/MiniNav'
+import Head from 'next/head'
 
 const styles = {
   gray_input:
@@ -266,66 +265,74 @@ const User = ({ profilePicture, setProfilePicture, handleMiniNav }: any) => {
     user && updateUserInputs()
   }, [user, accountType])
 
-  return user ? (
-    <main className="container mx-auto h-full py-4 text-white">
-      <AccountSettingsNavBar
-        profilePicture={profilePicture}
-        setProfilePicture={setProfilePicture}
-        accountType={accountType}
-        setAccountType={setAccountType}
-        styles={styles}
-      />
-      <form ref={formRef} className="h-[90%] overflow-y-auto">
-        <section className="scrolltype flex max-h-[70%] flex-col gap-8 overflow-y-auto pr-8">
-          {/* I removed ths: relative -top-5 
-      because it was causing the form to appear on the top of the button 'upload photo profile' */}
-          <div className="flex">
-            <div id="walletAddress">
-              <label
-                htmlFor="walletAddress"
-                className={styles.gray_input_label}
-              >
-                Wallet Address
-              </label>
-              <input
-                type="text"
-                name="walletAddress"
-                id="walletAddress"
-                className={styles.gray_input + ' w-[320px] rounded-md p-4'}
-                placeholder={user.attributes.ethAddress}
-                disabled
-              />
-            </div>
-          </div>
-          {accountType == 'Personal' ? (
-            <PersonalAccountSettings styles={styles} />
-          ) : (
-            <BusinessAccountSettings styles={styles} />
-          )}
-        </section>
-
-        <div id="save_changes" className="mt-6 flex w-full justify-between">
-          <MiniNav handleMiniNav={handleMiniNav} />
-          <Button
-            isLoading={isUserUpdating}
-            onClick={handleUpdateUserInfos}
-            background="orange-FIDIS"
-            svg={save_updates_icon}
-            text="Save Changes"
+  return (
+    <>
+      <Head>
+        <title>FIDIS - Account settings</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      {user ? (
+        <main className="container mx-auto h-full py-4 text-white">
+          <AccountSettingsNavBar
+            profilePicture={profilePicture}
+            setProfilePicture={setProfilePicture}
+            accountType={accountType}
+            setAccountType={setAccountType}
+            styles={styles}
           />
-          {emptyFields && <Notification text="Empty fields" color="red" />}
-          {userError
-            ? showNotificationAfterUpdatingUserInfos && (
-                <Notification text={userError.message} color="red" />
-              )
-            : showNotificationAfterUpdatingUserInfos && (
-                <Notification text="Done" color="green" />
+          <form ref={formRef} className="h-[90%] overflow-y-auto">
+            <section className="scrolltype flex max-h-[70%] flex-col gap-8 overflow-y-auto pr-8">
+              {/* I removed ths: relative -top-5 
+      because it was causing the form to appear on the top of the button 'upload photo profile' */}
+              <div className="flex">
+                <div id="walletAddress">
+                  <label
+                    htmlFor="walletAddress"
+                    className={styles.gray_input_label}
+                  >
+                    Wallet Address
+                  </label>
+                  <input
+                    type="text"
+                    name="walletAddress"
+                    id="walletAddress"
+                    className={styles.gray_input + ' w-[320px] rounded-md p-4'}
+                    placeholder={user.attributes.ethAddress}
+                    disabled
+                  />
+                </div>
+              </div>
+              {accountType == 'Personal' ? (
+                <PersonalAccountSettings styles={styles} />
+              ) : (
+                <BusinessAccountSettings styles={styles} />
               )}
-        </div>
-      </form>
-    </main>
-  ) : (
-    <></>
+            </section>
+
+            <div id="save_changes" className="mt-6 flex w-full justify-between">
+              <MiniNav handleMiniNav={handleMiniNav} />
+              <Button
+                isLoading={isUserUpdating}
+                onClick={handleUpdateUserInfos}
+                background="orange-FIDIS"
+                svg={save_updates_icon}
+                text="Save Changes"
+              />
+              {emptyFields && <Notification text="Empty fields" color="red" />}
+              {userError
+                ? showNotificationAfterUpdatingUserInfos && (
+                    <Notification text={userError.message} color="red" />
+                  )
+                : showNotificationAfterUpdatingUserInfos && (
+                    <Notification text="Done" color="green" />
+                  )}
+            </div>
+          </form>
+        </main>
+      ) : (
+        <></>
+      )}
+    </>
   )
 }
 export default User
