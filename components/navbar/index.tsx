@@ -190,7 +190,7 @@ const NavBar = ({ profilePicture, setProfilePicture, miniNav }: any) => {
                 {!miniNav && 'Account'}
               </a>
             </Link>
-            <span className="my-2 block h-[0.05rem] w-full bg-white/50"></span>
+            <span className="mb-2 block h-[0.05rem] w-full bg-white/50"></span>
             <Link href="/">
               <button
                 onClick={() => {
