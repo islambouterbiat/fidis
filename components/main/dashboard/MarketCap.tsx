@@ -42,20 +42,21 @@ const MarketCap = () => {
       <nav className="flex items-center justify-between py-2">
         <h1 className="text-xl font-medium">Market Cap</h1>
       </nav>
-      <table className="market-cap-table w-full text-left">
-        <thead className="whitespace-nowrap text-xs text-gray-300/30">
-          <tr className="border-y border-gray-300/30 text-center">
-            <th className="py-2 text-left text-sm font-light">Token Name</th>
-            <th className="text-right text-sm font-medium text-green-increased-value">
-              Balance
-            </th>
-            <th className="text-right text-sm font-light">Change</th>
-          </tr>
-        </thead>
-        <tbody>
+      <div className="market-cap-table w-full border-collapse text-left ">
+        <div className=" flex items-center justify-between whitespace-nowrap border-y border-gray-300/30 text-center text-xs text-gray-300/30">
+          <div className="py-2 text-left text-sm font-light">Token Name</div>
+          <div className="text-right text-sm font-medium text-green-increased-value">
+            Balance
+          </div>
+          <div className="text-right text-sm font-light">Change</div>
+        </div>
+        <div>
           {dummy_data.map((token, index) => (
-            <tr key={index} className="text-right">
-              <td className="flex items-center gap-2 py-3 font-bold">
+            <div
+              key={index}
+              className="flex items-center justify-between border-b-[1px] border-b-slate-600 py-2 text-right"
+            >
+              <div className="flex items-center gap-2 py-3 font-bold">
                 <Image
                   src={token.token_icon}
                   height={26}
@@ -63,19 +64,20 @@ const MarketCap = () => {
                   alt={`${token.token_name} icon`}
                 />
                 {token.token_name}
-              </td>
-              <td className="font-bold">
+              </div>
+              <div
+                className={`${
+                  token.balance === 0 ? 'text-orange-FIDIS' : ''
+                } font-bold`}
+              >
                 {token.balance}
-                <span className="block text-xs font-medium text-green-increased-value">
-                  ≈ ${token.balance_in_dollars}
-                </span>
-                {/* {token.balance > 0 && (
+                {token.balance_in_dollars !== 0 && (
                   <span className="block text-xs font-medium text-green-increased-value">
                     ≈ ${token.balance_in_dollars}
                   </span>
-                )} */}
-              </td>
-              <td className="font-bold">
+                )}
+              </div>
+              <div className="font-bold">
                 $ {token.change}
                 <span
                   className={`block text-xs font-medium ${
@@ -89,11 +91,11 @@ const MarketCap = () => {
                     : token.change_percentage}
                   %
                 </span>
-              </td>
-            </tr>
+              </div>
+            </div>
           ))}
-        </tbody>
-      </table>
+        </div>
+      </div>
     </div>
   )
 }

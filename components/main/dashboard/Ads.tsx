@@ -1,9 +1,15 @@
 import React from 'react'
-
+import Image from 'next/image'
+import ad from './../../../assets/images/temp/ad_example.jpeg'
 const Ads = () => {
   return (
-    <div className='col-span-3 bg-black/20 w-full flex items-center justify-center'>
-        <p className='text-2xl font-medium'>ADS</p>
+    <div className="col-span-3 flex h-full w-full items-center justify-center overflow-hidden rounded-lg bg-black/20 shadow-sm">
+      <Image
+        className="object-cover object-right"
+        src={ad}
+        height={460}
+        width={300}
+      ></Image>
     </div>
   )
 }
