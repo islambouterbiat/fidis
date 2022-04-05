@@ -54,7 +54,12 @@ const MarketCap = () => {
           {dummy_data.map((token, index) => (
             <div
               key={index}
-              className="flex items-center justify-between border-b-[1px] border-b-slate-600 py-2 text-right"
+              // dont add a border bottom to the last raw
+              className={`flex items-center justify-between ${
+                index !== dummy_data.length - 1
+                  ? 'border-b-[1px] border-b-slate-600'
+                  : ''
+              } py-2 text-right`}
             >
               <div className="flex items-center gap-2 py-3 font-bold">
                 <Image
