@@ -21,15 +21,13 @@ const CandlestickChart = ({ chartData }) => {
     },
   }
   return (
-    <div className="h-full">
-      <Chart
-        chartType="CandlestickChart"
-        width="100%"
-        height="100%"
-        data={data}
-        options={options}
-      />
-    </div>
+    <Chart
+      chartType="CandlestickChart"
+      width="100%"
+      height="100%"
+      data={data}
+      options={options}
+    />
   )
 }
 

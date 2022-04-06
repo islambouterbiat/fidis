@@ -11,7 +11,7 @@ const Index = () => {
         <Distribution />
         <Ads />
       </div>
-      <div className="chart-wrapper min-h-[50%] grid grid-cols-1 py-6">
+      <div className="chart-wrapper grid min-h-[50%] grid-cols-1 py-6">
         <div className="col-span-1">
           <ChartsWrapper />
         </div>

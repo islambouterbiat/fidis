@@ -245,3 +245,10 @@ button.hoverEffectOutlined:hover {
 a:hover svg path {
   fill: var(--orange-FIDIS);
 }
+
+    //* date input */
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+     margin-left: -1.5rem;
+}

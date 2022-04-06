@@ -28,7 +28,7 @@ ChartJS.register(
   TimeScale
 )
 
-const LineChart = ({ timeframe }) => {
+const LineChart = ({ timeframe, startDate, endDate }) => {
   const line_chart_options: any = {
     responsive: true,
     maintainAspectRatio: false,
@@ -53,6 +53,8 @@ const LineChart = ({ timeframe }) => {
         time: {
           unit: timeframe,
         },
+        min: startDate,
+        max: endDate,
       },
       y: {
         max: 200,
