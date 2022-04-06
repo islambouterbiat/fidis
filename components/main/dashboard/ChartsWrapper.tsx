@@ -26,7 +26,7 @@ const ChartsWrapper = () => {
     { name: 'year', text: '1Y' },
   ]
   return (
-    <div className="relative h-[15rem] xxl:h-[25rem]">
+    <div className="relative min-h-[15rem]">
       {/* timeframe options */}
       <div className="absolute top-2.5 left-12 z-50 flex items-center gap-2">
         {timeframeData.map((t, index) => (

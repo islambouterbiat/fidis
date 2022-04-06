@@ -7,7 +7,9 @@
   --normal-wite-text: #dadada;
 }
 /*  ======================
-    Content table
+
+    table of contents
+
     1- Global styles
 
     2- Typography 
@@ -23,11 +25,14 @@
       4.6 account
       4.7 checkbox
       4.8 icons
+
     ========================*/
 
 
 
 
+
+    
 
 /*  ======================
     1- Global styles
@@ -120,7 +125,7 @@ button.hoverEffectContained:hover {
     ========================*/
 
 
-    
+
 
 
 
@@ -159,6 +164,7 @@ button.hoverEffectContained:hover {
 .scrolltype::-webkit-scrollbar {
   background: rgba(0, 0, 0, 0.27);
   width: 4px;
+  height:4px;
 }
 
 .scrolltype::-webkit-scrollbar-thumb {
@@ -197,13 +203,9 @@ button.hoverEffectContained:hover {
 .react-stockchart{
   background-color:rgb(189, 189, 189) ;
 }
-.line_chart > div > div > canvas {
+.chart-wrapper > div > div > canvas {
   background-color: rgb(0 0 0 / 0.3);
   padding: 20px;
-}
-
-.apexcharts-canvas {
-  background-color: rgb(0 0 0 / 0.3);
 }
 
     //* account */
