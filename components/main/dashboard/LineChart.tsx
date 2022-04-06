@@ -32,6 +32,7 @@ const LineChart = ({ timeframe }) => {
   const line_chart_options: any = {
     responsive: true,
     maintainAspectRatio: false,
+    // aspectRation: 3,
     plugins: {
       legend: {
         position: 'top' as const,

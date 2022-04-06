@@ -21,7 +21,7 @@ const CandlestickChart = ({ chartData }) => {
     },
   }
   return (
-    <div className="">
+    <div className="h-full">
       <Chart
         chartType="CandlestickChart"
         width="100%"
