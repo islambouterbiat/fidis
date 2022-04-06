@@ -6,6 +6,32 @@
   --orange-FIDIS: #f09d01;
   --normal-wite-text: #dadada;
 }
+/*  ======================
+    Content table
+    1- Global styles
+
+    2- Typography 
+
+    3- Layout 
+
+    4- Components
+      4.1 navbar
+      4.2 popup
+      4.3 scrollbar
+      4.4 notification
+      4.5 charts
+      4.6 account
+      4.7 checkbox
+      4.8 icons
+    ========================*/
+
+
+
+
+
+/*  ======================
+    1- Global styles
+    ========================*/
 
 * {
   margin: 0;
@@ -17,18 +43,14 @@
   transition: all 0.2s ease-in-out;
   color: var(--normal-wite-text);
 }
-@media (min-width: 2500px) { 
- div,button,a{
-   font-size: 25px !important;
- }
- span,input,select{
-   font-size: 18px !important;
- }
- h1{
- font-size: 28px !important;
- }
-// *{transform: scale(1.2);}
- }
+
+html {
+  /* background-image: url(../assets/images/website_background.png); */
+  background-color: #281f5b;
+  background-size: cover;
+  background-position-x: left;
+  background-repeat: no-repeat;
+}
 
 button,
 button *,
@@ -49,29 +71,6 @@ input {
 input {
   cursor: text;
 }
-.account_settings select:hover,
-.account_settings input:hover {
-  opacity: 0.8;
-  transform: scale(1.05);
-}
-
-input[disabled]:hover {
-  opacity: 1;
-  transform: scale(1);
-  cursor: not-allowed;
-}
-button.hoverEffectContained:hover {
-  background-color: var(--orange-FIDIS);
-  color: white;
-}
-
-/* this is for the icon 'Chart-pie' that is next to the word 'Overview' or 'Dashboard' in the general Navbar */
-
-button.hoverEffectOutlined:hover {
-  color: var(--orange-FIDIS);
-  border: 2px solid var(--orange-FIDIS);
-  background: none;
-}
 
 button:hover,
 button[disabled],
@@ -79,16 +78,57 @@ a:hover {
   transform: scale(1.02);
 }
 
-a:hover svg path {
-  fill: var(--orange-FIDIS);
+input[disabled]:hover {
+  opacity: 1;
+  transform: scale(1);
+  cursor: not-allowed;
 }
-html {
-  /* background-image: url(../assets/images/website_background.png); */
-  background-color: #281f5b;
-  background-size: cover;
-  background-position-x: left;
-  background-repeat: no-repeat;
+
+button.hoverEffectContained:hover {
+  background-color: var(--orange-FIDIS);
+  color: white;
 }
+
+
+
+
+
+/*  ======================
+    2- Typography 
+    ========================*/
+
+@media (min-width: 2500px) { 
+ div,button,a{
+  font-size: 25px !important;
+ }
+ span,input,select{
+  font-size: 18px !important;
+ }
+ h1{
+  font-size: 28px !important;
+ }
+//{transform: scale(1.2);}
+ }
+
+
+
+
+
+
+/*  ======================
+    3- Layout 
+    ========================*/
+
+
+    
+
+
+
+/*  ======================
+    4- Component
+    ========================*/
+
+    //* navbar */
 
 #Navbar {
   a:hover {
@@ -98,6 +138,24 @@ html {
     padding-left: 0.5rem;
   }
 }
+
+    //* popup */
+
+.popup select {
+  outline: none;
+}
+.popup select > option {
+  background: #000;
+  color: var(--orange-FIDIS);
+  padding: 2px;
+}
+.popup select > option:hover {
+  background: var(--orange-FIDIS);
+  color: white;
+}
+
+    //* scrollbar */
+
 .scrolltype::-webkit-scrollbar {
   background: rgba(0, 0, 0, 0.27);
   width: 4px;
@@ -107,7 +165,9 @@ html {
   background: var(--orange-FIDIS);
   /* outline: 1px solid slategrey; */
   width: 8px;
-}
+}    
+
+    //* notification */
 
 .notification {
   position: absolute;
@@ -132,6 +192,11 @@ html {
   }
 }
 
+    //* charts */
+
+.react-stockchart{
+  background-color:rgb(189, 189, 189) ;
+}
 .line_chart > div > div > canvas {
   background-color: rgb(0 0 0 / 0.3);
   padding: 20px;
@@ -140,6 +205,16 @@ html {
 .apexcharts-canvas {
   background-color: rgb(0 0 0 / 0.3);
 }
+
+    //* account */
+
+.account_settings select:hover,
+.account_settings input:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+    //* checkbox */
 
 .toggle_bg:after {
   content: '';
@@ -153,19 +228,15 @@ input:checked + .toggle_bg {
   @apply border-blue-600 bg-blue-600;
 }
 
-.popup select {
-  outline: none;
-}
-.popup select > option {
-  background: #000;
+    //* icons */
+
+/* this is for the icon 'Chart-pie' that is next to the word 'Overview' or 'Dashboard' in the general Navbar */
+button.hoverEffectOutlined:hover {
   color: var(--orange-FIDIS);
-  padding: 2px;
-}
-.popup select > option:hover {
-  background: var(--orange-FIDIS);
-  color: white;
+  border: 2px solid var(--orange-FIDIS);
+  background: none;
 }
 
-.react-stockchart{
-  background-color:rgb(189, 189, 189) ;
+a:hover svg path {
+  fill: var(--orange-FIDIS);
 }
