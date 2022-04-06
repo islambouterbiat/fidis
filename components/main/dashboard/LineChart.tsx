@@ -13,11 +13,8 @@ import {
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
 import 'chartjs-adapter-date-fns'
-import CandleStickChart from './CandlestickChart'
-import { AiOutlineLineChart } from 'react-icons/ai'
-import { MdOutlineWaterfallChart } from 'react-icons/md'
-
-import { getData } from './../../../utils/chartData'
+import CandlestickChart from './CandlestickChart'
+import { TypeChooser } from 'react-stockcharts/lib/helper'
 
 ChartJS.register(
   ArcElement,
@@ -31,19 +28,8 @@ ChartJS.register(
   TimeScale
 )
 
-const LineChart = () => {
-  const [chartData, setChartData] = useState([])
-  useEffect(() => {
-    getData().then((data) => {
-      setChartData(data)
-    })
-  }, [])
-  // state for giving user the ability to set chart timeframe by month or week ...
-  const [timeframe, setTimeframe] = useState('month')
-  // state for showing current type of charts
-  const [currentChart, setCurrentChart] = useState('line_chart')
-
-  const options: any = {
+const LineChart = ({ timeframe }) => {
+  const line_chart_options: any = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
@@ -121,60 +107,8 @@ const LineChart = () => {
       },
     ],
   }
-  const timeframeData = [
-    { name: 'hour', text: '1H' },
-    { name: 'day', text: '1D' },
-    { name: 'week', text: '1W' },
-    { name: 'month', text: '1M' },
-    { name: 'year', text: '1Y' },
-  ]
 
-  return (
-    <div className="relative h-[15rem] xxl:h-[25rem]">
-      {/* timeframe options */}
-      <div className="absolute top-2.5 left-12 flex items-center gap-2">
-        {timeframeData.map((t, index) => (
-          <button
-            key={index}
-            className={`rounded px-2 py-1 text-center text-xs xxl:px-4 xxl:py-2  ${
-              timeframe == t.name
-                ? 'bg-white text-black'
-                : 'bg-black/50 text-white'
-            }`}
-            onClick={() => setTimeframe(t.name)}
-          >
-            {t.text}
-          </button>
-        ))}
-      </div>
-      {/* chart type buttons */}
-      <div className="absolute top-2.5 left-72 flex items-center gap-2 xxl:left-[42rem]">
-        <button
-          className={
-            currentChart == 'line_chart' ? 'rounded bg-black/50 px-1' : ''
-          }
-          onClick={() => setCurrentChart('line_chart')}
-        >
-          <AiOutlineLineChart className="h-5 w-5 xxl:h-10 xxl:w-10" />
-        </button>
-        <button
-          className={
-            currentChart == 'candlestick' ? 'rounded bg-black/50 px-1' : ''
-          }
-          onClick={() => setCurrentChart('candlestick')}
-        >
-          <MdOutlineWaterfallChart className="h-5 w-5 xxl:h-10 xxl:w-10" />
-        </button>
-      </div>
-      {currentChart == 'line_chart' ? (
-        <Line options={options} data={line_chart_data} />
-      ) : currentChart == 'candlestick' ? (
-        <CandleStickChart chartData={chartData} />
-      ) : (
-        ''
-      )}
-    </div>
-  )
+  return <Line options={line_chart_options} data={line_chart_data} />
 }
 
 export default LineChart

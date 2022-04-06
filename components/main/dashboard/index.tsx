@@ -1,7 +1,7 @@
 import MarketCap from './MarketCap'
 import Distribution from './Distribution'
 import Ads from './Ads'
-import LineChart from './LineChart'
+import ChartsWrapper from './ChartsWrapper'
 
 const Index = () => {
   return (
@@ -13,7 +13,7 @@ const Index = () => {
       </div>
       <div className="line_chart grid grid-cols-12 py-6">
         <div className="col-span-12">
-          <LineChart />
+          <ChartsWrapper />
         </div>
       </div>
     </div>
