@@ -27,14 +27,8 @@ ChartJS.register(
 )
 
 const LineChart = ({ timeframe, startDate, endDate, chartData }) => {
-  // console.log(chartData)
-  // const date = chartData.map((data) => data.date)
-  // const close = chartData.map((data) => data.close)
-  // const arr = chartData.map((data) => {
-  //   const newArray = { x: data.date, y: data.close }
-  //   return newArray
-  // })
-  // console.log(arr)
+  // const [days, setDays] = useState(1)
+
   const line_chart_options: any = {
     responsive: true,
     maintainAspectRatio: false,
@@ -74,7 +68,14 @@ const LineChart = ({ timeframe, startDate, endDate, chartData }) => {
   }
 
   const line_chart_data = {
-    // labels,
+    // labels: chartData.map((coin) => {
+    //   let date = new Date(coin.date)
+    //   let time =
+    //     date.getHours() > 12
+    //       ? `${date.getHours() - 12}:${date.getMinutes()} PM`
+    //       : `${date.getHours()}:${date.getMinutes()} AM`
+    //   return days === 1 ? time : date.toLocaleDateString()
+    // }),
     datasets: [
       {
         // tension: 0.3,
