@@ -13,8 +13,6 @@ import {
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
 import 'chartjs-adapter-date-fns'
-import CandlestickChart from './CandlestickChart'
-import { TypeChooser } from 'react-stockcharts/lib/helper'
 
 ChartJS.register(
   ArcElement,
@@ -28,7 +26,15 @@ ChartJS.register(
   TimeScale
 )
 
-const LineChart = ({ timeframe, startDate, endDate }) => {
+const LineChart = ({ timeframe, startDate, endDate, chartData }) => {
+  // console.log(chartData)
+  // const date = chartData.map((data) => data.date)
+  // const close = chartData.map((data) => data.close)
+  // const arr = chartData.map((data) => {
+  //   const newArray = { x: data.date, y: data.close }
+  //   return newArray
+  // })
+  // console.log(arr)
   const line_chart_options: any = {
     responsive: true,
     maintainAspectRatio: false,
@@ -56,8 +62,13 @@ const LineChart = ({ timeframe, startDate, endDate }) => {
         min: startDate,
         max: endDate,
       },
-      y: {
-        max: 200,
+      // y: {
+      //   max: 200,
+      // },
+    },
+    elements: {
+      point: {
+        radius: 1,
       },
     },
   }
@@ -66,48 +77,50 @@ const LineChart = ({ timeframe, startDate, endDate }) => {
     // labels,
     datasets: [
       {
-        tension: 0.3,
+        // tension: 0.3,
         label: 'FI25',
-        data: [
-          { x: '2022-03-12T13:00:00', y: 50 },
-          { x: '2022-03-23T14:00:00', y: 10 },
-          { x: '2022-04-12T03:00:00', y: 20 },
-          { x: '2022-04-28T18:00:00', y: 100 },
-          { x: '2022-05-12T19:00:00', y: 60 },
-          { x: '2022-06-12T10:00:00', y: 40 },
-        ],
+        data: chartData.map((data) => {
+          const newDataObject = { x: data.date, y: data.close }
+          return newDataObject
+        }),
         // borderWidth: 4,
         borderColor: 'rgb(238,130,238)',
         backgroundColor: 'rgba(238,130,238, 0.5)',
       },
-      {
-        tension: 0.3,
-        label: 'FI10',
-        data: [
-          { x: '2022-03-12T13:00:00', y: 100 },
-          { x: '2022-03-23T14:00:00', y: 80 },
-          { x: '2022-04-12T03:00:00', y: 70 },
-          { x: '2022-04-28T18:00:00', y: 10 },
-          { x: '2022-05-12T19:00:00', y: 20 },
-          { x: '2022-06-12T10:00:00', y: 70 },
-        ],
-        borderColor: 'rgb(55, 125, 255)',
-        backgroundColor: 'rgba(55, 125, 255, 0.5)',
-      },
-      {
-        tension: 0.3,
-        label: 'MetaFI',
-        data: [
-          { x: '2022-03-12T13:00:00', y: 200 },
-          { x: '2022-03-23T14:00:00', y: 80 },
-          { x: '2022-04-12T03:00:00', y: 100 },
-          { x: '2022-04-28T18:00:00', y: 30 },
-          { x: '2022-05-12T19:00:00', y: 20 },
-          { x: '2022-06-12T10:00:00', y: 10 },
-        ],
-        borderColor: 'rgb(240, 157, 1)',
-        backgroundColor: 'rgba(240, 157, 1, 0.5)',
-      },
+      // {
+      //   // tension: 0.3,
+      //   label: 'FI10',
+      //   data: [
+      //     { x: '2022-03-12T13:00:00', y: 100 },
+      //     { x: '2022-03-23T14:00:00', y: 80 },
+      //     { x: '2022-04-12T03:00:00', y: 70 },
+      //     { x: '2022-04-28T18:00:00', y: 10 },
+      //     { x: '2022-05-12T19:00:00', y: 20 },
+      //     { x: '2022-06-12T10:00:00', y: 70 },
+      //     { x: '2022-07-12T13:00:00', y: 50 },
+      //     { x: '2022-08-23T14:00:00', y: 29 },
+      //     { x: '2022-09-12T03:00:00', y: 38 },
+      //     { x: '2022-10-28T18:00:00', y: 200 },
+      //     { x: '2022-11-12T19:00:00', y: 160 },
+      //     { x: '2022-12-12T10:00:00', y: 40 },
+      //   ],
+      //   borderColor: 'rgb(55, 125, 255)',
+      //   backgroundColor: 'rgba(55, 125, 255, 0.5)',
+      // },
+      // {
+      //   // tension: 0.3,
+      //   label: 'MetaFI',
+      //   data: [
+      //     { x: '2022-03-12T13:00:00', y: 200 },
+      //     { x: '2022-03-23T14:00:00', y: 80 },
+      //     { x: '2022-04-12T03:00:00', y: 100 },
+      //     { x: '2022-04-28T18:00:00', y: 30 },
+      //     { x: '2022-05-12T19:00:00', y: 20 },
+      //     { x: '2022-06-12T10:00:00', y: 10 },
+      //   ],
+      //   borderColor: 'rgb(240, 157, 1)',
+      //   backgroundColor: 'rgba(240, 157, 1, 0.5)',
+      // },
     ],
   }
 

@@ -95,6 +95,7 @@ const ChartsWrapper = () => {
             timeframe={timeframe}
             startDate={startDate}
             endDate={endDate}
+            chartData={chartData}
           />
         ) : currentChart == 'candlestick' ? (
           <CandlestickChart chartData={chartData} />
