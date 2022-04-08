@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import LineChart from './LineChart'
 import CandlestickChart from './CandlestickChart'
-import { AiOutlineLineChart } from 'react-icons/ai'
+import { MdOutlineStackedLineChart } from 'react-icons/md'
 import { MdOutlineWaterfallChart } from 'react-icons/md'
 
 import { getData } from './../../../utils/chartData'
@@ -34,40 +34,54 @@ const ChartsWrapper = () => {
     <div className="relative flex h-full flex-col">
       {/* customization options */}
       <div className="flex items-center justify-between">
-        {/* timeframe options */}
+        {/* chart type buttons */}
         <div className="z-40 flex items-center gap-2">
+          <button
+            className={`border-2 border-orange-FIDIS px-2 xxl:border-4
+              ${
+                currentChart == 'line_chart'
+                  ? 'bg-orange-FIDIS'
+                  : 'bg-transaprent'
+              }
+            `}
+            onClick={() => setCurrentChart('line_chart')}
+          >
+            <MdOutlineStackedLineChart
+              color={currentChart == 'line_chart' ? 'white' : '#f09d01'}
+              className="h-5 w-5 xxl:h-12 xxl:w-12"
+            />
+          </button>
+          <button
+            className={`border-2 border-orange-FIDIS px-2 xxl:border-4
+              ${
+                currentChart == 'candlestick'
+                  ? 'bg-orange-FIDIS'
+                  : 'bg-transaprent'
+              }
+            `}
+            onClick={() => setCurrentChart('candlestick')}
+          >
+            <MdOutlineWaterfallChart
+              color={currentChart == 'candlestick' ? 'white' : '#f09d01'}
+              className="h-5 w-5 xxl:h-12 xxl:w-12"
+            />
+          </button>
+        </div>
+        {/* timeframe options */}
+        <div className="z-40 flex items-center border-b-4 border-orange-FIDIS">
           {timeframeData.map((t, index) => (
             <button
               key={index}
-              className={`rounded px-2 py-1 text-center text-xs xxl:px-4 xxl:py-2  ${
+              className={`px-2 py-1 text-center text-xs xxl:px-4 xxl:py-3  ${
                 timeframe == t.name
-                  ? 'bg-white text-black'
-                  : 'bg-black/50 text-white'
+                  ? 'bg-orange-FIDIS text-white'
+                  : 'bg-transparent text-orange-FIDIS'
               }`}
               onClick={() => setTimeframe(t.name)}
             >
               {t.text}
             </button>
           ))}
-        </div>
-        {/* chart type buttons */}
-        <div className="z-40 flex items-center gap-2">
-          <button
-            className={
-              currentChart == 'line_chart' ? 'rounded bg-black/50 px-1' : ''
-            }
-            onClick={() => setCurrentChart('line_chart')}
-          >
-            <AiOutlineLineChart className="h-5 w-5 xxl:h-10 xxl:w-10" />
-          </button>
-          <button
-            className={
-              currentChart == 'candlestick' ? 'rounded bg-black/50 px-1' : ''
-            }
-            onClick={() => setCurrentChart('candlestick')}
-          >
-            <MdOutlineWaterfallChart className="h-5 w-5 xxl:h-10 xxl:w-10" />
-          </button>
         </div>
         {/* min & max dates inputes */}
         <div className="flex items-center gap-8">

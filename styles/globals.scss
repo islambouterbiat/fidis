@@ -47,7 +47,7 @@
   font-family: 'Montserrat';
   font-weight: 400;
   transition: all 0.2s ease-in-out;
-  color: var(--normal-wite-text);
+  // color: var(--normal-wite-text);
 }
 
 html {
@@ -66,7 +66,7 @@ input[checkbox],
 input[radio],
 select {
   cursor: pointer;
-  color: white;
+  // color: white;
 }
 
 select,
