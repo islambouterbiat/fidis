@@ -25,50 +25,84 @@ const ChartsWrapper = () => {
     { name: 'month', text: '1M' },
     { name: 'year', text: '1Y' },
   ]
+  // state for start & end chart date values
+  const [startDate, setStartDate] = useState('')
+  const [endDate, setEndDate] = useState('')
+  console.log(startDate, endDate)
+
   return (
-    <div className="relative h-[15rem] xxl:h-[25rem]">
-      {/* timeframe options */}
-      <div className="absolute top-2.5 left-12 z-50 flex items-center gap-2">
-        {timeframeData.map((t, index) => (
+    <div className="relative flex h-full flex-col">
+      {/* customization options */}
+      <div className="flex items-center justify-between">
+        {/* timeframe options */}
+        <div className="z-40 flex items-center gap-2">
+          {timeframeData.map((t, index) => (
+            <button
+              key={index}
+              className={`rounded px-2 py-1 text-center text-xs xxl:px-4 xxl:py-2  ${
+                timeframe == t.name
+                  ? 'bg-white text-black'
+                  : 'bg-black/50 text-white'
+              }`}
+              onClick={() => setTimeframe(t.name)}
+            >
+              {t.text}
+            </button>
+          ))}
+        </div>
+        {/* chart type buttons */}
+        <div className="z-40 flex items-center gap-2">
           <button
-            key={index}
-            className={`rounded px-2 py-1 text-center text-xs xxl:px-4 xxl:py-2  ${
-              timeframe == t.name
-                ? 'bg-white text-black'
-                : 'bg-black/50 text-white'
-            }`}
-            onClick={() => setTimeframe(t.name)}
+            className={
+              currentChart == 'line_chart' ? 'rounded bg-black/50 px-1' : ''
+            }
+            onClick={() => setCurrentChart('line_chart')}
           >
-            {t.text}
+            <AiOutlineLineChart className="h-5 w-5 xxl:h-10 xxl:w-10" />
           </button>
-        ))}
+          <button
+            className={
+              currentChart == 'candlestick' ? 'rounded bg-black/50 px-1' : ''
+            }
+            onClick={() => setCurrentChart('candlestick')}
+          >
+            <MdOutlineWaterfallChart className="h-5 w-5 xxl:h-10 xxl:w-10" />
+          </button>
+        </div>
+        {/* min & max dates inputes */}
+        <div className="flex items-center gap-8">
+          <input
+            type="date"
+            name="start-date"
+            id="start-date"
+            className=""
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+          <input
+            type="date"
+            name="end-date"
+            id="end-date"
+            className=""
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+        </div>
       </div>
-      {/* chart type buttons */}
-      <div className="absolute top-2.5 left-72 z-50 flex items-center gap-2 xxl:left-[42rem]">
-        <button
-          className={
-            currentChart == 'line_chart' ? 'rounded bg-black/50 px-1' : ''
-          }
-          onClick={() => setCurrentChart('line_chart')}
-        >
-          <AiOutlineLineChart className="h-5 w-5 xxl:h-10 xxl:w-10" />
-        </button>
-        <button
-          className={
-            currentChart == 'candlestick' ? 'rounded bg-black/50 px-1' : ''
-          }
-          onClick={() => setCurrentChart('candlestick')}
-        >
-          <MdOutlineWaterfallChart className="h-5 w-5 xxl:h-10 xxl:w-10" />
-        </button>
+      <div className="mt-3 h-full">
+        {currentChart == 'line_chart' ? (
+          <LineChart
+            timeframe={timeframe}
+            startDate={startDate}
+            endDate={endDate}
+            chartData={chartData}
+          />
+        ) : currentChart == 'candlestick' ? (
+          <CandlestickChart chartData={chartData} />
+        ) : (
+          ''
+        )}
       </div>
-      {currentChart == 'line_chart' ? (
-        <LineChart timeframe={timeframe} />
-      ) : currentChart == 'candlestick' ? (
-        <CandlestickChart chartData={chartData} />
-      ) : (
-        ''
-      )}
     </div>
   )
 }
