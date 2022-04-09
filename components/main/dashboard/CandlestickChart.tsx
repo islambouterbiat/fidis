@@ -1,33 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Chart } from 'react-google-charts'
 
 const CandlestickChart = ({ chartData }) => {
-  // candlestick chart data
-  const candlestickData = chartData.slice(0, 10).map((data) => {
-    const newDataObject = [
-      data.date,
-      data.low,
-      data.open,
-      data.close,
-      data.high,
-    ]
-    return newDataObject
-  })
-  candlestickData.unshift(['date', '', '', '', ''])
-  console.log(candlestickData)
-  // while (candlestickData.length > 0) {
-  //   const khra = candlestickData.splice(0, 3)
-  //   // console.log(khra[0][1])
-  //   const newArr = [
-  //     khra[0][0],
-  //     khra[0][1],
-  //     khra[0][2],
-  //     khra[khra.length - 1][3],
-  //     khra[khra.length - 1][4],
-  //   ]
-  //   console.log(newArr)
-  //   // console.log(khra)
-  // }
+  //* candlestick chart data
+  const khra = chartData.map((data) => data)
+  // chartData.unshift(['date', '', '', '', ''])
+  const data = [['date', '', '', '', ''], ...khra]
+  console.log(data)
+
   // candlstick chart options
   const options = {
     legend: 'none',
@@ -61,7 +41,7 @@ const CandlestickChart = ({ chartData }) => {
       chartType="CandlestickChart"
       width="100%"
       height="100%"
-      data={candlestickData}
+      data={data}
       options={options}
     />
   )

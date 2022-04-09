@@ -81,7 +81,7 @@ const LineChart = ({ timeframe, startDate, endDate, chartData }) => {
         // tension: 0.3,
         label: 'FI25',
         data: chartData.map((data) => {
-          const newDataObject = { x: data.date, y: data.close }
+          const newDataObject = { x: data[0], y: data[3] }
           return newDataObject
         }),
         // borderWidth: 4,
