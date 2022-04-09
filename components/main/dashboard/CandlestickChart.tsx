@@ -24,8 +24,8 @@ const CandlestickChart = ({ chartData, startDate, endDate }) => {
     hAxis: {
       // scaleType: 'linear',
       viewWindow: {
-        min: new Date(startDate),
-        max: new Date(endDate),
+        min: startDate ? new Date(startDate):new Date(data[1][0]),
+        max: endDate ? new Date(endDate):new Date(data[data.length-1][0]),
       },
       gridlines: { color: '#f09d01' },
       minorGridlines: { color: '#f09d01' },
