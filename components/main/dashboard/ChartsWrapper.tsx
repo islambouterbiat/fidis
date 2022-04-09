@@ -3,10 +3,16 @@ import LineChart from './LineChart'
 import CandlestickChart from './CandlestickChart'
 import { MdOutlineStackedLineChart } from 'react-icons/md'
 import { MdOutlineWaterfallChart } from 'react-icons/md'
+import { RiArrowDownSLine } from 'react-icons/ri'
 
 import { getData } from './../../../utils/chartData'
 
+const styles = {
+  date_input: 'rounded-lg border border-orange-FIDIS px-2 py-1',
+}
 const ChartsWrapper = () => {
+  // state for showind & hiding custom range dropdown
+  const [customRangeOpen, setCustomRangeOpen] = useState(false)
   // state for giving user the ability to set chart interval by 15min,30min ...
   const [chartInterval, setChartInterval] = useState(1)
   // state for giving user the ability to set chart timeframe by month or week ...
@@ -70,7 +76,6 @@ const ChartsWrapper = () => {
     // console.log(newArr)
     // console.log(intervalArray)
   }
-  console.log(finalData)
 
   return (
     <div className="relative flex h-full flex-col">
@@ -145,25 +150,76 @@ const ChartsWrapper = () => {
         </div>
 
         {/* min & max dates inputes */}
-        <div className="flex items-center gap-8">
-          <input
-            type="date"
-            name="start-date"
-            id="start-date"
-            className=""
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-          />
-          <input
-            type="date"
-            name="end-date"
-            id="end-date"
-            className=""
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-          />
+        <div className="relative">
+          <button
+            onClick={() => setCustomRangeOpen((p) => !p)}
+            className="inline-flex items-center gap-2 whitespace-nowrap rounded bg-orange-FIDIS px-2 py-1 text-white"
+          >
+            Custom range <RiArrowDownSLine />
+          </button>
+          {customRangeOpen && (
+            <div className="absolute top-14 right-0 z-40 flex flex-col rounded bg-black px-4 py-3 font-bold text-orange-FIDIS">
+              <h2>Custom range</h2>
+              <div className="my-3 flex items-center gap-2">
+                <label htmlFor="start-date" className="w-20">
+                  From
+                </label>
+                {/* <input
+                  type="time"
+                  name="start-time"
+                  id="start-time"
+                  className={styles.date_input}
+                /> */}
+                <input
+                  type="datetime-local"
+                  name="start-date"
+                  id="start-date"
+                  className={styles.date_input}
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
+              </div>
+              <div className="flex items-center gap-2">
+                <label htmlFor="end-date" className="w-20">
+                  To
+                </label>
+                {/* <input
+                  type="time"
+                  name="end-time"
+                  id="end-time"
+                  className={styles.date_input}
+                /> */}
+                <input
+                  type="datetime-local"
+                  name="end-date"
+                  id="end-date"
+                  className={styles.date_input}
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="flex items-center gap-8"></div>
+
+        {/* token type */}
+        <div className="absolute top-28 left-4 flex flex-col rounded bg-black px-2 py-2 font-bold text-orange-FIDIS">
+          {['FI25', 'FI10', 'MetaFi'].map((token, i) => (
+            <div className="font-bold" key={i}>
+              <input
+                type="checkbox"
+                name="token-checkbox"
+                id="token-checkbox"
+                className="mr-1.5"
+              />
+              <label htmlFor="token-checkbox">{token}</label>
+            </div>
+          ))}
         </div>
       </div>
+
+      {/* charts */}
       <div className="mt-3 h-full">
         {currentChart == 'line_chart' ? (
           <LineChart
@@ -173,7 +229,11 @@ const ChartsWrapper = () => {
             chartData={finalData}
           />
         ) : currentChart == 'candlestick' ? (
-          <CandlestickChart chartData={finalData} />
+          <CandlestickChart
+            chartData={finalData}
+            startDate={startDate}
+            endDate={endDate}
+          />
         ) : (
           ''
         )}

@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { Chart } from 'react-google-charts'
 
-const CandlestickChart = ({ chartData }) => {
+const CandlestickChart = ({ chartData, startDate, endDate }) => {
+  console.log(startDate, endDate)
   //* candlestick chart data
   const khra = chartData.map((data) => data)
   // chartData.unshift(['date', '', '', '', ''])
   const data = [['date', '', '', '', ''], ...khra]
-  console.log(data)
 
   // candlstick chart options
   const options = {
@@ -22,7 +22,11 @@ const CandlestickChart = ({ chartData }) => {
       startup: true,
     },
     hAxis: {
-      scaleType: 'linear',
+      // scaleType: 'linear',
+      viewWindow: {
+        min: new Date(startDate),
+        max: new Date(endDate),
+      },
       gridlines: { color: '#f09d01' },
       minorGridlines: { color: '#f09d01' },
       textStyle: { color: '#f09d01' },

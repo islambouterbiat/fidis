@@ -249,7 +249,10 @@ a:hover svg path {
 
     //* date input */
 
-::-webkit-calendar-picker-indicator {
-    filter: invert(1);
-     margin-left: -1.5rem;
-}
+
+  
+  ::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+      margin-left: -0.25rem;
+  }
+
