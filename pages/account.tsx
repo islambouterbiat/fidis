@@ -29,8 +29,14 @@ const User = ({ profilePicture, setProfilePicture }: any) => {
     - isUserUpdating: used to show LADOING state when the user clicks 'save unfos'
     - userError: used to show error message when the user clicks 'save unfos'
   */
-  const { user, isAuthUndefined, setUserData, isUserUpdating, userError } =
-    useMoralis()
+  const {
+    user,
+    isAuthenticated,
+    isAuthUndefined,
+    setUserData,
+    isUserUpdating,
+    userError,
+  } = useMoralis()
 
   // define the state + content of the form
   const formRef = useRef<HTMLFormElement>(null)!
@@ -211,11 +217,12 @@ const User = ({ profilePicture, setProfilePicture }: any) => {
 
   /// this should execute only once, that's why it's separated, and not every time the user data changes
   useEffect(() => {
-    user
-      ? setAccountType(user.attributes.accountType || 'Personal')
-      : 'Personal'
+    user && setAccountType(user.attributes.accountType || 'Personal')
 
-    !user && router.push('/')
+    setTimeout(() => {
+      if (isAuthUndefined || !isAuthenticated) router.push('/')
+      // else router.back()
+    }, 1000)
   }, [])
 
   /// fetch all user data from Moralis database when the user logs in
