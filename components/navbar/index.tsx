@@ -10,7 +10,7 @@ import MiniNav from '../main/account/MiniNav'
 import logo from '../../assets/images/fidis_icons/fidis_logo_text_gold_transparent.png'
 import mini_logo from '../../assets/images/fidis_icons/fidis_logo_gold_transparent.png'
 import FI25_icon from '../../assets/images/tokens_icons/fi25.png'
-import FI10_icon from '../../assets/images/tokens_icons/fi10.png'
+import GOLDFI_icon from '../../assets/images/tokens_icons/fi10.png'
 import METAFI_icon from '../../assets/images/tokens_icons/metafi.png'
 import wallet_icon from '../../assets/images/general_icons/wallet.png'
 import logout_icon from '../../assets/images/general_icons/logout.png'
@@ -28,8 +28,11 @@ const NavBar = ({ profilePicture, setProfilePicture }: any) => {
   }
   const data = [
     { name: 'FI25', icon: FI25_icon },
-    { name: 'FI10', icon: FI10_icon },
+    { name: 'GoldFI', icon: GOLDFI_icon },
     { name: 'MetaFI', icon: METAFI_icon },
+    { name: 'NFTFI', icon: FI25_icon },
+    { name: 'GameFI', icon: METAFI_icon },
+    { name: 'DeFiFI', icon: GOLDFI_icon },
   ]
 
   // using useMoralis Hook
@@ -65,9 +68,7 @@ const NavBar = ({ profilePicture, setProfilePicture }: any) => {
     <nav
       id="Navbar"
       className={`grid ${
-        !miniNav
-          ? ' w-[200px] min-w-[200px] max-w-[200px]'
-          : 'w-[55px] min-w-[55px] max-w-[55px]'
+        !miniNav ? 'max-w-[250px]' : 'w-[55px]'
       }  grid-cols-1 place-content-between gap-6 py-12 text-sm font-light text-white transition `}
     >
       <div>
@@ -94,10 +95,8 @@ const NavBar = ({ profilePicture, setProfilePicture }: any) => {
             isAuthenticated ? buySellTokens() : await authenticate()
           }
           className={`hoverEffectContained ${
-            !miniNav
-              ? 'w-full px-2'
-              : 'mx-auto flex w-full place-content-center px-[0.3rem]'
-          } my-4 flex h-12 items-center gap-3 whitespace-nowrap rounded bg-orange-FIDIS  py-1 text-[1.2rem] font-semibold`}
+            !miniNav ? 'w-full px-2' : 'px-[0.3rem]'
+          } my-4 inline-flex h-12 items-center gap-3 whitespace-nowrap rounded bg-orange-FIDIS  py-1 text-[1.2rem] font-semibold`}
         >
           <Image src={wallet_icon} height={24} width={30} alt="" />
           {!miniNav &&
@@ -146,7 +145,7 @@ const NavBar = ({ profilePicture, setProfilePicture }: any) => {
             </a>
           </Link>
           {/* add passHref if the url contains anything other than a string */}
-          <div className="flex flex-col">
+          <div className="tokens_scrolltype flex h-48 flex-col overflow-auto pr-2 xxl:h-full">
             {data.map((nav, index) => (
               <Link key={index} href={`/${nav.name}`}>
                 <a

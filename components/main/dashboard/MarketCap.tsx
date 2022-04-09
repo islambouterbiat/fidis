@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 
 import FI25_icon from '../../../assets/images/tokens_icons/fi25.png'
-import FI10_icon from '../../../assets/images/tokens_icons/fi10.png'
+import GOLDFI_icon from '../../../assets/images/tokens_icons/fi10.png'
 import METAFI_icon from '../../../assets/images/tokens_icons/metafi.png'
 
 const styles = {
@@ -21,8 +21,8 @@ const MarketCap = () => {
       change_percentage: 25.1,
     },
     {
-      token_name: 'FI10',
-      token_icon: FI10_icon,
+      token_name: 'GoldFI',
+      token_icon: GOLDFI_icon,
       balance: 31.38,
       balance_in_dollars: 1.213,
       change: 24.51,
@@ -36,6 +36,30 @@ const MarketCap = () => {
       change: 259.32,
       change_percentage: -3,
     },
+    {
+      token_name: 'NFTFI',
+      token_icon: FI25_icon,
+      balance: 0,
+      balance_in_dollars: 0,
+      change: 259.32,
+      change_percentage: -3,
+    },
+    {
+      token_name: 'GameFi',
+      token_icon: METAFI_icon,
+      balance: 0,
+      balance_in_dollars: 0,
+      change: 259.32,
+      change_percentage: -3,
+    },
+    {
+      token_name: 'DeFiFi',
+      token_icon: GOLDFI_icon,
+      balance: 0,
+      balance_in_dollars: 0,
+      change: 259.32,
+      change_percentage: -3,
+    },
   ]
   return (
     <div className="col-span-5 w-full rounded bg-black/30 py-2 px-3">
@@ -43,14 +67,14 @@ const MarketCap = () => {
         <h1 className="text-xl font-medium">Market Cap</h1>
       </nav>
       <div className="market-cap-table w-full border-collapse text-left ">
-        <div className=" flex items-center justify-between whitespace-nowrap border-y border-gray-300/30 text-center text-xs text-gray-300/30">
-          <div className="py-2 text-left font-light xxl:py-6">Token Name</div>
+        <div className=" flex items-center justify-between whitespace-nowrap border-y border-gray-300/30 text-center text-xs text-gray-300/80">
+          <div className="py-2 text-left xxl:py-6">Token Name</div>
           <div className="text-right font-medium text-green-increased-value">
             Balance
           </div>
-          <div className="text-right font-light">Change</div>
+          <div className="text-right">Change</div>
         </div>
-        <div>
+        <div className="scrolltype h-48 overflow-auto pr-4 xxl:h-80">
           {dummy_data.map((token, index) => (
             <div
               key={index}

@@ -174,6 +174,26 @@ button.hoverEffectContained:hover {
   width: 8px;
 }    
 
+.tokens_scrolltype::-webkit-scrollbar {
+  background: rgba(0, 0, 0, 0);
+  width: 4px;
+  height:4px;
+}
+.tokens_scrolltype:hover::-webkit-scrollbar {
+  background: rgba(0, 0, 0, 0.27);
+}
+
+.tokens_scrolltype::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0);
+  /* outline: 1px solid slategrey; */
+  width: 8px;
+}    
+.tokens_scrolltype:hover::-webkit-scrollbar-thumb {
+  background: var(--orange-FIDIS);
+  /* outline: 1px solid slategrey; */
+  width: 8px;
+}   
+
     //* notification */
 
 .notification {
@@ -249,10 +269,8 @@ a:hover svg path {
 
     //* date input */
 
-
-  
-  ::-webkit-calendar-picker-indicator {
-      filter: invert(1);
-      margin-left: -0.25rem;
-  }
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    margin-left: -0.25rem;
+}
 
