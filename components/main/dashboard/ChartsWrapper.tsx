@@ -12,7 +12,9 @@ const styles = {
   date_input: 'rounded-lg border border-orange-FIDIS px-2 py-1',
 }
 const ChartsWrapper = ({ chartData }) => {
-  // state for showind & hiding custom range dropdown
+  // state for showing & hiding token type select dropdown
+  const [tokenTypeOpen, setTokenTypeOpen] = useState(false)
+  // state for showing & hiding custom range dropdown
   const [customRangeOpen, setCustomRangeOpen] = useState(false)
   // state for giving user the ability to set chart interval by 15min,30min ...
   const [chartInterval, setChartInterval] = useState(1)
@@ -132,7 +134,7 @@ const ChartsWrapper = ({ chartData }) => {
         </div>
 
         {/* timeframe options */}
-        <div className="z-40 flex items-center border-b-4 border-orange-FIDIS">
+        {/* <div className="z-40 flex items-center border-b-4 border-orange-FIDIS">
           {timeframeData.map((t, index) => (
             <button
               key={index}
@@ -146,7 +148,7 @@ const ChartsWrapper = ({ chartData }) => {
               {t.text}
             </button>
           ))}
-        </div>
+        </div> */}
 
         {/* chart interval options */}
         <div className="z-40 flex items-center border-b-4 border-orange-FIDIS">
@@ -174,7 +176,7 @@ const ChartsWrapper = ({ chartData }) => {
             Custom range <RiArrowDownSLine />
           </button>
           {customRangeOpen && (
-            <div className="absolute top-14 right-0 z-40 flex flex-col rounded bg-black px-4 py-3 font-bold text-orange-FIDIS">
+            <div className="absolute top-12 right-0 z-40 flex flex-col rounded bg-black px-4 py-3 font-bold text-orange-FIDIS">
               <h2>Custom range</h2>
               <div className="my-3 flex items-center gap-2">
                 <label htmlFor="start-date" className="w-20">
@@ -220,18 +222,28 @@ const ChartsWrapper = ({ chartData }) => {
         <div className="flex items-center gap-8"></div>
 
         {/* token type */}
-        <div className="absolute top-28 left-4 z-40 flex flex-col rounded bg-black px-2 py-2 font-bold text-orange-FIDIS">
-          {['FI25', 'FI10', 'MetaFi'].map((token, i) => (
-            <div className="font-bold" key={i}>
-              <input
-                type="checkbox"
-                name="token-checkbox"
-                id="token-checkbox"
-                className="mr-1.5 cursor-pointer"
-              />
-              <label htmlFor="token-checkbox">{token}</label>
+        <div className="relative">
+          <button
+            onClick={() => setTokenTypeOpen((p) => !p)}
+            className="inline-flex items-center gap-2 whitespace-nowrap rounded bg-orange-FIDIS px-2 py-1 text-white"
+          >
+            Tokens <RiArrowDownSLine />
+          </button>
+          {tokenTypeOpen && (
+            <div className="absolute top-12 right-0 z-40 flex flex-col rounded bg-black px-2 py-2 font-bold text-orange-FIDIS">
+              {['FI25', 'FI10', 'MetaFi'].map((token, i) => (
+                <div className="font-bold" key={i}>
+                  <input
+                    type="checkbox"
+                    name="token-checkbox"
+                    id="token-checkbox"
+                    className="mr-1.5 cursor-pointer"
+                  />
+                  <label htmlFor="token-checkbox">{token}</label>
+                </div>
+              ))}
             </div>
-          ))}
+          )}
         </div>
       </div>
 
