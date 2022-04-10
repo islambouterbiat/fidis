@@ -11,12 +11,12 @@ const CandlestickChart = ({ chartData, startDate, endDate }) => {
     legend: 'none',
     bar: { groupWidth: '100%' }, // Remove space between bars.
     candlestick: {
-      fallingColor: {
-        strokeWidth: 0,
-        fill: '#EB2824',
-        colors: '#EB2824',
-      }, // red
+      fallingColor: { strokeWidth: 0, fill: '#EB2824' }, // red
       risingColor: { strokeWidth: 0, fill: '#199E5D' }, // green
+    },
+    series: {
+      fallingColor: { fill: '#EB4824' },
+      0: { color: '#199E5D' },
     },
     animation: {
       easing: 'in',

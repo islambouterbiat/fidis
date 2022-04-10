@@ -38,14 +38,15 @@ const LineChart = ({ timeframe, startDate, endDate, chartData }) => {
 
   // line chart options
   const options = {
+    lineWidth: 4,
     legend: 'none',
     animation: {
       easing: 'in',
-      duration: 300,
+      duration: 600,
       startup: true,
     },
+    colors: ['#c084fc', 'other color here'], // specify the color of lines by order
     hAxis: {
-      // scaleType: 'linear',
       viewWindow: {
         min: new Date(startDate),
         max: new Date(endDate),
@@ -61,7 +62,7 @@ const LineChart = ({ timeframe, startDate, endDate, chartData }) => {
       baselineColor: { color: '#f09d01' },
       textStyle: { color: '#f09d01' },
     },
-    explorer: { axis: 'horizontal', keepInBounds: true },
+    explorer: { axis: 'horizontal', keepInBounds: true }, //scroll and zoom In/Out
   }
 
   return (
