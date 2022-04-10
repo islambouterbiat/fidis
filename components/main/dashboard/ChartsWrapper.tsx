@@ -1,16 +1,17 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import LineChart from './LineChart'
 import CandlestickChart from './CandlestickChart'
 import { MdOutlineStackedLineChart } from 'react-icons/md'
 import { MdOutlineWaterfallChart } from 'react-icons/md'
 import { RiArrowDownSLine } from 'react-icons/ri'
+import moment from 'moment'
 
 import { getData } from './../../../utils/chartData'
 
 const styles = {
   date_input: 'rounded-lg border border-orange-FIDIS px-2 py-1',
 }
-const ChartsWrapper = () => {
+const ChartsWrapper = ({ chartData }) => {
   // state for showind & hiding custom range dropdown
   const [customRangeOpen, setCustomRangeOpen] = useState(false)
   // state for giving user the ability to set chart interval by 15min,30min ...
@@ -19,13 +20,22 @@ const ChartsWrapper = () => {
   const [timeframe, setTimeframe] = useState('month')
   // state for showing current type of charts
   const [currentChart, setCurrentChart] = useState('line_chart')
-  // candlestick chart data fetching
-  const [chartData, setChartData] = useState([])
+  // state for start & end chart date values
+  const [startDate, setStartDate] = useState('')
+  const [endDate, setEndDate] = useState('')
   useEffect(() => {
-    getData().then((data) => {
-      setChartData(data)
-    })
-  }, [])
+    chartData.length == 0
+      ? ''
+      : setStartDate(moment(chartData[0].date).format('YYYY-MM-DDThh:mm'))
+    chartData.length == 0
+      ? ''
+      : setEndDate(
+          moment(chartData[chartData.length - 1].date).format(
+            'YYYY-MM-DDThh:mm'
+          )
+        )
+  }, [chartData])
+
   const timeframeData = [
     { name: 'hour', text: '1H' },
     { name: 'day', text: '1D' },
@@ -33,9 +43,8 @@ const ChartsWrapper = () => {
     { name: 'month', text: '1M' },
     { name: 'year', text: '1Y' },
   ]
-  // state for start & end chart date values
-  const [startDate, setStartDate] = useState('')
-  const [endDate, setEndDate] = useState('')
+
+  console.log()
 
   // time aggregation logic (candle interval)
   const timeIntervalData = [
@@ -49,7 +58,9 @@ const ChartsWrapper = () => {
     { name: '1W', value: 2016 },
     { name: '1M', value: 8640 },
   ]
-  const ohlcData = chartData.slice(0, 2500).map((data) => {
+
+  //give data an ohlc structure
+  const ohlcData = chartData.map((data) => {
     const newDataObject = [
       data.date,
       data.low,
@@ -59,7 +70,7 @@ const ChartsWrapper = () => {
     ]
     return newDataObject
   })
-  // console.log(ohlcData)
+  // console.log(chartData[0].date)
 
   let finalData = []
   while (ohlcData.length > 0) {
@@ -204,14 +215,14 @@ const ChartsWrapper = () => {
         <div className="flex items-center gap-8"></div>
 
         {/* token type */}
-        <div className="absolute top-28 left-4 flex flex-col rounded bg-black px-2 py-2 font-bold text-orange-FIDIS">
+        <div className="absolute top-28 left-4 z-40 flex flex-col rounded bg-black px-2 py-2 font-bold text-orange-FIDIS">
           {['FI25', 'FI10', 'MetaFi'].map((token, i) => (
             <div className="font-bold" key={i}>
               <input
                 type="checkbox"
                 name="token-checkbox"
                 id="token-checkbox"
-                className="mr-1.5"
+                className="mr-1.5 cursor-pointer"
               />
               <label htmlFor="token-checkbox">{token}</label>
             </div>
