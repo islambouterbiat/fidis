@@ -37,7 +37,7 @@ const CandlestickChart = ({ chartData, startDate, endDate }) => {
       baselineColor: { color: '#f09d01' },
       textStyle: { color: '#f09d01' },
     },
-    tootltip: { textStyle: { color: '#fff' }, showColorCode: false },
+    explorer: { axis: 'horizontal', keepInBounds: true },
   }
   return (
     <Chart
