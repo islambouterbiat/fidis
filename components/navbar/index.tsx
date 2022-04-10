@@ -44,6 +44,7 @@ const NavBar = ({ profilePicture, setProfilePicture }: any) => {
     logout,
     isAuthenticated,
     isAuthenticating,
+    isLoggingOut,
   } = useMoralis()
 
   const buySellTokens = () => {
@@ -90,9 +91,13 @@ const NavBar = ({ profilePicture, setProfilePicture }: any) => {
           />
         )}
         <button
-          disabled={isAuthenticating}
+          disabled={isAuthenticating || isLoggingOut}
           onClick={async () =>
-            isAuthenticated ? buySellTokens() : await authenticate()
+            isAuthenticated
+              ? buySellTokens()
+              : await authenticate({
+                  signingMessage: 'Login to the Dashboard',
+                })
           }
           className={`hoverEffectContained ${
             !miniNav ? 'w-full px-2' : 'px-[0.3rem]'
@@ -198,6 +203,7 @@ const NavBar = ({ profilePicture, setProfilePicture }: any) => {
             <span className="mb-2 block h-[0.05rem] w-full bg-white/50"></span>
             <Link href="/">
               <button
+                disabled={isAuthenticating || isLoggingOut}
                 onClick={() => {
                   logout()
                   router.push('/')
