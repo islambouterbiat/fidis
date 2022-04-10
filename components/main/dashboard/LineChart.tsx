@@ -38,7 +38,7 @@ const LineChart = ({ timeframe, startDate, endDate, chartData }) => {
 
   // line chart options
   const options = {
-    lineWidth: 4,
+    lineWidth: 3,
     legend: 'none',
     animation: {
       easing: 'in',
