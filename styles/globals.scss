@@ -226,12 +226,14 @@ button.hoverEffectContained:hover {
 }
 .chart-wrapper canvas {
   background-color: rgb(0 0 0 / 0.3);
-  padding: 20px;
+  // padding: 20px;
 }
 .chart-wrapper svg>rect{
   fill: rgb(0 0 0 / 0.3);
 }
-
+.chart-wrapper svg>g>rect:first-child{
+  fill: rgb(0 0 0 / 0.3);
+}
     //* account */
 
 .account_settings select:hover,

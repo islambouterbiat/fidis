@@ -4,7 +4,6 @@ import { Chart } from 'react-google-charts'
 const CandlestickChart = ({ chartData, startDate, endDate }) => {
   //* candlestick chart data
   const mappedChartData = chartData.map((data) => data)
-  // chartData.unshift(['date', '', '', '', ''])
   const data = [['date', '', '', '', ''], ...mappedChartData]
 
   // candlstick chart options
@@ -12,7 +11,11 @@ const CandlestickChart = ({ chartData, startDate, endDate }) => {
     legend: 'none',
     bar: { groupWidth: '100%' }, // Remove space between bars.
     candlestick: {
-      fallingColor: { strokeWidth: 0, fill: '#EB2824', stroke: '#FF4E4E' }, // red
+      fallingColor: {
+        strokeWidth: 0,
+        fill: '#EB2824',
+        colors: '#EB2824',
+      }, // red
       risingColor: { strokeWidth: 0, fill: '#199E5D' }, // green
     },
     animation: {
@@ -23,7 +26,7 @@ const CandlestickChart = ({ chartData, startDate, endDate }) => {
     hAxis: {
       // scaleType: 'linear',
       viewWindow: {
-        min: new Date(startDate) ,
+        min: new Date(startDate),
         max: new Date(endDate),
       },
       gridlines: { color: '#f09d01' },

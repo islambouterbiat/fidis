@@ -176,7 +176,7 @@ const ChartsWrapper = ({ chartData }) => {
             Custom range <RiArrowDownSLine />
           </button>
           {customRangeOpen && (
-            <div className="absolute top-12 right-0 z-40 flex flex-col rounded bg-black px-4 py-3 font-bold text-orange-FIDIS">
+            <div className="absolute top-12 right-0 z-40 flex flex-col rounded bg-black px-4 py-3 font-bold text-orange-FIDIS xxl:top-14">
               <h2>Custom range</h2>
               <div className="my-3 flex items-center gap-2">
                 <label htmlFor="start-date" className="w-20">
@@ -230,7 +230,7 @@ const ChartsWrapper = ({ chartData }) => {
             Tokens <RiArrowDownSLine />
           </button>
           {tokenTypeOpen && (
-            <div className="absolute top-12 right-0 z-40 flex flex-col rounded bg-black px-2 py-2 font-bold text-orange-FIDIS">
+            <div className="absolute top-12 right-0 z-40 flex flex-col rounded bg-black px-2 py-2 font-bold text-orange-FIDIS xxl:top-14">
               {['FI25', 'FI10', 'MetaFi'].map((token, i) => (
                 <div className="font-bold" key={i}>
                   <input
