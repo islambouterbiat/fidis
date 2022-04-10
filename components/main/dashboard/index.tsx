@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import MarketCap from './MarketCap'
 import Distribution from './Distribution'
 import Ads from './Ads'
-import ChartsWrapper from './ChartsWrapper'
+import ChartsWrapper from './chart/ChartsWrapper'
 
 import { getData } from './../../../utils/chartData'
 

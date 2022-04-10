@@ -6,7 +6,7 @@ import { MdOutlineWaterfallChart } from 'react-icons/md'
 import { RiArrowDownSLine } from 'react-icons/ri'
 import moment from 'moment'
 
-import { getData } from './../../../utils/chartData'
+import { getData } from '../../../../utils/chartData'
 
 const styles = {
   date_input: 'rounded-lg border border-orange-FIDIS px-2 py-1',

@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 const ApexCharts = dynamic(() => import('react-apexcharts'), { ssr: false })
 
-import { candlestickData } from '../../../utils/candlestickChartData'
+import { candlestickData } from '../../../../utils/candlestickChartData'
 
 const CandleStick = () => {
   const options: any = {
