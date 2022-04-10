@@ -23,10 +23,16 @@ const ChartsWrapper = ({ chartData }) => {
   // state for start & end chart date values
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
+
   useEffect(() => {
     chartData.length == 0
       ? ''
-      : setStartDate(moment(chartData[0].date).format('YYYY-MM-DDThh:mm'))
+      : setStartDate(
+          moment(
+            chartData[chartData.length - 1].date.getTime() -
+              24 * 60 * 60 * 1000 * 365
+          ).format('YYYY-MM-DDThh:mm')
+        )
     chartData.length == 0
       ? ''
       : setEndDate(
@@ -35,7 +41,6 @@ const ChartsWrapper = ({ chartData }) => {
           )
         )
   }, [chartData])
-
   const timeframeData = [
     { name: 'hour', text: '1H' },
     { name: 'day', text: '1D' },
