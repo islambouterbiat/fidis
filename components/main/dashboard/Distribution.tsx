@@ -16,20 +16,26 @@ const Distribution = () => {
   }
 
   const pie_chart_data = {
-    labels: ['FI25', 'FI10', 'MetaFi'],
+    labels: ['FI25', 'GoldFI', 'MetaFi', 'NFTFI', 'GameFI', 'DeFiFI'],
     datasets: [
       {
         label: '# of Votes',
-        data: [12, 19, 3],
+        data: [12, 19, 3, 4, 8, 9],
         backgroundColor: [
           'rgba(111, 159, 198, 1)',
           'rgba(243, 168, 101, 1)',
           'rgba(127, 185, 115, 1)',
+          '#38bdf8',
+          '#fbbf24',
+          '#c084fc',
         ],
         borderColor: [
           'rgba(111, 159, 198, 1)',
           'rgba(243, 168, 101, 1)',
           'rgba(127, 185, 115, 1)',
+          '#38bdf8',
+          '#fbbf24',
+          '#c084fc',
         ],
         borderWidth: 1,
       },

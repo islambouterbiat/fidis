@@ -231,17 +231,19 @@ const ChartsWrapper = ({ chartData }) => {
           </button>
           {tokenTypeOpen && (
             <div className="absolute top-12 right-0 z-40 flex flex-col rounded bg-black px-2 py-2 font-bold text-orange-FIDIS xxl:top-14">
-              {['FI25', 'FI10', 'MetaFi'].map((token, i) => (
-                <div className="font-bold" key={i}>
-                  <input
-                    type="checkbox"
-                    name="token-checkbox"
-                    id="token-checkbox"
-                    className="mr-1.5 cursor-pointer"
-                  />
-                  <label htmlFor="token-checkbox">{token}</label>
-                </div>
-              ))}
+              {['FI25', 'GoldFI', 'MetaFi', 'NFTFI', 'GameFI', 'DeFiFI'].map(
+                (token, i) => (
+                  <div className="flex items-center font-bold " key={i}>
+                    <input
+                      type="checkbox"
+                      name="token-checkbox"
+                      id="token-checkbox"
+                      className="mr-1.5 cursor-pointer"
+                    />
+                    <label htmlFor="token-checkbox">{token}</label>
+                  </div>
+                )
+              )}
             </div>
           )}
         </div>
