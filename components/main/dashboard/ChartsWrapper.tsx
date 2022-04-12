@@ -97,8 +97,30 @@ const ChartsWrapper = ({ chartData }) => {
     // console.log(newArr)
     // console.log(intervalArray)
   }
+
+  //* rerenders when size changes (in order to chart fits automatically place when mininav clicked)
+  const [size, setSize] = useState({
+    width: undefined,
+    height: undefined,
+  })
+
+  useEffect(() => {
+    const handleResize = () => {
+      setSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      })
+    }
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      console.log('khra')
+    }
+  }, [size.width])
+
   return (
-    <div className="relative col-span-9 flex h-full flex-col">
+    <div className="relative col-span-9 flex h-full w-full flex-col">
       {/* customization options */}
       <div className="flex items-center justify-evenly">
         {/* chart type buttons */}
@@ -242,9 +264,9 @@ const ChartsWrapper = ({ chartData }) => {
               setTimeframeOpen(false)
             }}
             className="inline-flex items-center gap-2 whitespace-nowrap rounded bg-orange-FIDIS px-2 py-1 text-white disabled:opacity-75"
-            disabled={currentChart == 'line_chart' ? false : true}
+            // disabled={currentChart == 'line_chart' ? false : true}
           >
-            Tokens{' '}
+            Crypto Index
             <RiArrowDownSLine
               className={`${
                 currentChart == 'line_chart' ? 'cursor-pointer' : 'cursor-auto'

@@ -24,7 +24,6 @@ const NavBar = ({ profilePicture, setProfilePicture }: any) => {
   const [miniNav, SetMiniNav] = useState(false)
   const handleMiniNav = () => {
     SetMiniNav((p) => !p)
-    console.log('Mini nav toggled')
   }
   const data = [
     { name: 'FI25', icon: FI25_icon },
@@ -69,8 +68,8 @@ const NavBar = ({ profilePicture, setProfilePicture }: any) => {
     <nav
       id="Navbar"
       className={`grid ${
-        !miniNav ? 'max-w-[180px] xxl:max-w-[250px]' : 'w-[55px]'
-      }  grid-cols-1 place-content-between gap-6 py-12 text-sm font-light text-white transition `}
+        !miniNav ? 'max-w-[180px] xxl:max-w-[280px]' : 'w-[55px]'
+      }  grid-cols-1 place-content-between gap-6 py-12 text-center text-sm font-light text-white transition `}
     >
       <div>
         {!miniNav ? (
@@ -101,14 +100,14 @@ const NavBar = ({ profilePicture, setProfilePicture }: any) => {
           }
           className={`hoverEffectContained ${
             !miniNav ? 'w-full px-2' : 'px-[0.3rem]'
-          } my-4 inline-flex h-12 items-center gap-3 whitespace-nowrap rounded bg-orange-FIDIS  py-1 text-[1rem] font-semibold`}
+          } my-4 inline-flex h-12 items-center gap-3 whitespace-nowrap rounded bg-orange-FIDIS  py-1 text-[0.8rem] font-semibold `}
         >
           <Image src={wallet_icon} height={24} width={30} alt="" />
           {!miniNav &&
             (isAuthenticated
               ? 'Buy/Sell'
               : !isAuthenticated
-              ? 'Connect wallet'
+              ? 'Connect MetaMask'
               : isAuthenticating
               ? 'Loading...'
               : '')}
