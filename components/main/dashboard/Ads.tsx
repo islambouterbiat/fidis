@@ -7,9 +7,9 @@ const Ads = () => {
       <Image
         className="object-cover object-right"
         src={ad}
-        height={460}
+        height={480}
         width={300}
-      ></Image>
+      />
     </div>
   )
 }

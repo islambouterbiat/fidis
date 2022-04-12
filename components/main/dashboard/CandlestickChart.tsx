@@ -5,7 +5,7 @@ const CandlestickChart = ({ chartData, startDate, endDate, chartInterval }) => {
   //* candlestick chart data
   const mappedChartData = chartData.map((data) => data)
   const data = [['date', '', '', '', ''], ...mappedChartData]
-
+  
   // candlstick chart options
   const options = {
     legend: 'none',
@@ -33,7 +33,7 @@ const CandlestickChart = ({ chartData, startDate, endDate, chartInterval }) => {
       minorGridlines: { color: 'transparent' },
       textStyle: { color: '#f09d01' },
       baselineColor: { color: '#f09d01' },
-      // format: 'MMM d, YY',
+      // format: chartInterval < 288 ? 'hh:mm' : 'MMM d, YY',
     },
     vAxis: {
       gridlines: { count: 1, color: '#f09d01' },

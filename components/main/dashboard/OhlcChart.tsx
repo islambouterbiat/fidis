@@ -32,7 +32,6 @@ const OhlcChart = ({ chartData, startDate, endDate }) => {
         mode: 'X',
         enableScrollbar: true,
         enablePan: true,
-        enablePinchZooming: true,
       }}
       background="black"
       id="charts"
@@ -53,10 +52,8 @@ const OhlcChart = ({ chartData, startDate, endDate }) => {
         lineStyle: { width: 0 },
         majorTickLines: { width: 0 },
         majorGridLines: { width: 0 },
-        //   lineStyle: { color: '#f09d01' },
         labelStyle: { color: '#f09d01' },
       }}
-      //   visibleRangeModel={{ max: 4, min: 3 }}
       chartArea={{ border: { width: 0 } }}
       tooltip={{
         enable: true,

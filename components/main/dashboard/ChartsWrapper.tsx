@@ -99,7 +99,7 @@ const ChartsWrapper = ({ chartData }) => {
   }
 
   return (
-    <div className="relative flex h-full flex-col">
+    <div className="relative col-span-9 flex h-full flex-col">
       {/* customization options */}
       <div className="flex items-center justify-evenly">
         {/* chart type buttons */}
