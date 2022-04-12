@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Chart } from 'react-google-charts'
 
-
 const LineChart = ({ timeframe, startDate, endDate, chartData }) => {
   // line chart data
   const mappedChartData = chartData.map((data) => {
@@ -12,7 +11,7 @@ const LineChart = ({ timeframe, startDate, endDate, chartData }) => {
 
   // line chart options
   const options = {
-        chartArea: { left: 45, top: 30,width:"90%",height:"80%" },
+    chartArea: { left: 45, top: 30, width: '90%', height: '80%' },
     lineWidth: 3,
     legend: 'none',
     animation: {
@@ -37,7 +36,7 @@ const LineChart = ({ timeframe, startDate, endDate, chartData }) => {
       baselineColor: { color: '#f09d01' },
       textStyle: { color: '#f09d01' },
     },
-    explorer: { axis: 'horizontal', keepInBounds: true ,zoomDelta: 0.75}, //scroll and zoom In/Out
+    explorer: { axis: 'horizontal', keepInBounds: true, zoomDelta: 0.75 }, //scroll and zoom In/Out
   }
 
   return (

@@ -97,7 +97,6 @@ const ChartsWrapper = ({ chartData }) => {
     // console.log(newArr)
     // console.log(intervalArray)
   }
-
   return (
     <div className="relative col-span-9 flex h-full flex-col">
       {/* customization options */}
@@ -289,13 +288,12 @@ const ChartsWrapper = ({ chartData }) => {
             chartInterval={chartInterval}
           />
         ) : currentChart == 'ohlc' ? (
-          ''
+          <OhlcChart
+            chartData={finalData}
+            startDate={startDate}
+            endDate={endDate}
+          />
         ) : (
-          // <OhlcChart
-          //   chartData={finalData}
-          //   startDate={startDate}
-          //   endDate={endDate}
-          // />
           ''
         )}
       </div>
