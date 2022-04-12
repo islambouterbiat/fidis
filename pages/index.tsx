@@ -5,12 +5,12 @@ import Head from 'next/head'
 const IndexPage = () => (
   <>
     <Head>
-      <title>FIDIS - Dashboard</title>
+      <title>FIDIS | Dashboard</title>
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <main
       title="FIDIS Crypto Index Assets - Home"
-      className="container mx-auto py-12 text-white"
+      className="container mx-auto h-full py-6 text-white"
     >
       <Dashboard />
     </main>

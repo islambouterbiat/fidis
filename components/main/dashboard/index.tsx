@@ -15,16 +15,15 @@ const Index = () => {
     })
   }, [])
   return (
-    <div className="scrolltype h-full overflow-auto pr-2">
+    <div className="scrolltype grid h-full grid-rows-2 overflow-auto pr-2">
       <div className="grid grid-cols-12 gap-4">
         <MarketCap />
         <Distribution />
         <Ads />
       </div>
-      <div className="chart-wrapper grid min-h-[50%] grid-cols-1 py-6">
-        <div className="col-span-1">
-          <ChartsWrapper chartData={chartData} />
-        </div>
+      <div className="chart-wrapper grid grid-cols-12 gap-4 pt-6">
+        <ChartsWrapper chartData={chartData} />
+        <Ads />
       </div>
     </div>
   )

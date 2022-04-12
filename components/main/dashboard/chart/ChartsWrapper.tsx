@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import LineChart from './LineChart'
 import CandlestickChart from './CandlestickChart'
+import OhlcChart from './OhlcChart'
 import { MdOutlineStackedLineChart } from 'react-icons/md'
 import { MdOutlineWaterfallChart } from 'react-icons/md'
 import { RiArrowDownSLine } from 'react-icons/ri'
+import { FiBarChart2 } from 'react-icons/fi'
 import moment from 'moment'
 
 import { getData } from '../../../../utils/chartData'
@@ -16,6 +18,8 @@ const ChartsWrapper = ({ chartData }) => {
   const [tokenTypeOpen, setTokenTypeOpen] = useState(false)
   // state for showing & hiding custom range dropdown
   const [customRangeOpen, setCustomRangeOpen] = useState(false)
+  // state for showing & hiding custom timeframee dropdown
+  const [timeframeOpen, setTimeframeOpen] = useState(false)
   // state for giving user the ability to set chart interval by 15min,30min ...
   const [chartInterval, setChartInterval] = useState(1)
   // state for giving user the ability to set chart timeframe by month or week ...
@@ -95,42 +99,55 @@ const ChartsWrapper = ({ chartData }) => {
     // console.log(intervalArray)
   }
 
+  //* rerenders when size changes (in order to chart fits automatically place when mininav clicked)
+  const [size, setSize] = useState({
+    width: undefined,
+    height: undefined,
+  })
+
+  useEffect(() => {
+    const handleResize = () => {
+      setSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      })
+    }
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      console.log('khra')
+    }
+  }, [size.width])
+
   return (
-    <div className="relative flex h-full flex-col">
+    <div className="relative col-span-9 flex h-full w-full flex-col">
       {/* customization options */}
       <div className="flex items-center justify-evenly">
         {/* chart type buttons */}
         <div className="z-40 flex items-center gap-2">
-          <button
-            className={`border-2 border-orange-FIDIS px-2 xxl:border-4
+          {[
+            { name: 'line_chart', icon: MdOutlineStackedLineChart },
+            { name: 'candlestick', icon: MdOutlineWaterfallChart },
+            { name: 'ohlc', icon: FiBarChart2 },
+          ].map((chart, index) => (
+            <button
+              key={index}
+              className={`border-2 border-orange-FIDIS px-2 xxl:border-4
               ${
-                currentChart == 'line_chart'
+                currentChart == chart.name
                   ? 'bg-orange-FIDIS'
                   : 'bg-transaprent'
               }
             `}
-            onClick={() => setCurrentChart('line_chart')}
-          >
-            <MdOutlineStackedLineChart
-              color={currentChart == 'line_chart' ? 'white' : '#f09d01'}
-              className="h-5 w-5 xxl:h-12 xxl:w-12"
-            />
-          </button>
-          <button
-            className={`border-2 border-orange-FIDIS px-2 xxl:border-4
-              ${
-                currentChart == 'candlestick'
-                  ? 'bg-orange-FIDIS'
-                  : 'bg-transaprent'
-              }
-            `}
-            onClick={() => setCurrentChart('candlestick')}
-          >
-            <MdOutlineWaterfallChart
-              color={currentChart == 'candlestick' ? 'white' : '#f09d01'}
-              className="h-5 w-5 xxl:h-12 xxl:w-12"
-            />
-          </button>
+              onClick={() => setCurrentChart(chart.name)}
+            >
+              <chart.icon
+                color={currentChart == chart.name ? 'white' : '#f09d01'}
+                className="h-6 w-6 xxl:h-12 xxl:w-12"
+              />
+            </button>
+          ))}
         </div>
 
         {/* timeframe options */}
@@ -151,32 +168,50 @@ const ChartsWrapper = ({ chartData }) => {
         </div> */}
 
         {/* chart interval options */}
-        <div className="z-40 flex items-center border-b-4 border-orange-FIDIS">
-          {timeIntervalData.map((t, index) => (
-            <button
-              key={index}
-              className={`px-2 py-1 text-center text-xs xxl:px-4 xxl:py-3  ${
-                chartInterval == t.value
-                  ? 'bg-orange-FIDIS text-white'
-                  : 'bg-transparent text-orange-FIDIS'
-              }`}
-              onClick={() => setChartInterval(t.value)}
-            >
-              {t.name}
-            </button>
-          ))}
+        <div className="relative">
+          <button
+            onClick={() => {
+              setTimeframeOpen((p) => !p)
+              setCustomRangeOpen(false)
+              setTokenTypeOpen(false)
+            }}
+            className="inline-flex items-center gap-2 whitespace-nowrap rounded bg-orange-FIDIS px-2 py-1 text-white"
+          >
+            Time Interval <RiArrowDownSLine />
+          </button>
+          {timeframeOpen && (
+            <div className="absolute top-10 -left-24 z-40 flex items-center border-b-4 border-orange-FIDIS bg-black xxl:top-14">
+              {timeIntervalData.map((t, index) => (
+                <button
+                  key={index}
+                  className={`px-2 py-1 text-center text-xs xxl:px-4 xxl:py-3  ${
+                    chartInterval == t.value
+                      ? 'bg-orange-FIDIS text-white'
+                      : 'bg-transparent text-orange-FIDIS'
+                  }`}
+                  onClick={() => setChartInterval(t.value)}
+                >
+                  {t.name}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* min & max dates inputes */}
         <div className="relative">
           <button
-            onClick={() => setCustomRangeOpen((p) => !p)}
+            onClick={() => {
+              setCustomRangeOpen((p) => !p)
+              setTimeframeOpen(false)
+              setTokenTypeOpen(false)
+            }}
             className="inline-flex items-center gap-2 whitespace-nowrap rounded bg-orange-FIDIS px-2 py-1 text-white"
           >
             Custom range <RiArrowDownSLine />
           </button>
           {customRangeOpen && (
-            <div className="absolute top-12 right-0 z-40 flex flex-col rounded bg-black px-4 py-3 font-bold text-orange-FIDIS xxl:top-14">
+            <div className="absolute top-10 right-0 z-40 flex flex-col rounded bg-black px-4 py-3 font-bold text-orange-FIDIS xxl:top-14">
               <h2>Custom range</h2>
               <div className="my-3 flex items-center gap-2">
                 <label htmlFor="start-date" className="w-20">
@@ -224,24 +259,36 @@ const ChartsWrapper = ({ chartData }) => {
         {/* token type */}
         <div className="relative">
           <button
-            onClick={() => setTokenTypeOpen((p) => !p)}
-            className="inline-flex items-center gap-2 whitespace-nowrap rounded bg-orange-FIDIS px-2 py-1 text-white"
+            onClick={() => {
+              setTokenTypeOpen((p) => !p)
+              setCustomRangeOpen(false)
+              setTimeframeOpen(false)
+            }}
+            className="inline-flex items-center gap-2 whitespace-nowrap rounded bg-orange-FIDIS px-2 py-1 text-white disabled:opacity-75"
+            // disabled={currentChart == 'line_chart' ? false : true}
           >
-            Tokens <RiArrowDownSLine />
+            Crypto Index
+            <RiArrowDownSLine
+              className={`${
+                currentChart == 'line_chart' ? 'cursor-pointer' : 'cursor-auto'
+              }`}
+            />
           </button>
           {tokenTypeOpen && (
-            <div className="absolute top-12 right-0 z-40 flex flex-col rounded bg-black px-2 py-2 font-bold text-orange-FIDIS xxl:top-14">
-              {['FI25', 'FI10', 'MetaFi'].map((token, i) => (
-                <div className="font-bold" key={i}>
-                  <input
-                    type="checkbox"
-                    name="token-checkbox"
-                    id="token-checkbox"
-                    className="mr-1.5 cursor-pointer"
-                  />
-                  <label htmlFor="token-checkbox">{token}</label>
-                </div>
-              ))}
+            <div className="absolute top-10 right-0 z-40 flex flex-col rounded bg-black px-2 py-2 font-bold text-orange-FIDIS xxl:top-14">
+              {['FI25', 'GoldFI', 'MetaFi', 'NFTFI', 'GameFI', 'DeFiFI'].map(
+                (token, i) => (
+                  <div className="flex items-center font-bold " key={i}>
+                    <input
+                      type={currentChart == 'line_chart' ? 'checkbox' : 'radio'}
+                      name="token-checkbox"
+                      id="token-checkbox"
+                      className="mr-1.5 cursor-pointer"
+                    />
+                    <label htmlFor="token-checkbox">{token}</label>
+                  </div>
+                )
+              )}
             </div>
           )}
         </div>
@@ -261,8 +308,16 @@ const ChartsWrapper = ({ chartData }) => {
             chartData={finalData}
             startDate={startDate}
             endDate={endDate}
+            chartInterval={chartInterval}
           />
+        ) : currentChart == 'ohlc' ? (
+          'Under Dev'
         ) : (
+          // <OhlcChart
+          //   chartData={finalData}
+          //   startDate={startDate}
+          //   endDate={endDate}
+          // />
           ''
         )}
       </div>

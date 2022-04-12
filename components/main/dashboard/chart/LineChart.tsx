@@ -1,31 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Chart } from 'react-google-charts'
-import {
-  Chart as ChartJS,
-  ArcElement,
-  Tooltip,
-  Legend,
-  CategoryScale,
-  LinearScale,
-  TimeScale,
-  PointElement,
-  LineElement,
-  Title,
-} from 'chart.js'
-import { Line } from 'react-chartjs-2'
-import 'chartjs-adapter-date-fns'
-
-ChartJS.register(
-  ArcElement,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  TimeScale
-)
 
 const LineChart = ({ timeframe, startDate, endDate, chartData }) => {
   // line chart data
@@ -34,10 +8,10 @@ const LineChart = ({ timeframe, startDate, endDate, chartData }) => {
     return newDataObject
   })
   const data = [['date', ''], ...mappedChartData]
-  console.log(data)
 
   // line chart options
   const options = {
+    chartArea: { left: 50, top: 25, width: '90%', height: '80%' },
     lineWidth: 3,
     legend: 'none',
     animation: {
@@ -51,18 +25,18 @@ const LineChart = ({ timeframe, startDate, endDate, chartData }) => {
         min: new Date(startDate),
         max: new Date(endDate),
       },
-      gridlines: { color: '#f09d01' },
-      minorGridlines: { color: '#f09d01' },
+      gridlines: { color: 'transparent' },
+      minorGridlines: { color: 'transparent' },
       textStyle: { color: '#f09d01' },
       baselineColor: { color: '#f09d01' },
     },
     vAxis: {
-      gridlines: { color: '#f09d01' },
+      gridlines: { count: 1, color: '#f09d01' },
       minorGridlines: { color: '#f09d01' },
       baselineColor: { color: '#f09d01' },
       textStyle: { color: '#f09d01' },
     },
-    explorer: { axis: 'horizontal', keepInBounds: true }, //scroll and zoom In/Out
+    explorer: { axis: 'horizontal', keepInBounds: true, zoomDelta: 0.75 }, //scroll and zoom In/Out
   }
 
   return (

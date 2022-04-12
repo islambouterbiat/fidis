@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Chart } from 'react-google-charts'
 
-const CandlestickChart = ({ chartData, startDate, endDate }) => {
+const CandlestickChart = ({ chartData, startDate, endDate, chartInterval }) => {
   //* candlestick chart data
   const mappedChartData = chartData.map((data) => data)
   const data = [['date', '', '', '', ''], ...mappedChartData]
@@ -9,8 +9,10 @@ const CandlestickChart = ({ chartData, startDate, endDate }) => {
   // candlstick chart options
   const options = {
     legend: 'none',
-    bar: { groupWidth: '100%' }, // Remove space between bars.
+    chartArea: { left: 50, top: 25, width: '90%', height: '80%' },
+    bar: { groupWidth: '90%' }, // Remove space between bars.
     candlestick: {
+      hollowIsRising: true,
       fallingColor: { strokeWidth: 0, fill: '#EB2824' }, // red
       risingColor: { strokeWidth: 0, fill: '#199E5D' }, // green
     },
@@ -25,22 +27,24 @@ const CandlestickChart = ({ chartData, startDate, endDate }) => {
     },
     hAxis: {
       // scaleType: 'linear',
+      // slantedText: true,
       viewWindow: {
         min: new Date(startDate),
         max: new Date(endDate),
       },
-      gridlines: { color: '#f09d01' },
-      minorGridlines: { color: '#f09d01' },
+      gridlines: { color: 'transparent' },
+      minorGridlines: { color: 'transparent' },
       textStyle: { color: '#f09d01' },
       baselineColor: { color: '#f09d01' },
+      // format: chartInterval < 288 ? 'hh:mm' : 'MMM d, YY',
     },
     vAxis: {
-      gridlines: { color: '#f09d01' },
-      minorGridlines: { color: '#f09d01' },
+      gridlines: { count: 1, color: '#f09d01' },
+      minorGridlines: { color: 'transparent' },
       baselineColor: { color: '#f09d01' },
       textStyle: { color: '#f09d01' },
     },
-    explorer: { axis: 'horizontal', keepInBounds: true },
+    explorer: { axis: 'horizontal', keepInBounds: true, zoomDelta: 0.75 },
   }
   return (
     <Chart
