@@ -16,6 +16,8 @@ const ChartsWrapper = ({ chartData }) => {
   const [tokenTypeOpen, setTokenTypeOpen] = useState(false)
   // state for showing & hiding custom range dropdown
   const [customRangeOpen, setCustomRangeOpen] = useState(false)
+  // state for showing & hiding custom timeframee dropdown
+  const [timeframeOpen, setTimeframeOpen] = useState(false)
   // state for giving user the ability to set chart interval by 15min,30min ...
   const [chartInterval, setChartInterval] = useState(1)
   // state for giving user the ability to set chart timeframe by month or week ...
@@ -151,32 +153,50 @@ const ChartsWrapper = ({ chartData }) => {
         </div> */}
 
         {/* chart interval options */}
-        <div className="z-40 flex items-center border-b-4 border-orange-FIDIS">
-          {timeIntervalData.map((t, index) => (
-            <button
-              key={index}
-              className={`px-2 py-1 text-center text-xs xxl:px-4 xxl:py-3  ${
-                chartInterval == t.value
-                  ? 'bg-orange-FIDIS text-white'
-                  : 'bg-transparent text-orange-FIDIS'
-              }`}
-              onClick={() => setChartInterval(t.value)}
-            >
-              {t.name}
-            </button>
-          ))}
+        <div className="relative">
+          <button
+            onClick={() => {
+              setTimeframeOpen((p) => !p)
+              setCustomRangeOpen(false)
+              setTokenTypeOpen(false)
+            }}
+            className="inline-flex items-center gap-2 whitespace-nowrap rounded bg-orange-FIDIS px-2 py-1 text-white"
+          >
+            Time Interval <RiArrowDownSLine />
+          </button>
+          {timeframeOpen && (
+            <div className="absolute top-10 -left-24 z-40 flex items-center border-b-4 border-orange-FIDIS bg-black xxl:top-14">
+              {timeIntervalData.map((t, index) => (
+                <button
+                  key={index}
+                  className={`px-2 py-1 text-center text-xs xxl:px-4 xxl:py-3  ${
+                    chartInterval == t.value
+                      ? 'bg-orange-FIDIS text-white'
+                      : 'bg-transparent text-orange-FIDIS'
+                  }`}
+                  onClick={() => setChartInterval(t.value)}
+                >
+                  {t.name}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* min & max dates inputes */}
         <div className="relative">
           <button
-            onClick={() => setCustomRangeOpen((p) => !p)}
+            onClick={() => {
+              setCustomRangeOpen((p) => !p)
+              setTimeframeOpen(false)
+              setTokenTypeOpen(false)
+            }}
             className="inline-flex items-center gap-2 whitespace-nowrap rounded bg-orange-FIDIS px-2 py-1 text-white"
           >
             Custom range <RiArrowDownSLine />
           </button>
           {customRangeOpen && (
-            <div className="absolute top-12 right-0 z-40 flex flex-col rounded bg-black px-4 py-3 font-bold text-orange-FIDIS xxl:top-14">
+            <div className="absolute top-10 right-0 z-40 flex flex-col rounded bg-black px-4 py-3 font-bold text-orange-FIDIS xxl:top-14">
               <h2>Custom range</h2>
               <div className="my-3 flex items-center gap-2">
                 <label htmlFor="start-date" className="w-20">
@@ -224,13 +244,23 @@ const ChartsWrapper = ({ chartData }) => {
         {/* token type */}
         <div className="relative">
           <button
-            onClick={() => setTokenTypeOpen((p) => !p)}
-            className="inline-flex items-center gap-2 whitespace-nowrap rounded bg-orange-FIDIS px-2 py-1 text-white"
+            onClick={() => {
+              setTokenTypeOpen((p) => !p)
+              setCustomRangeOpen(false)
+              setTimeframeOpen(false)
+            }}
+            className="inline-flex items-center gap-2 whitespace-nowrap rounded bg-orange-FIDIS px-2 py-1 text-white disabled:opacity-75"
+            disabled={currentChart == 'line_chart' ? false : true}
           >
-            Tokens <RiArrowDownSLine />
+            Tokens{' '}
+            <RiArrowDownSLine
+              className={`${
+                currentChart == 'line_chart' ? 'cursor-pointer' : 'cursor-auto'
+              }`}
+            />
           </button>
           {tokenTypeOpen && (
-            <div className="absolute top-12 right-0 z-40 flex flex-col rounded bg-black px-2 py-2 font-bold text-orange-FIDIS xxl:top-14">
+            <div className="absolute top-10 right-0 z-40 flex flex-col rounded bg-black px-2 py-2 font-bold text-orange-FIDIS xxl:top-14">
               {['FI25', 'GoldFI', 'MetaFi', 'NFTFI', 'GameFI', 'DeFiFI'].map(
                 (token, i) => (
                   <div className="flex items-center font-bold " key={i}>
