@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import LineChart from './LineChart'
 import CandlestickChart from './CandlestickChart'
+import OhlcChart from './OhlcChart'
 import { MdOutlineStackedLineChart } from 'react-icons/md'
 import { MdOutlineWaterfallChart } from 'react-icons/md'
 import { RiArrowDownSLine } from 'react-icons/ri'
@@ -103,36 +104,28 @@ const ChartsWrapper = ({ chartData }) => {
       <div className="flex items-center justify-evenly">
         {/* chart type buttons */}
         <div className="z-40 flex items-center gap-2">
-          <button
-            className={`border-2 border-orange-FIDIS px-2 xxl:border-4
+          {[
+            { name: 'line_chart', icon: MdOutlineStackedLineChart },
+            { name: 'candlestick', icon: MdOutlineWaterfallChart },
+            { name: 'ohlc', icon: MdOutlineWaterfallChart },
+          ].map((chart, index) => (
+            <button
+              key={index}
+              className={`border-2 border-orange-FIDIS px-2 xxl:border-4
               ${
-                currentChart == 'line_chart'
+                currentChart == chart.name
                   ? 'bg-orange-FIDIS'
                   : 'bg-transaprent'
               }
             `}
-            onClick={() => setCurrentChart('line_chart')}
-          >
-            <MdOutlineStackedLineChart
-              color={currentChart == 'line_chart' ? 'white' : '#f09d01'}
-              className="h-5 w-5 xxl:h-12 xxl:w-12"
-            />
-          </button>
-          <button
-            className={`border-2 border-orange-FIDIS px-2 xxl:border-4
-              ${
-                currentChart == 'candlestick'
-                  ? 'bg-orange-FIDIS'
-                  : 'bg-transaprent'
-              }
-            `}
-            onClick={() => setCurrentChart('candlestick')}
-          >
-            <MdOutlineWaterfallChart
-              color={currentChart == 'candlestick' ? 'white' : '#f09d01'}
-              className="h-5 w-5 xxl:h-12 xxl:w-12"
-            />
-          </button>
+              onClick={() => setCurrentChart(chart.name)}
+            >
+              <chart.icon
+                color={currentChart == chart.name ? 'white' : '#f09d01'}
+                className="h-6 w-6 xxl:h-12 xxl:w-12"
+              />
+            </button>
+          ))}
         </div>
 
         {/* timeframe options */}
@@ -290,6 +283,13 @@ const ChartsWrapper = ({ chartData }) => {
           />
         ) : currentChart == 'candlestick' ? (
           <CandlestickChart
+            chartData={finalData}
+            startDate={startDate}
+            endDate={endDate}
+            chartInterval={chartInterval}
+          />
+        ) : currentChart == 'ohlc' ? (
+          <OhlcChart
             chartData={finalData}
             startDate={startDate}
             endDate={endDate}

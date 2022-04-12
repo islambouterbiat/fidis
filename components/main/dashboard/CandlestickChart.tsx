@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Chart } from 'react-google-charts'
 
-const CandlestickChart = ({ chartData, startDate, endDate }) => {
+const CandlestickChart = ({ chartData, startDate, endDate, chartInterval }) => {
   //* candlestick chart data
   const mappedChartData = chartData.map((data) => data)
   const data = [['date', '', '', '', ''], ...mappedChartData]
@@ -33,6 +33,7 @@ const CandlestickChart = ({ chartData, startDate, endDate }) => {
       minorGridlines: { color: 'transparent' },
       textStyle: { color: '#f09d01' },
       baselineColor: { color: '#f09d01' },
+      // format: 'MMM d, YY',
     },
     vAxis: {
       gridlines: { count: 1, color: '#f09d01' },

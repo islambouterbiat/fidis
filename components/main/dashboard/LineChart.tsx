@@ -34,7 +34,6 @@ const LineChart = ({ timeframe, startDate, endDate, chartData }) => {
     return newDataObject
   })
   const data = [['date', ''], ...mappedChartData]
-  console.log(data)
 
   // line chart options
   const options = {
