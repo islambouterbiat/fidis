@@ -62,7 +62,7 @@ const MarketCap = () => {
     },
   ]
   return (
-    <div className="col-span-5 w-full rounded bg-black/30 py-2 px-3">
+    <div className="col-span-5 w-full rounded bg-black/30 pt-2 px-3 py-6 ">
       <nav className="flex items-center justify-between py-2">
         <h1 className="text-xl font-medium">Market Cap</h1>
       </nav>

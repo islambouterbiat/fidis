@@ -37,7 +37,7 @@ const LineChart = ({ timeframe, startDate, endDate, chartData }) => {
       baselineColor: { color: '#f09d01' },
       textStyle: { color: '#f09d01' },
     },
-    explorer: { axis: 'horizontal', keepInBounds: true }, //scroll and zoom In/Out
+    explorer: { axis: 'horizontal', keepInBounds: true ,zoomDelta: 0.75}, //scroll and zoom In/Out
   }
 
   return (

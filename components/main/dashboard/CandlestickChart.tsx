@@ -9,7 +9,7 @@ const CandlestickChart = ({ chartData, startDate, endDate, chartInterval }) => {
   // candlstick chart options
   const options = {
     legend: 'none',
-    chartArea: { left: 45, top: 30,width:"90%",height:"80%" },
+    chartArea: { left: 45, top: 30, width: '90%', height: '80%' },
     bar: { groupWidth: '100%' }, // Remove space between bars.
     candlestick: {
       fallingColor: { strokeWidth: 0, fill: '#EB2824' }, // red
@@ -42,7 +42,7 @@ const CandlestickChart = ({ chartData, startDate, endDate, chartInterval }) => {
       baselineColor: { color: '#f09d01' },
       textStyle: { color: '#f09d01' },
     },
-    explorer: { axis: 'horizontal', keepInBounds: true },
+    explorer: { axis: 'horizontal', keepInBounds: true, zoomDelta: 0.75 },
   }
   return (
     <Chart
