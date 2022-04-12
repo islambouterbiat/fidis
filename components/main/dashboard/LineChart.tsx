@@ -12,7 +12,7 @@ const LineChart = ({ timeframe, startDate, endDate, chartData }) => {
 
   // line chart options
   const options = {
-        chartArea: { left: 40, top: 30,width:"90%",height:"80%" },
+        chartArea: { left: 45, top: 30,width:"90%",height:"80%" },
     lineWidth: 3,
     legend: 'none',
     animation: {
