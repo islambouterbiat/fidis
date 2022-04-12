@@ -1,31 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Chart } from 'react-google-charts'
-import {
-  Chart as ChartJS,
-  ArcElement,
-  Tooltip,
-  Legend,
-  CategoryScale,
-  LinearScale,
-  TimeScale,
-  PointElement,
-  LineElement,
-  Title,
-} from 'chart.js'
-import { Line } from 'react-chartjs-2'
-import 'chartjs-adapter-date-fns'
 
-ChartJS.register(
-  ArcElement,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  TimeScale
-)
 
 const LineChart = ({ timeframe, startDate, endDate, chartData }) => {
   // line chart data
@@ -37,6 +12,7 @@ const LineChart = ({ timeframe, startDate, endDate, chartData }) => {
 
   // line chart options
   const options = {
+        chartArea: { left: 40, top: 30,width:"90%",height:"80%" },
     lineWidth: 3,
     legend: 'none',
     animation: {

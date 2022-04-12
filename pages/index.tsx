@@ -10,7 +10,7 @@ const IndexPage = () => (
     </Head>
     <main
       title="FIDIS Crypto Index Assets - Home"
-      className="container mx-auto py-6 text-white"
+      className="container mx-auto py-6 text-white h-full"
     >
       <Dashboard />
     </main>

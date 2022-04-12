@@ -33,7 +33,7 @@ const OhlcChart = ({ chartData, startDate, endDate }) => {
         enableScrollbar: true,
         enablePan: true,
       }}
-      background="black"
+      background="rgb(0 0 0 / 0.3)"
       id="charts"
       style={{ textAlign: 'center' }}
       //   ref={(chart) => (this.chart1 = chart)}
@@ -59,7 +59,7 @@ const OhlcChart = ({ chartData, startDate, endDate }) => {
         enable: true,
         shared: true,
       }}
-      // height="60%"
+      height={'60%'}
       width={'100%'}
       legendSettings={{ visible: false }}
       crosshair={{

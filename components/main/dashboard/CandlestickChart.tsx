@@ -5,10 +5,11 @@ const CandlestickChart = ({ chartData, startDate, endDate, chartInterval }) => {
   //* candlestick chart data
   const mappedChartData = chartData.map((data) => data)
   const data = [['date', '', '', '', ''], ...mappedChartData]
-  
+
   // candlstick chart options
   const options = {
     legend: 'none',
+    chartArea: { left: 40, top: 30,width:"90%",height:"80%" },
     bar: { groupWidth: '100%' }, // Remove space between bars.
     candlestick: {
       fallingColor: { strokeWidth: 0, fill: '#EB2824' }, // red
