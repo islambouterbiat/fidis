@@ -1,5 +1,5 @@
 import moment from 'moment'
-import { Browser } from '@syncfusion/ej2-base';
+import { Browser } from '@syncfusion/ej2-base'
 import {
   ChartComponent,
   SeriesCollectionDirective,
@@ -61,8 +61,8 @@ const OhlcChart = ({ chartData, startDate, endDate }) => {
         shared: true,
       }}
       height={'60%'}
-      width={Browser.isDevice ? '100%' : '80%'}
-      // width={'100%'}
+      // width={Browser.isDevice ? '100%' : '80%'}
+      width={'100%'}
       legendSettings={{ visible: false }}
       crosshair={{
         enable: true,

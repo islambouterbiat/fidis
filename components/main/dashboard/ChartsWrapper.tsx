@@ -288,12 +288,13 @@ const ChartsWrapper = ({ chartData }) => {
             chartInterval={chartInterval}
           />
         ) : currentChart == 'ohlc' ? (
-          <OhlcChart
-            chartData={finalData}
-            startDate={startDate}
-            endDate={endDate}
-          />
+          'Under Dev'
         ) : (
+          // <OhlcChart
+          //   chartData={finalData}
+          //   startDate={startDate}
+          //   endDate={endDate}
+          // />
           ''
         )}
       </div>
