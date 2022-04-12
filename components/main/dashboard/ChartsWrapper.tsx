@@ -5,6 +5,7 @@ import OhlcChart from './OhlcChart'
 import { MdOutlineStackedLineChart } from 'react-icons/md'
 import { MdOutlineWaterfallChart } from 'react-icons/md'
 import { RiArrowDownSLine } from 'react-icons/ri'
+import { FiBarChart2 } from 'react-icons/fi'
 import moment from 'moment'
 
 import { getData } from './../../../utils/chartData'
@@ -128,7 +129,7 @@ const ChartsWrapper = ({ chartData }) => {
           {[
             { name: 'line_chart', icon: MdOutlineStackedLineChart },
             { name: 'candlestick', icon: MdOutlineWaterfallChart },
-            { name: 'ohlc', icon: MdOutlineWaterfallChart },
+            { name: 'ohlc', icon: FiBarChart2 },
           ].map((chart, index) => (
             <button
               key={index}
@@ -279,7 +280,7 @@ const ChartsWrapper = ({ chartData }) => {
                 (token, i) => (
                   <div className="flex items-center font-bold " key={i}>
                     <input
-                      type="checkbox"
+                      type={currentChart == 'line_chart' ? 'checkbox' : 'radio'}
                       name="token-checkbox"
                       id="token-checkbox"
                       className="mr-1.5 cursor-pointer"

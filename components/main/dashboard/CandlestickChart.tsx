@@ -9,9 +9,10 @@ const CandlestickChart = ({ chartData, startDate, endDate, chartInterval }) => {
   // candlstick chart options
   const options = {
     legend: 'none',
-    chartArea: { left: 45, top: 30, width: '90%', height: '80%' },
-    bar: { groupWidth: '100%' }, // Remove space between bars.
+    chartArea: { left: 50, top: 25, width: '90%', height: '80%' },
+    bar: { groupWidth: '90%' }, // Remove space between bars.
     candlestick: {
+      hollowIsRising: true,
       fallingColor: { strokeWidth: 0, fill: '#EB2824' }, // red
       risingColor: { strokeWidth: 0, fill: '#199E5D' }, // green
     },
@@ -26,6 +27,7 @@ const CandlestickChart = ({ chartData, startDate, endDate, chartInterval }) => {
     },
     hAxis: {
       // scaleType: 'linear',
+      // slantedText: true,
       viewWindow: {
         min: new Date(startDate),
         max: new Date(endDate),

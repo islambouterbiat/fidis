@@ -47,8 +47,8 @@ const Distribution = () => {
       <nav className="flex items-center justify-between border-b border-gray-300/30 py-2">
         <h1 className="text-xl font-medium">Distribution</h1>
       </nav>
-      <h2 className="py-3 text-sm">FI25 Crypto Index Token</h2>
-      <div className="h-40 xxl:h-72">
+      {/* <h2 className="py-3 text-sm">FI25 Crypto Index Token</h2> */}
+      <div className="grid h-3/4 grid-rows-1 pt-8 ">
         <Pie data={pie_chart_data} options={options} />
       </div>
       <div className="flex justify-end">
@@ -57,7 +57,7 @@ const Distribution = () => {
           className="relative mt-2 flex cursor-pointer items-center hover:scale-105"
         >
           <span className="mr-1.5 cursor-pointer text-sm font-medium">
-            Value
+            Balance
           </span>
           <div className="relative">
             <input
@@ -70,7 +70,7 @@ const Distribution = () => {
           </div>
 
           <span className="ml-1.5 cursor-pointer text-sm font-medium">
-            Balance
+            Value
           </span>
         </label>
       </div>
