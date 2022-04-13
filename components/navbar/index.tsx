@@ -68,7 +68,7 @@ const NavBar = ({ profilePicture, setProfilePicture }: any) => {
     <nav
       id="Navbar"
       className={`grid ${
-        !miniNav ? 'max-w-[180px] xxl:max-w-[280px]' : 'w-[55px]'
+        !miniNav ? 'max-w-[180px] xxl:max-w-[280px]' : 'w-[60px]'
       }  grid-cols-1 place-content-between gap-6 py-12 text-center text-sm font-light text-white transition `}
     >
       <div>
