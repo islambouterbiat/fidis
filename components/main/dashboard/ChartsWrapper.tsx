@@ -123,7 +123,7 @@ const ChartsWrapper = ({ chartData }) => {
   return (
     <div className="relative col-span-9 flex h-full w-full flex-col">
       {/* customization options */}
-      <div className="flex items-center justify-evenly">
+      <div className="flex items-center justify-start gap-6 bg-black/30 py-3 pl-6 xxl:gap-10 xxl:pl-4">
         {/* chart type buttons */}
         <div className="z-40 flex items-center gap-2">
           {[
@@ -150,6 +150,99 @@ const ChartsWrapper = ({ chartData }) => {
           ))}
         </div>
 
+        {/* token type */}
+        <div className="relative">
+          <button
+            onClick={() => {
+              setTokenTypeOpen((p) => !p)
+              setCustomRangeOpen(false)
+              setTimeframeOpen(false)
+            }}
+            className="inline-flex items-center gap-2 whitespace-nowrap rounded bg-orange-FIDIS px-2 py-1 text-white disabled:opacity-75"
+            // disabled={currentChart == 'line_chart' ? false : true}
+          >
+            Crypto Index
+            <RiArrowDownSLine
+              className={`${
+                currentChart == 'line_chart' ? 'cursor-pointer' : 'cursor-auto'
+              }`}
+            />
+          </button>
+          {tokenTypeOpen && (
+            <div className="absolute top-10 right-0 z-40 flex flex-col rounded bg-black px-2 py-2 font-bold text-orange-FIDIS xxl:top-14">
+              {['FI25', 'GoldFI', 'MetaFi', 'NFTFI', 'GameFI', 'DeFiFI'].map(
+                (token, i) => (
+                  <div className="flex items-center font-bold " key={i}>
+                    <input
+                      type={currentChart == 'line_chart' ? 'checkbox' : 'radio'}
+                      name="token-checkbox"
+                      id="token-checkbox"
+                      className="mr-1.5 cursor-pointer"
+                    />
+                    <label htmlFor="token-checkbox">{token}</label>
+                  </div>
+                )
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* min & max dates inputes */}
+        <div className="relative">
+          <button
+            onClick={() => {
+              setCustomRangeOpen((p) => !p)
+              setTimeframeOpen(false)
+              setTokenTypeOpen(false)
+            }}
+            className="inline-flex items-center gap-2 whitespace-nowrap rounded bg-orange-FIDIS px-2 py-1 text-white"
+          >
+            Time range <RiArrowDownSLine />
+          </button>
+          {customRangeOpen && (
+            <div className="absolute top-10 right-0 z-40 flex flex-col rounded bg-black px-4 py-3 font-bold text-orange-FIDIS xxl:top-14">
+              <h2>Custom range</h2>
+              <div className="my-3 flex items-center gap-2">
+                <label htmlFor="start-date" className="w-20">
+                  From
+                </label>
+                {/* <input
+                  type="time"
+                  name="start-time"
+                  id="start-time"
+                  className={styles.date_input}
+                /> */}
+                <input
+                  type="datetime-local"
+                  name="start-date"
+                  id="start-date"
+                  className={styles.date_input}
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
+              </div>
+              <div className="flex items-center gap-2">
+                <label htmlFor="end-date" className="w-20">
+                  To
+                </label>
+                {/* <input
+                  type="time"
+                  name="end-time"
+                  id="end-time"
+                  className={styles.date_input}
+                /> */}
+                <input
+                  type="datetime-local"
+                  name="end-date"
+                  id="end-date"
+                  className={styles.date_input}
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                />
+              </div>
+            </div>
+          )}
+        </div>
         {/* timeframe options */}
         {/* <div className="z-40 flex items-center border-b-4 border-orange-FIDIS">
           {timeframeData.map((t, index) => (
@@ -198,104 +291,11 @@ const ChartsWrapper = ({ chartData }) => {
           )}
         </div>
 
-        {/* min & max dates inputes */}
-        <div className="relative">
-          <button
-            onClick={() => {
-              setCustomRangeOpen((p) => !p)
-              setTimeframeOpen(false)
-              setTokenTypeOpen(false)
-            }}
-            className="inline-flex items-center gap-2 whitespace-nowrap rounded bg-orange-FIDIS px-2 py-1 text-white"
-          >
-            Custom range <RiArrowDownSLine />
-          </button>
-          {customRangeOpen && (
-            <div className="absolute top-10 right-0 z-40 flex flex-col rounded bg-black px-4 py-3 font-bold text-orange-FIDIS xxl:top-14">
-              <h2>Custom range</h2>
-              <div className="my-3 flex items-center gap-2">
-                <label htmlFor="start-date" className="w-20">
-                  From
-                </label>
-                {/* <input
-                  type="time"
-                  name="start-time"
-                  id="start-time"
-                  className={styles.date_input}
-                /> */}
-                <input
-                  type="datetime-local"
-                  name="start-date"
-                  id="start-date"
-                  className={styles.date_input}
-                  value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
-                />
-              </div>
-              <div className="flex items-center gap-2">
-                <label htmlFor="end-date" className="w-20">
-                  To
-                </label>
-                {/* <input
-                  type="time"
-                  name="end-time"
-                  id="end-time"
-                  className={styles.date_input}
-                /> */}
-                <input
-                  type="datetime-local"
-                  name="end-date"
-                  id="end-date"
-                  className={styles.date_input}
-                  value={endDate}
-                  onChange={(e) => setEndDate(e.target.value)}
-                />
-              </div>
-            </div>
-          )}
-        </div>
         <div className="flex items-center gap-8"></div>
-
-        {/* token type */}
-        <div className="relative">
-          <button
-            onClick={() => {
-              setTokenTypeOpen((p) => !p)
-              setCustomRangeOpen(false)
-              setTimeframeOpen(false)
-            }}
-            className="inline-flex items-center gap-2 whitespace-nowrap rounded bg-orange-FIDIS px-2 py-1 text-white disabled:opacity-75"
-            // disabled={currentChart == 'line_chart' ? false : true}
-          >
-            Crypto Index
-            <RiArrowDownSLine
-              className={`${
-                currentChart == 'line_chart' ? 'cursor-pointer' : 'cursor-auto'
-              }`}
-            />
-          </button>
-          {tokenTypeOpen && (
-            <div className="absolute top-10 right-0 z-40 flex flex-col rounded bg-black px-2 py-2 font-bold text-orange-FIDIS xxl:top-14">
-              {['FI25', 'GoldFI', 'MetaFi', 'NFTFI', 'GameFI', 'DeFiFI'].map(
-                (token, i) => (
-                  <div className="flex items-center font-bold " key={i}>
-                    <input
-                      type={currentChart == 'line_chart' ? 'checkbox' : 'radio'}
-                      name="token-checkbox"
-                      id="token-checkbox"
-                      className="mr-1.5 cursor-pointer"
-                    />
-                    <label htmlFor="token-checkbox">{token}</label>
-                  </div>
-                )
-              )}
-            </div>
-          )}
-        </div>
       </div>
 
       {/* charts */}
-      <div className="mt-3 h-full">
+      <div className="h-full">
         {currentChart == 'line_chart' ? (
           <LineChart
             timeframe={timeframe}
