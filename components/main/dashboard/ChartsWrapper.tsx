@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import LineChart from './LineChart'
 import CandlestickChart from './CandlestickChart'
 import OhlcChart from './OhlcChart'
@@ -55,8 +55,6 @@ const ChartsWrapper = ({ chartData }) => {
     { name: 'year', text: '1Y' },
   ]
 
-  console.log()
-
   // time aggregation logic (candle interval)
   const timeIntervalData = [
     { name: '5MIN', value: 1 },
@@ -81,7 +79,6 @@ const ChartsWrapper = ({ chartData }) => {
     ]
     return newDataObject
   })
-  // console.log(chartData[0].date)
 
   let finalData = []
   while (ohlcData.length > 0) {
@@ -95,35 +92,40 @@ const ChartsWrapper = ({ chartData }) => {
       intervalArray[intervalArray.length - 1][4],
     ]
     finalData.push(newArr)
-    // console.log(newArr)
-    // console.log(intervalArray)
   }
 
   //* rerenders when size changes (in order to chart fits automatically place when mininav clicked)
+
   const [size, setSize] = useState({
     width: undefined,
     height: undefined,
   })
 
   useEffect(() => {
-    const handleResize = () => {
-      setSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      })
-    }
-    window.addEventListener('resize', handleResize)
+    const resize_ob = new ResizeObserver(function (entries) {
+      // since we are observing only a single element, so we access the first element in entries array
+      let rect = entries[0].contentRect
 
-    return () => {
-      window.removeEventListener('resize', handleResize)
-      console.log('khra')
-    }
+      // current width & height
+      let width = rect.width
+      let height = rect.height
+      setSize({ width, height })
+
+      // console.log('Current Width : ' + width)
+      // console.log('Current Height : ' + height)
+    })
+
+    // start observing for resize
+    resize_ob.observe(document.querySelector('#chart_wrapper'))
   }, [size.width])
-
   return (
-    <div className="relative col-span-9 flex h-full w-full flex-col">
+    <div
+      // ref={ref}
+      id="chart_wrapper"
+      className="class__name relative col-span-9 flex h-full w-full flex-col bg-black/30"
+    >
       {/* customization options */}
-      <div className="flex items-center justify-start gap-6 bg-black/30 py-3 pl-6 xxl:gap-10 xxl:pl-4">
+      <div className="flex w-full items-center justify-start gap-6  py-3 pl-6 xxl:gap-10 xxl:pl-4">
         {/* chart type buttons */}
         <div className="z-40 flex items-center gap-2">
           {[
@@ -295,7 +297,7 @@ const ChartsWrapper = ({ chartData }) => {
       </div>
 
       {/* charts */}
-      <div className="h-full">
+      <div className="h-full w-full">
         {currentChart == 'line_chart' ? (
           <LineChart
             timeframe={timeframe}
