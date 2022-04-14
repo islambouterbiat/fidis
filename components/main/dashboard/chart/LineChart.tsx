@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Chart } from 'react-google-charts'
 
-const LineChart = ({ timeframe, startDate, endDate, chartData }) => {
+const LineChart = ({ startDate, endDate, chartData }) => {
   // line chart data
   const mappedChartData = chartData.map((data) => {
     const newDataObject = [data[0], data[3]]
@@ -39,15 +39,44 @@ const LineChart = ({ timeframe, startDate, endDate, chartData }) => {
     explorer: { axis: 'horizontal', keepInBounds: true, zoomDelta: 0.75 }, //scroll and zoom In/Out
   }
 
+  //* rerenders when size changes (in order to chart fits automatically place when mininav clicked)
+
+  const [size, setSize] = useState({
+    width: undefined,
+    height: undefined,
+  })
+  useEffect(() => {
+    const resize_ob = new ResizeObserver(function (entries) {
+      // since we are observing only a single element, so we access the first element in entries array
+      let rect = entries[0].contentRect
+
+      // current width & height
+      let width = rect.width
+      let height = rect.height
+      setSize({ width, height })
+
+      console.log('Current Width : ' + width)
+      console.log('Current Height : ' + height)
+    })
+
+    // start observing for resize
+    resize_ob.observe(document.querySelector('#line_chart'))
+    return () => {
+      resize_ob.unobserve(document.querySelector('#line_chart'))
+    }
+  }, [size.width])
+
   return (
     // <Line options={line_chart_options} data={line_chart_data} />
-    <Chart
-      chartType="LineChart"
-      width="100%"
-      height="100%"
-      data={data}
-      options={options}
-    />
+    <div id="line_chart" className="h-full">
+      <Chart
+        chartType="LineChart"
+        width="100%"
+        height="100%"
+        data={data}
+        options={options}
+      />
+    </div>
   )
 }
 
