@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useRef } from 'react'
 import { Chart } from 'react-google-charts'
+import useSize from '../../../../hooks/useSize'
 
 const LineChart = ({ startDate, endDate, chartData }) => {
   // line chart data
@@ -39,36 +40,13 @@ const LineChart = ({ startDate, endDate, chartData }) => {
     explorer: { axis: 'horizontal', keepInBounds: true, zoomDelta: 0.75 }, //scroll and zoom In/Out
   }
 
-  //* rerenders when size changes (in order to chart fits automatically place when mininav clicked)
-
-  const [size, setSize] = useState({
-    width: undefined,
-    height: undefined,
-  })
-  useEffect(() => {
-    const resize_ob = new ResizeObserver(function (entries) {
-      // since we are observing only a single element, so we access the first element in entries array
-      let rect = entries[0].contentRect
-
-      // current width & height
-      let width = rect.width
-      let height = rect.height
-      setSize({ width, height })
-
-      console.log('Current Width : ' + width)
-      console.log('Current Height : ' + height)
-    })
-
-    // start observing for resize
-    resize_ob.observe(document.querySelector('#line_chart'))
-    return () => {
-      resize_ob.unobserve(document.querySelector('#line_chart'))
-    }
-  }, [size.width])
+  //* rerenders when size changes (in order to chart fits automatically place when mininav clicked) using custopm hook
+  const target = useRef(null)
+  useSize(target)
 
   return (
     // <Line options={line_chart_options} data={line_chart_data} />
-    <div id="line_chart" className="h-full">
+    <div ref={target} className="h-full">
       <Chart
         chartType="LineChart"
         width="100%"

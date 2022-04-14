@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useRef } from 'react'
 import { Chart } from 'react-google-charts'
+import useSize from '../../../../hooks/useSize'
 
 const CandlestickChart = ({ chartData, startDate, endDate }) => {
+  console.log(chartData)
   //* candlestick chart data
   const mappedChartData = chartData.map((data) => data)
   const data = [['date', '', '', '', ''], ...mappedChartData]
@@ -47,35 +49,12 @@ const CandlestickChart = ({ chartData, startDate, endDate }) => {
     explorer: { axis: 'horizontal', keepInBounds: true, zoomDelta: 0.75 },
   }
 
-  //* rerenders when size changes (in order to chart fits automatically place when mininav clicked)
-
-  const [size, setSize] = useState({
-    width: undefined,
-    height: undefined,
-  })
-  useEffect(() => {
-    const resize_ob = new ResizeObserver(function (entries) {
-      // since we are observing only a single element, so we access the first element in entries array
-      let rect = entries[0].contentRect
-
-      // current width & height
-      let width = rect.width
-      let height = rect.height
-      setSize({ width, height })
-
-      console.log('Current Width : ' + width)
-      console.log('Current Height : ' + height)
-    })
-
-    // start observing for resize
-    resize_ob.observe(document.querySelector('#candlestick'))
-    return () => {
-      resize_ob.unobserve(document.querySelector('#candlestick'))
-    }
-  }, [size.width])
+  //* rerenders when size changes (in order to chart fits automatically place when mininav clicked) using custopm hook
+  const target = useRef(null)
+  useSize(target)
 
   return (
-    <div id="candlestick" className="h-full">
+    <div ref={target} className="h-full">
       <Chart
         chartType="CandlestickChart"
         width="100%"

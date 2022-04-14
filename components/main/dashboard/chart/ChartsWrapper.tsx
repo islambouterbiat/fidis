@@ -2,11 +2,8 @@ import React, { useState, useEffect } from 'react'
 import LineChart from './LineChart'
 import CandlestickChart from './CandlestickChart'
 import OhlcChart from '../OhlcChart'
-
-import moment from 'moment'
-
-import { getData } from '../../../../utils/chartData'
 import ChartCustomization from './ChartCustomization'
+import moment from 'moment'
 
 const ChartsWrapper = ({ chartData }) => {
   const [chartInterval, setChartInterval] = useState(1)
@@ -33,7 +30,6 @@ const ChartsWrapper = ({ chartData }) => {
           )
         )
   }, [chartData])
-  console.log(chartData)
 
   //give data an ohlc structure
   const ohlcData = chartData.map((data) => {
