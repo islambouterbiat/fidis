@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import LineChart from './LineChart'
 import CandlestickChart from './CandlestickChart'
-import OhlcChart from './OhlcChart'
+import OhlcChart from '../OhlcChart'
 import { MdOutlineStackedLineChart } from 'react-icons/md'
 import { MdOutlineWaterfallChart } from 'react-icons/md'
 import { RiArrowDownSLine } from 'react-icons/ri'
