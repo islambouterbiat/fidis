@@ -19,6 +19,7 @@ const styles = {
   btnNav: 'py-[0.8rem] hover:text-orange-FIDIS',
   btnBottomNav: 'hover:text-orange-FIDIS',
 }
+
 const NavBar = ({ profilePicture, setProfilePicture }: any) => {
   const [popupOpen, SetPopupOpen] = useState(false)
   const [miniNav, SetMiniNav] = useState(false)

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
-import LineChart from './chart/LineChart'
-import CandlestickChart from './chart/CandlestickChart'
+import LineChart from './LineChart'
+import CandlestickChart from './CandlestickChart'
 import OhlcChart from './OhlcChart'
 import { MdOutlineStackedLineChart } from 'react-icons/md'
 import { MdOutlineWaterfallChart } from 'react-icons/md'
@@ -8,7 +8,7 @@ import { RiArrowDownSLine } from 'react-icons/ri'
 import { FiBarChart2 } from 'react-icons/fi'
 import moment from 'moment'
 
-import { getData } from './../../../utils/chartData'
+import { getData } from '../../../../utils/chartData'
 
 const styles = {
   date_input: 'rounded-lg border border-orange-FIDIS px-2 py-1',
